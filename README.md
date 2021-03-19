@@ -1,24 +1,40 @@
 # liquid-client
 
-## Project setup
-```
+## Development
+
+### Requirements
+
+- [Node.js](https://nodejs.org) >= 12 with npm
+- [Yarn](https://yarnpkg.com/) package manager
+
+### Getting Started
+
+```sh
+# Project setup: Install dependencies
 yarn install
-```
 
-### Compiles and hot-reloads for development
-```
+# Development: Compiles and hot-reloads
 yarn serve
-```
 
-### Compiles and minifies for production
-```
+# Lint and fix files
+yarn lint
+
+# Production: Build and minify
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### Build Tool Reference
 
-### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Conventions
+
+#### Code Formatting
+
+This project uses the code formatter [prettier](https://prettier.io/) to format all code consistently.
+Staged code is prettied in a git hook on-commit. Additionally it's recommended to setup your code editor for prettier.
+
+- VSCode: [Prettier Plugin](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- JetBrains:
+  - [JetBrains Plugin Prettier](https://plugins.jetbrains.com/plugin/10456-prettier)
+  - [Configuring Prettier for JetBrains IDEs](https://www.jetbrains.com/help/idea/prettier.html#ws_prettier_reformat_code)
