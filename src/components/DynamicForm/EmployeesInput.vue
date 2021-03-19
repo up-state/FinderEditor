@@ -9,13 +9,13 @@
       @focus="setActive(true)"
       @blur="setActive(false)"
     />
-    <span v-if="!!config.unit" class="unit">{{config.unit}}</span>
+    <span v-if="!!config.unit" class="unit">{{ config.unit }}</span>
   </label>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
-import { FinderService } from "../../shared/services/finder.service";
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class EmployeesInput extends Vue {
@@ -36,12 +36,12 @@ export default class EmployeesInput extends Vue {
     this.validate(this.value);
     this.emitStatusChange(this.status);
   }
-  @Watch("value")
+  @Watch('value')
   valueChanged(newVal: any) {
     this.validate(newVal);
     this.emitStatusChange(this.status);
   }
-  @Emit("status")
+  @Emit('status')
   emitStatusChange(status: any) {
     this.status = status;
   }
@@ -76,14 +76,14 @@ export default class EmployeesInput extends Vue {
     letter-spacing: 1px;
     color: black;
     border: none;
-      text-align: center;
+    text-align: center;
     outline: none !important;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-    &[type="number"] {
+    &[type='number'] {
       -moz-appearance: textfield;
     }
   }
@@ -92,11 +92,11 @@ export default class EmployeesInput extends Vue {
   }
   @media (min-width: 500px) {
     .unit {
-    font-size: 24px;
-    display: block;
-    padding: 16px 24px;
-    background: #007d8c;
-    color: white;
+      font-size: 24px;
+      display: block;
+      padding: 16px 24px;
+      background: #007d8c;
+      color: white;
     }
     input {
       text-align: left;

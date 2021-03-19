@@ -3,14 +3,17 @@
     <ul ref="linkList">
       <li v-for="(category, index) in categories" :key="index" ref="categoryLink">
         <router-link
-          :to="'/results/'+category.name+''+query"
-          v-bind:class="{active: $route.params.cathegorie == category.name || !$route.params.cathegorie && index == 0}"
+          :to="'/results/' + category.name + '' + query"
+          v-bind:class="{
+            active:
+              $route.params.cathegorie == category.name ||
+              (!$route.params.cathegorie && index == 0),
+          }"
         >
-          {{category.name}}
-          <span
-            class="number-of-offers"
-            v-if="category.offers.length > 1"
-          >{{category.offers.length}}</span>
+          {{ category.name }}
+          <span class="number-of-offers" v-if="category.offers.length > 1">{{
+            category.offers.length
+          }}</span>
         </router-link>
       </li>
     </ul>
@@ -18,8 +21,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from "vue-property-decorator";
-import AnalyticsService from "../../shared/services/analytics.service";
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import AnalyticsService from '../../shared/services/analytics.service';
 
 @Component
 export default class ResultNav extends Vue {
@@ -28,25 +31,25 @@ export default class ResultNav extends Vue {
   @Prop()
   query!: string;
 
-  type: string = "horizontal";
+  type: string = 'horizontal';
   $refs: any;
-  @Emit("type")
+  @Emit('type')
   checkType() {
     let navWidth = 0;
     this.$refs.categoryLink.forEach((link: any) => {
       navWidth += link.offsetWidth;
     });
     if (window.innerWidth - 32 >= navWidth) {
-      this.type = "horizontal";
+      this.type = 'horizontal';
     } else {
-      this.type = "vertical";
+      this.type = 'vertical';
     }
     return this.type;
   }
 
   mounted() {
     this.checkType();
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       this.checkType();
     });
   }
@@ -69,9 +72,9 @@ export default class ResultNav extends Vue {
     margin: 0;
     padding: 0;
     li {
-          @media (max-width: 700px) {
-            width: 100%;
-          }
+      @media (max-width: 700px) {
+        width: 100%;
+      }
       a {
         position: relative;
         font-size: 16px;
@@ -87,8 +90,8 @@ export default class ResultNav extends Vue {
           background-color: var(--brown);
         }
         @media (max-width: 700px) {
-            text-align: center;
-          }
+          text-align: center;
+        }
         .number-of-offers {
           position: absolute;
           top: -12px;

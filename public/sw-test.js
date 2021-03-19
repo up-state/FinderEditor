@@ -1,8 +1,8 @@
 const sec = 1000;
 const min = 60 * sec;
-const hour = 60* min;
+const hour = 60 * min;
 
-// how often should the data be checked 
+// how often should the data be checked
 const refreshRate = 10 * sec;
 
 // current data
@@ -16,7 +16,7 @@ function loadData() {
     fetch(url)
       .then(response => response.json())
       .then(data => checkData(data));
-  } catch (err) { }
+  } catch (err) {}
 }
 
 function checkData(resData) {
@@ -33,7 +33,7 @@ function checkData(resData) {
     for (let j = 0; j < resData.length; j++) {
       if (resData[j].name == data[i].name) {
         if (resData[j].offers.length > data[i].offers.length) {
-          cathegorieOffersAdded.push(resData[j].name)
+          cathegorieOffersAdded.push(resData[j].name);
           offersChangesCount += resData[j].offers.length - data[i].offers.length;
         }
       }
@@ -41,9 +41,12 @@ function checkData(resData) {
   }
   data = resData;
   if (newCategorie) {
-    sendMessage('Neue Kategorien', 'Es sind neue Kategorien auf der Resultateseite hinzugekommen.')
+    sendMessage('Neue Kategorien', 'Es sind neue Kategorien auf der Resultateseite hinzugekommen.');
   } else if (offersChangesCount > 0) {
-    sendMessage('Mindestens ' + offersChangesCount + ' neue Förderprogramme', 'In den Kategorien ' + cathegorieOffersAdded.join())
+    sendMessage(
+      'Mindestens ' + offersChangesCount + ' neue Förderprogramme',
+      'In den Kategorien ' + cathegorieOffersAdded.join(),
+    );
   }
 }
 
@@ -54,22 +57,22 @@ function sendMessage(title, message) {
   let tag = 'change' + new Date().now;
   let data = {
     doge: {
-      wow: 'such amaze notification data'
-    }
+      wow: 'such amaze notification data',
+    },
   };
   self.registration.showNotification(title, {
     body: body,
     icon: icon,
     tag: tag + i,
-    data: data
-  })
+    data: data,
+  });
 }
 
 // ----------------------------------------------
-self.addEventListener('install', function (event) {
+self.addEventListener('install', function(event) {
   console.log('Worker installed successfully', event);
 });
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', function(event) {
   console.log('Worker activated successfully', event);
   let i = 0;
   let interval = setInterval(() => {

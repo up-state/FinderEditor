@@ -8,17 +8,24 @@
         <ul>
           <li v-for="(category, index) in categories" :key="index">
             <router-link
-              :to="'/test/'+category.name+''+query"
-              v-bind:class="{active: $route.params.cathegorie == category.name || !$route.params.cathegorie && index == 0}"
-            >{{category.name}}</router-link>
+              :to="'/test/' + category.name + '' + query"
+              v-bind:class="{
+                active:
+                  $route.params.cathegorie == category.name ||
+                  (!$route.params.cathegorie && index == 0),
+              }"
+              >{{ category.name }}</router-link
+            >
           </li>
         </ul>
       </nav>
       <main v-for="(category, index) in categories" :key="index">
         <div
-          v-if="$route.params.cathegorie == category.name || !$route.params.cathegorie && index == 0"
+          v-if="
+            $route.params.cathegorie == category.name || (!$route.params.cathegorie && index == 0)
+          "
         >
-          <h2>{{category.name}}</h2>
+          <h2>{{ category.name }}</h2>
           <Description
             v-if="!!category.description"
             v-bind:text="category.description"
@@ -29,7 +36,7 @@
               <ResultCard
                 v-if="offer.id == indexFilter"
                 v-bind:offer="offer"
-                v-bind:link="'/test/'+category.name+'?offer='+offer.id"
+                v-bind:link="'/test/' + category.name + '?offer=' + offer.id"
               />
             </div>
           </div>
@@ -38,7 +45,7 @@
               v-for="(offer, index) in category.offers"
               :key="index"
               v-bind:offer="offer"
-              v-bind:link="'/test/'+category.name+'?offer='+offer.id"
+              v-bind:link="'/test/' + category.name + '?offer=' + offer.id"
             />
           </div>
           <!-- <ResultList v-if="!!categories && categories.length>0" v-bind:categories="categories" v-bind:current="current" /> -->
@@ -50,12 +57,12 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import ResultList from "../components/ResultList.vue";
-import { Component, Prop, Vue, Emit } from "vue-property-decorator";
-import { FinderService } from "../shared/services/finder.service";
-import { ButtonConfig } from "../components/NavFooter/ButtonConfig.class";
-import Description from "../components/results/Description.vue";
-import ResultCard from "../components/results/ResultCard.vue";
+import ResultList from '../components/ResultList.vue';
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import { FinderService } from '../shared/services/finder.service';
+import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
+import Description from '../components/results/Description.vue';
+import ResultCard from '../components/results/ResultCard.vue';
 
 @Component({
   components: {
@@ -69,19 +76,19 @@ export default class Results extends Vue {
   public categories: any[] = [];
   public descriptions: any[] = [];
   public current: any = null;
-  public query: string = "";
+  public query: string = '';
   public indexFilter: any = null;
 
   backToResults() {
-    FinderService.updateValue("index", 0, false);
+    FinderService.updateValue('index', 0, false);
     this.$router.push({
-      path: "/finder" + this.query,
+      path: '/finder' + this.query,
     });
   }
-  @Emit("updateStatus")
+  @Emit('updateStatus')
   updateStatus(): ButtonConfig[] {
     return [
-      new ButtonConfig("Zurück zum Finder", false, () => {
+      new ButtonConfig('Zurück zum Finder', false, () => {
         this.backToResults();
       }),
     ];
@@ -107,12 +114,12 @@ export default class Results extends Vue {
   mounted() {
     this.updateStatus();
     FinderService.loadStatusFromUrl();
-    FinderService.updateValue("index", null, false);
+    FinderService.updateValue('index', null, false);
     this.query = FinderService.parseValueToUrl();
     let categories: any[] = [];
 
     let queryParams = new URLSearchParams(window.location.search);
-    this.indexFilter = queryParams.get("id");
+    this.indexFilter = queryParams.get('id');
 
     FinderService.getTestResults().then((results: any) => {
       FinderService.getDescriptions().then((descriptions: any) => {
@@ -139,7 +146,6 @@ export default class Results extends Vue {
   }
 }
 </script>
-
 
 <style lang="scss">
 .test {

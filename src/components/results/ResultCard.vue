@@ -1,9 +1,9 @@
 <template>
   <div class="result-card">
-    <h3>{{offer.name}}</h3>
+    <h3>{{ offer.name }}</h3>
     <ul>
-      <li v-for="(field, i) in offer.fields.main" :key="'main'+i">
-        <span class="name">{{field.name}}:</span>
+      <li v-for="(field, i) in offer.fields.main" :key="'main' + i">
+        <span class="name">{{ field.name }}:</span>
         <span class="value" v-html="field.value"></span>
       </li>
       <!-- <li v-for="(field, index) in offer.fields.details" :key="'details'+index">
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class ResultCard extends Vue {

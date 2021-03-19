@@ -1,15 +1,15 @@
 <template>
   <div class="grid-select">
     <label v-for="(option, index) in config.options" :key="index">
-      <input type="radio" :id="config.key+'_'+index" :value="option.value" v-model="value" />
+      <input type="radio" :id="config.key + '_' + index" :value="option.value" v-model="value" />
       <span v-bind:class="{ active: option.value == value }" v-html="option.key"></span>
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
-import { FinderService } from "../../shared/services/finder.service";
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class GridSelect extends Vue {
@@ -28,12 +28,12 @@ export default class GridSelect extends Vue {
     this.validate(this.value);
     this.emitStatusChange(this.status);
   }
-  @Watch("value")
+  @Watch('value')
   valueChanged(newVal: any) {
     this.validate(newVal);
     this.emitStatusChange(this.status);
   }
-  @Emit("status")
+  @Emit('status')
   emitStatusChange(status: any) {
     this.status = status;
   }
@@ -43,7 +43,7 @@ export default class GridSelect extends Vue {
     this.config.validators.forEach((v: any) => {
       if (!v.isValide(val)) {
         this.status.errors.push({
-          message: v.message
+          message: v.message,
         });
       }
     });
@@ -75,7 +75,7 @@ export default class GridSelect extends Vue {
     span {
       font-size: 1.5rem;
       &::before {
-        content: "";
+        content: '';
         display: inline-block;
         width: 0.6em;
         height: 0.6em;

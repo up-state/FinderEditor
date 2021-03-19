@@ -1,5 +1,5 @@
-import QuestionRequestService from "./question-request.service";
-import axios from "axios";
+import QuestionRequestService from './question-request.service';
+import axios from 'axios';
 
 export class FinderService {
   static config: any[] = [];
@@ -19,13 +19,12 @@ export class FinderService {
     this.config = QuestionRequestService.getQuestions();
     let queryParams = new URLSearchParams(window.location.search);
     this.values = {
-      index: queryParams.get('index') == null ? 0 : parseInt("" + queryParams.get('index'))
-    }
-    this.config.forEach(element => {
+      index: queryParams.get('index') == null ? 0 : parseInt('' + queryParams.get('index')),
+    };
+    this.config.forEach((element) => {
       let v = queryParams.get(element.config.key);
       this.values[element.config.key] = v == null ? null : parseInt(v);
     });
-
   }
   public static updateCurrentOffer(offers: any[]) {
     let queryParams = new URLSearchParams(window.location.search);
@@ -39,27 +38,25 @@ export class FinderService {
     } else {
       this.currentOffer = null;
     }
-    this.currentOfferListeners.forEach(listener => {
+    this.currentOfferListeners.forEach((listener) => {
       listener(this.currentOffer);
     });
   }
   public static updateCurrentDescription(current: any) {
     let queryParams = new URLSearchParams(window.location.search);
     let descriptionFlag = !!queryParams.get('description');
-    if(descriptionFlag){
-      this.currentDescriptionListeners.forEach(listener => {
-        listener({name: current.name, text: current.description});
+    if (descriptionFlag) {
+      this.currentDescriptionListeners.forEach((listener) => {
+        listener({ name: current.name, text: current.description });
       });
     } else {
-      this.currentDescriptionListeners.forEach(listener => {
+      this.currentDescriptionListeners.forEach((listener) => {
         listener(null);
       });
     }
-    
-    
   }
   public static parseValueToUrl(values = this.values): string {
-    let params = []
+    let params = [];
     for (const key in values) {
       if (Object.prototype.hasOwnProperty.call(values, key)) {
         if (values[key] != null) {
@@ -68,7 +65,7 @@ export class FinderService {
       }
     }
     if (params.length > 0) {
-      return '?' + params.join('&')
+      return '?' + params.join('&');
     }
     return '';
   }
@@ -80,7 +77,7 @@ export class FinderService {
   }
   public static allValuesExist() {
     let condition = true;
-    FinderService.config.forEach(element => {
+    FinderService.config.forEach((element) => {
       let key = element.config.key;
       if (FinderService.values[key] == null || FinderService.values[key] == undefined) {
         // TODO: früher abbrechen
@@ -91,12 +88,12 @@ export class FinderService {
   }
   public static updateValue(key: string, value: any, doReload: boolean = true) {
     this.values[key] = value;
-    if (doReload) window.history.replaceState(null, "", this.parseValueToUrl(this.values));
+    if (doReload) window.history.replaceState(null, '', this.parseValueToUrl(this.values));
   }
   public static transformValues() {
     let tmpValues: any = {};
     try {
-      this.config.forEach(config => {
+      this.config.forEach((config) => {
         if (Object.prototype.hasOwnProperty.call(this.values, config.config.key)) {
           let value = this.values[config.config.key];
           let key = config.config.key;
@@ -112,7 +109,7 @@ export class FinderService {
           }
         } else {
           // throw error
-          throw new Error("");
+          throw new Error('');
         }
       });
     } catch (err) {
@@ -124,34 +121,39 @@ export class FinderService {
     let tmpValues = this.transformValues();
 
     if (tmpValues != null) {
-      return axios.get(location.origin + '/api/offers' + this.parseValueToUrl(tmpValues))
+      return axios.get(location.origin + '/api/offers' + this.parseValueToUrl(tmpValues));
     } else {
       return null;
     }
   }
   public static getTestResults(): any {
-      return axios.get(location.origin + '/api/offers');
+    return axios.get(location.origin + '/api/offers');
   }
   public static getDescriptions(): any {
     return axios.get(location.origin + '/api/descriptions');
   }
-  public static filterText(text: string): string{
+  public static filterText(text: string): string {
     let replacedText = text;
-    this.config.forEach(con => {
-      if(con.config.type === 'select'){
+    this.config.forEach((con) => {
+      if (con.config.type === 'select') {
         let replacement = '';
-        con.config.options.forEach((option:any) => {
-          if(option.value === this.values[con.config.key]){
-            replacement = option.key
+        con.config.options.forEach((option: any) => {
+          if (option.value === this.values[con.config.key]) {
+            replacement = option.key;
           }
         });
-        replacedText = replacedText.replaceAll('&lt;&lt;'+con.config.key+'&gt;&gt;', replacement);
-        
+        replacedText = replacedText.replaceAll(
+          '&lt;&lt;' + con.config.key + '&gt;&gt;',
+          replacement,
+        );
       } else {
-        replacedText = replacedText.replaceAll('&lt;&lt;'+con.config.key+'&gt;&gt;', this.values[con.config.key]);
+        replacedText = replacedText.replaceAll(
+          '&lt;&lt;' + con.config.key + '&gt;&gt;',
+          this.values[con.config.key],
+        );
       }
     });
-    
+
     return replacedText;
   }
 }

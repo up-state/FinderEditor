@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Progress extends Vue {
@@ -17,10 +17,7 @@ export default class Progress extends Vue {
   private startZero = 0;
 
   public get progress() {
-    return (
-      (this.startZero * 100 * (this.values.index + 1)) /
-      (Object.keys(this.values).length - 1)
-    );
+    return (this.startZero * 100 * (this.values.index + 1)) / (Object.keys(this.values).length - 1);
   }
   mounted() {
     setTimeout(() => {

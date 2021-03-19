@@ -1,19 +1,22 @@
 <template>
-  <div class="description" v-bind:class="{minimizable: minimizable}">
+  <div class="description" v-bind:class="{ minimizable: minimizable }">
     <div
       class="content"
       ref="content"
-      v-bind:style="{'--height': !minimizable || min? 200+'px': maxHeight+'px'}"
+      v-bind:style="{ '--height': !minimizable || min ? 200 + 'px' : maxHeight + 'px' }"
     >
       <p v-html="html"></p>
-      <span class="gradient" v-bind:style="{'height': !minimizable || min? 5+'px': 0+'px'}"></span>
+      <span
+        class="gradient"
+        v-bind:style="{ height: !minimizable || min ? 5 + 'px' : 0 + 'px' }"
+      ></span>
     </div>
     <button class="btn" v-if="minimizable" v-on:click="min = !min">Mehr Informationen</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Description extends Vue {

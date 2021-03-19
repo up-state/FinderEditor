@@ -1,10 +1,16 @@
 <template>
-  <header class="navbar" v-bind:class="{ 'isOpen': isOpen && !isHidden, 'isHidden': isHidden }">
+  <header class="navbar" v-bind:class="{ isOpen: isOpen && !isHidden, isHidden: isHidden }">
     <div class="contact">
       <span class="sozial-media">
         <span class="text">Teile, was Dir hilft:</span>
-        <a class="fa fa-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=linkedin.com/company/wir-bleiben-liqui-de&title=%23liquidebleiben&summary=&source="></a>
-        <a class="fa fa-twitter" href="https://twitter.com/intent/tweet?text=https%3A//twitter.com/liquidebleiben"></a>
+        <a
+          class="fa fa-linkedin"
+          href="https://www.linkedin.com/shareArticle?mini=true&url=linkedin.com/company/wir-bleiben-liqui-de&title=%23liquidebleiben&summary=&source="
+        ></a>
+        <a
+          class="fa fa-twitter"
+          href="https://twitter.com/intent/tweet?text=https%3A//twitter.com/liquidebleiben"
+        ></a>
         <!-- <a class="fa fa-envelope"></a> -->
         <!-- TODO: Icon + Link -->
       </span>
@@ -37,8 +43,16 @@
           <a class="active" href="">Förderfinder</a>
         </li>
         <li class="sozial-links">
-          <a class="fa fa-linkedin" target="blank" href="https://www.linkedin.com/shareArticle?mini=true&url=linkedin.com/company/wir-bleiben-liqui-de&title=%23liquidebleiben&summary=&source="></a>
-          <a class="fa fa-twitter" target="blank" href="https://twitter.com/intent/tweet?text=https%3A//twitter.com/liquidebleiben"></a>
+          <a
+            class="fa fa-linkedin"
+            target="blank"
+            href="https://www.linkedin.com/shareArticle?mini=true&url=linkedin.com/company/wir-bleiben-liqui-de&title=%23liquidebleiben&summary=&source="
+          ></a>
+          <a
+            class="fa fa-twitter"
+            target="blank"
+            href="https://twitter.com/intent/tweet?text=https%3A//twitter.com/liquidebleiben"
+          ></a>
           <a class="fa fa-envelope" target="blank" href="mailto:hallo@wir-bleiben-liqui.de"></a>
         </li>
       </ul>
@@ -50,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class NavHeader extends Vue {
@@ -62,8 +76,8 @@ export default class NavHeader extends Vue {
   private config = {
     scrollDistance: {
       up: 200,
-      down: 200
-    }
+      down: 200,
+    },
   };
 
   public toggle() {
@@ -72,15 +86,12 @@ export default class NavHeader extends Vue {
   }
   mounted() {
     let scrollPosition = window.scrollY;
-    window.addEventListener("scroll", event => {
+    window.addEventListener('scroll', (event) => {
       if (scrollPosition + this.config.scrollDistance.down < window.scrollY) {
         scrollPosition = window.scrollY;
         this.isHidden = true;
         this.isOpen = false;
-      } else if (
-        scrollPosition - this.config.scrollDistance.up >
-        window.scrollY
-      ) {
+      } else if (scrollPosition - this.config.scrollDistance.up > window.scrollY) {
         scrollPosition = window.scrollY;
         this.isHidden = false;
       }
@@ -135,7 +146,7 @@ header.navbar {
         display: inline-block;
         color: var(--prim-700);
         background-color: white;
-        
+
         text-decoration: none;
         padding: 4px;
         width: 24px;

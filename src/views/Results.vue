@@ -22,18 +22,12 @@
       <div class="main-box">
         <article v-if="current">
           <h2 v-html="current.name"></h2>
-          <p
-            class="description-box"
-            v-if="current.description"
-            v-html="current.description"
-          ></p>
+          <p class="description-box" v-if="current.description" v-html="current.description"></p>
           <div class="details">
             <router-link
               class="max-article"
               v-if="current.description"
-              :to="
-                '/results/' + current.name + '' + query + '&description=true'
-              "
+              :to="'/results/' + current.name + '' + query + '&description=true'"
               >Details anzeigen</router-link
             >
           </div>
@@ -41,8 +35,7 @@
         <main v-for="(category, index) in categories" :key="index">
           <div
             v-if="
-              $route.params.cathegorie == category.name ||
-              (!$route.params.cathegorie && index == 0)
+              $route.params.cathegorie == category.name || (!$route.params.cathegorie && index == 0)
             "
           >
             <div class="offers">
@@ -50,14 +43,7 @@
                 v-for="(offer, index) in category.offers"
                 :key="index"
                 v-bind:offer="offer"
-                v-bind:link="
-                  '/results/' +
-                  category.name +
-                  '' +
-                  query +
-                  '&offer=' +
-                  offer.id
-                "
+                v-bind:link="'/results/' + category.name + '' + query + '&offer=' + offer.id"
               />
             </div>
           </div>
@@ -69,16 +55,16 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import ResultList from "../components/ResultList.vue";
-import { Component, Prop, Vue, Emit, Watch } from "vue-property-decorator";
-import { FinderService } from "../shared/services/finder.service";
-import { NotificationService } from "../shared/services/notfication.service";
-import { ButtonConfig } from "../components/NavFooter/ButtonConfig.class";
-import Description from "../components/results/Description.vue";
-import ResultCard from "../components/results/ResultCard.vue";
-import ResultNav from "../components/results/ResultNav.vue";
-import { Route } from "vue-router";
-import AnalyticsService from "../shared/services/analytics.service";
+import ResultList from '../components/ResultList.vue';
+import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
+import { FinderService } from '../shared/services/finder.service';
+import { NotificationService } from '../shared/services/notfication.service';
+import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
+import Description from '../components/results/Description.vue';
+import ResultCard from '../components/results/ResultCard.vue';
+import ResultNav from '../components/results/ResultNav.vue';
+import { Route } from 'vue-router';
+import AnalyticsService from '../shared/services/analytics.service';
 
 @Component({
   components: {
@@ -93,37 +79,37 @@ export default class Results extends Vue {
   public categories: any[] = [];
   public descriptions: any[] = [];
   public current: any = null;
-  public query: string = "";
+  public query: string = '';
   public isCopied: boolean = false;
 
   $refs: any;
   public type: boolean = false;
 
   backToFinder() {
-    FinderService.updateValue("index", 0, false);
+    FinderService.updateValue('index', 0, false);
     this.$router.push({
-      path: "/finder" + this.query,
+      path: '/finder' + this.query,
     });
   }
 
   copyToClipboard(str: string = window.location.href) {
-    const el = document.createElement("textarea");
+    const el = document.createElement('textarea');
     el.value = str;
-    el.setAttribute("readonly", "");
-    el.style.position = "absolute";
-    el.style.left = "-9999px";
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
     document.body.appendChild(el);
     el.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(el);
 
     this.isCopied = true;
   }
 
-  @Emit("updateStatus")
+  @Emit('updateStatus')
   updateStatus(): ButtonConfig[] {
     return [
-      new ButtonConfig("Zurück zum Finder", false, () => {
+      new ButtonConfig('Zurück zum Finder', false, () => {
         this.backToFinder();
       }),
     ];
@@ -150,12 +136,12 @@ export default class Results extends Vue {
     }
   }
   checkNavType(type: string): void {
-    this.type = type == "vertical";
+    this.type = type == 'vertical';
   }
   mounted() {
     this.updateStatus();
     FinderService.loadStatusFromUrl();
-    FinderService.updateValue("index", null, false);
+    FinderService.updateValue('index', null, false);
     this.query = FinderService.parseValueToUrl();
     let categories: any[] = [];
     FinderService.getResults().then((results: any) => {
@@ -184,18 +170,12 @@ export default class Results extends Vue {
     // NotificationService.main();
   }
 
-  @Watch("$route", { immediate: true, deep: true })
+  @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: Route) {
-    AnalyticsService.sendGAEvent(
-      "Load",
-      "Results",
-      "Navigate",
-      FinderService.values
-    );
+    AnalyticsService.sendGAEvent('Load', 'Results', 'Navigate', FinderService.values);
   }
 }
 </script>
-
 
 <style lang="scss">
 .results {

@@ -3,11 +3,7 @@
     <h1>{{ $router.currentRoute.meta.title }}</h1>
     <Progress v-bind:values="progressValues" />
     <!-- <transition :name="'direction'" v-for="(question, index) in questions" :key="index"> -->
-    <div
-      :name="'direction'"
-      v-for="(question, index) in questions"
-      :key="index"
-    >
+    <div :name="'direction'" v-for="(question, index) in questions" :key="index">
       <div v-if="index === currentQuestion">
         <article>
           <h2>{{ question.title }}</h2>
@@ -54,16 +50,16 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import { ButtonConfig } from "../components/NavFooter/ButtonConfig.class";
-import DynamicForm from "../components/DynamicForm.vue";
-import Progress from "../components/Progress.vue";
-import EmployeesCalculator from "../components/EmployeesCalculator.vue";
-import { Component, Prop, Vue, Emit, Watch } from "vue-property-decorator";
-import QuestionRequestService from "../shared/services/question-request.service";
-import { FinderService } from "../shared/services/finder.service";
-import URLService from "../shared/services/url.service";
-import AnalyticsService from "../shared/services/analytics.service";
-import { Route } from "vue-router";
+import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
+import DynamicForm from '../components/DynamicForm.vue';
+import Progress from '../components/Progress.vue';
+import EmployeesCalculator from '../components/EmployeesCalculator.vue';
+import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
+import QuestionRequestService from '../shared/services/question-request.service';
+import { FinderService } from '../shared/services/finder.service';
+import URLService from '../shared/services/url.service';
+import AnalyticsService from '../shared/services/analytics.service';
+import { Route } from 'vue-router';
 
 @Component({
   components: {
@@ -74,10 +70,10 @@ import { Route } from "vue-router";
 })
 export default class Finder extends Vue {
   public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig("Zurück", false, () => {
+    new ButtonConfig('Zurück', false, () => {
       this.previous();
     }),
-    new ButtonConfig("Weiter", true, () => {
+    new ButtonConfig('Weiter', true, () => {
       this.next();
     }),
   ];
@@ -90,7 +86,7 @@ export default class Finder extends Vue {
   public renderComponent = true;
   public calcIsOpen = false;
 
-  @Emit("updateStatus")
+  @Emit('updateStatus')
   updateStatus(): ButtonConfig[] {
     return this.buttonsConfig;
   }
@@ -98,60 +94,50 @@ export default class Finder extends Vue {
   mounted() {
     FinderService.loadStatusFromUrl();
     this.progressValues = FinderService.values;
-    this.currentQuestion = FinderService.getValue("index");
+    this.currentQuestion = FinderService.getValue('index');
     this.updateStatus();
 
     if (this.currentQuestion == this.questions.length - 1) {
-      this.buttonsConfig[1].name = "Fertig";
+      this.buttonsConfig[1].name = 'Fertig';
     } else {
-      this.buttonsConfig[1].name = "Weiter";
+      this.buttonsConfig[1].name = 'Weiter';
     }
   }
   public previous() {
-    this.buttonsConfig[1].name = "Weiter";
+    this.buttonsConfig[1].name = 'Weiter';
     if (this.currentQuestion > 0) {
-      FinderService.updateValue("index", --this.currentQuestion);
+      FinderService.updateValue('index', --this.currentQuestion);
     } else {
-      FinderService.updateValue("index", null, false);
+      FinderService.updateValue('index', null, false);
       this.$router.push({
-        path: "/" + FinderService.parseValueToUrl(),
+        path: '/' + FinderService.parseValueToUrl(),
       });
     }
     this.progressValues = FinderService.values;
     this.calcIsOpen = false;
-    AnalyticsService.sendGAEvent(
-      "Click",
-      "Button",
-      "Previous",
-      FinderService.values
-    );
+    AnalyticsService.sendGAEvent('Click', 'Button', 'Previous', FinderService.values);
   }
   public next() {
     let key = this.questions[this.currentQuestion].config.key;
     if (this.currentQuestion < this.questions.length) {
       FinderService.updateValue(key, this.status.value, false);
       if (this.currentQuestion < this.questions.length - 1) {
-        FinderService.updateValue("index", ++this.currentQuestion);
+        FinderService.updateValue('index', ++this.currentQuestion);
         if (this.currentQuestion == this.questions.length - 1) {
-          this.buttonsConfig[1].name = "Fertig";
+          this.buttonsConfig[1].name = 'Fertig';
         } else {
-          this.buttonsConfig[1].name = "Weiter";
+          this.buttonsConfig[1].name = 'Weiter';
         }
       } else {
-        FinderService.updateValue("index", null, false);
+        FinderService.updateValue('index', null, false);
         this.$router.push({
-          path: "/results" + FinderService.parseValueToUrl(),
+          path: '/results' + FinderService.parseValueToUrl(),
         });
       }
     }
     this.progressValues = FinderService.values;
     this.calcIsOpen = false;
-    AnalyticsService.sendGAEvent(
-      "Click",
-      "Button",
-      "Next",
-      FinderService.values
-    );
+    AnalyticsService.sendGAEvent('Click', 'Button', 'Next', FinderService.values);
   }
 
   public setEmployees(bla: any) {
@@ -159,7 +145,7 @@ export default class Finder extends Vue {
     FinderService.updateValue(key, bla, false);
     this.$router
       .push({
-        path: "/finder" + FinderService.parseValueToUrl(),
+        path: '/finder' + FinderService.parseValueToUrl(),
       })
       .catch(() => {});
     this.progressValues = FinderService.values;
@@ -179,14 +165,9 @@ export default class Finder extends Vue {
     this.updateStatus();
   }
 
-  @Watch("$route", { immediate: true, deep: true })
+  @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: Route) {
-    AnalyticsService.sendGAEvent(
-      "Load",
-      "Finder",
-      "Enter",
-      FinderService.values
-    );
+    AnalyticsService.sendGAEvent('Load', 'Finder', 'Enter', FinderService.values);
   }
 }
 </script>
@@ -228,4 +209,3 @@ article {
 @media (min-width: 768px + 20px) {
 }
 </style>
-

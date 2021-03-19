@@ -21,7 +21,11 @@
       <FullscreenResultCard v-if="!!offer" v-bind:offer="offer"></FullscreenResultCard>
     </transition>
     <transition name="fscard">
-      <FullscreenDescriptionCard v-if="!!description" v-bind:name="description.name" v-bind:text="description.text"></FullscreenDescriptionCard>
+      <FullscreenDescriptionCard
+        v-if="!!description"
+        v-bind:name="description.name"
+        v-bind:text="description.text"
+      ></FullscreenDescriptionCard>
     </transition>
     <!-- <transition name="cookies">
       <div class="cookies-banner" v-if="cookieBannerVisible">
@@ -47,17 +51,17 @@
 </template>
 
 <script lang="ts">
-import { ButtonConfig } from "./components/NavFooter/ButtonConfig.class";
-import { Component, Prop, Vue, Watch } from "vue-property-decorator";
-import NavHeader from "./components/NavHeader.vue";
-import NavFooter from "./components/NavFooter/NavFooter.vue";
-import FullscreenResultCard from "./components/results/FullscreenResultCard.vue";
-import FullscreenDescriptionCard from "./components/results/FullscreenDescriptionCard.vue";
-import { FinderService } from "./shared/services/finder.service";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
-import AnalyticsService from "./shared/services/analytics.service";
-import { Route } from "vue-router";
-import { NotificationService } from "./shared/services/notfication.service";
+import { ButtonConfig } from './components/NavFooter/ButtonConfig.class';
+import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import NavHeader from './components/NavHeader.vue';
+import NavFooter from './components/NavFooter/NavFooter.vue';
+import FullscreenResultCard from './components/results/FullscreenResultCard.vue';
+import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
+import { FinderService } from './shared/services/finder.service';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
+import AnalyticsService from './shared/services/analytics.service';
+import { Route } from 'vue-router';
+import { NotificationService } from './shared/services/notfication.service';
 
 @Component({
   components: {
@@ -74,8 +78,8 @@ export default class App extends Vue {
   public offer: any = false;
   public description: any = false;
   public cookieBannerVisible: boolean = true;
-  public gtmProperty = "UA-180130811-1";
-  public gtmTrackerName = "gtmDefaultTracker";
+  public gtmProperty = 'UA-180130811-1';
+  public gtmTrackerName = 'gtmDefaultTracker';
 
   $refs: any;
 
@@ -84,7 +88,7 @@ export default class App extends Vue {
   }
   mounted() {
     // console.log(this.$router);
-    
+
     // this.$cookies.remove('allow');
     AnalyticsService.init(this.$cookies);
     this.cookieBannerVisible = AnalyticsService.cookieBannerVisible;
@@ -133,13 +137,13 @@ export default class App extends Vue {
   //     f.parentNode.insertBefore(j, f);
   //   })(window, document, "script", "dataLayer", this.gtmProperty);
   //   console.log(g);
-    
+
   // }
 }
 </script>
 
 <style lang="scss">
-@import "./styles/index.scss";
+@import './styles/index.scss';
 #app {
   display: flex;
   flex-direction: column;
@@ -213,4 +217,3 @@ export default class App extends Vue {
 // $large: 500px; l
 // $extra-large: 1000px; xl
 </style>
-

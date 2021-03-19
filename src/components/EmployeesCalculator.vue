@@ -2,7 +2,14 @@
   <div class="employees-calculator">
     <ul class="factors-table" v-if="!!question.factors">
       <li v-for="(factor, i) in question.factors" :key="i">
-        <Input v-bind:config="getConfig(i, factor.time)" v-on:status="(bla)=>{calcStatus(bla, i)}" />
+        <Input
+          v-bind:config="getConfig(i, factor.time)"
+          v-on:status="
+            (bla) => {
+              calcStatus(bla, i);
+            }
+          "
+        />
       </li>
     </ul>
     <button class="btn" v-on:click="getStatus()">Berechnen</button>
@@ -10,8 +17,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from "vue-property-decorator";
-import Input from "./DynamicForm/Input.vue";
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import Input from './DynamicForm/Input.vue';
 @Component({
   components: {
     Input,
@@ -28,15 +35,15 @@ export default class EmployeesCalculator extends Vue {
   }
   getConfig(index: number, unit: string) {
     return {
-      type: "input",
-      key: "empl" + index,
+      type: 'input',
+      key: 'empl' + index,
       unit: unit,
       validators: [
         {
           isValide: (value: any) => {
             return value == null || value == undefined || value >= 0;
           },
-          message: "Bitte keine negativen Zahlen einfügen",
+          message: 'Bitte keine negativen Zahlen einfügen',
         },
       ],
       placeholder: 0,
@@ -51,9 +58,8 @@ export default class EmployeesCalculator extends Vue {
     this.value = result;
   }
 
-  @Emit("status")
+  @Emit('status')
   getStatus() {
-    
     return Math.ceil(this.value);
   }
 }

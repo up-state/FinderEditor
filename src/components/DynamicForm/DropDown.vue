@@ -3,7 +3,7 @@
     <!-- <div class="content"> -->
     <button
       class="toggle btn"
-      v-bind:class="{active: value != null}"
+      v-bind:class="{ active: value != null }"
       v-on:click="setInnerHeight(!open)"
     >
       <span class="content" v-html="buttonText"></span>
@@ -17,7 +17,7 @@
     <!-- <button v-on:click="toggle()" class="select">{{value? config.options[value-1].key: 'bitte wählen'}}</button> -->
     <div
       class="options"
-      v-bind:style="{height: height}"
+      v-bind:style="{ height: height }"
       v-bind:class="{ open: open }"
       ref="options"
     >
@@ -31,7 +31,7 @@
           v-on:click="setInnerHeight(false)"
         >
           <!-- v-bind:class="{closed: true}" -->
-          <input type="radio" :id="config.key+'_'+index" :value="index" v-model="value" />
+          <input type="radio" :id="config.key + '_' + index" :value="index" v-model="value" />
           <span v-html="option.key"></span>
         </label>
       </div>
@@ -42,9 +42,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
-import { FinderService } from "../../shared/services/finder.service";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { FinderService } from '../../shared/services/finder.service';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
 
 @Component({
   components: {
@@ -55,24 +55,24 @@ export default class DropDown extends Vue {
   private status: any;
   @Prop() private config!: any;
   private value: any = null;
-  private height = "0";
+  private height = '0';
   public $refs: any;
 
-  public buttonText: string = "bitte wählen";
+  public buttonText: string = 'bitte wählen';
 
   setInnerHeight(open: boolean) {
     this.open = open;
-    this.height = !this.open ? "0px" : this.$refs.options.scrollHeight + "px";
+    this.height = !this.open ? '0px' : this.$refs.options.scrollHeight + 'px';
   }
 
   mounted() {
     this.status = {};
     let index: any = FinderService.getValue(this.config.key);
-    this.value = index == null? null: this.findOptionIndex(index);
+    this.value = index == null ? null : this.findOptionIndex(index);
     this.open = false;
-    
+
     this.valueChanged(this.value);
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       this.setInnerHeight(this.open);
     });
   }
@@ -94,15 +94,15 @@ export default class DropDown extends Vue {
     this.validate(this.value);
     this.emitStatusChange(this.status);
   }
-  @Watch("value")
+  @Watch('value')
   valueChanged(id: number) {
     let option = this.config.options[id];
-    this.buttonText = id != null ? option.key : "bitte wählen";
+    this.buttonText = id != null ? option.key : 'bitte wählen';
 
     this.validate(id != null ? option.value : null);
     this.emitStatusChange(this.status);
   }
-  @Emit("status")
+  @Emit('status')
   emitStatusChange(status: any) {
     this.status = status;
   }

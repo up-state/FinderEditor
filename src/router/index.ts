@@ -13,46 +13,50 @@ const routes: Array<RouteConfig> = [
     name: 'Start',
     component: Start,
     meta: {
-      title: 'Förderfinder'
-    }
+      title: 'Förderfinder',
+    },
   },
   {
     path: '/finder',
     name: 'Finder',
     component: Finder,
     meta: {
-      title: 'Förderfinder'
-    }
+      title: 'Förderfinder',
+    },
   },
   {
     path: '/results',
     name: 'Results',
     component: Results,
     meta: {
-      title: 'Deine Resultate'
+      title: 'Deine Resultate',
     },
-    children: [{
-      path: '/results/:cathegorie',
-      component: Results,
-      meta: {
-        title: 'Deine Resultate'
-      }
-    }]
+    children: [
+      {
+        path: '/results/:cathegorie',
+        component: Results,
+        meta: {
+          title: 'Deine Resultate',
+        },
+      },
+    ],
   },
   {
     path: '/test',
     name: 'Test',
     component: Test,
     meta: {
-      title: 'Testtitle'
+      title: 'Testtitle',
     },
-    children: [{
-      path: '/test/:cathegorie',
-      component: Test,
-      meta: {
-        title: 'Test'
-      }
-    }]
+    children: [
+      {
+        path: '/test/:cathegorie',
+        component: Test,
+        meta: {
+          title: 'Test',
+        },
+      },
+    ],
   },
 ];
 

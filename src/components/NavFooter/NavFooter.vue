@@ -6,13 +6,15 @@
       :key="index"
       :disabled="button.disabled"
       v-on:click="button.listener"
-    >{{button.name}}</button>
+    >
+      {{ button.name }}
+    </button>
   </nav>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from "vue-property-decorator";
-import { ButtonConfig } from "./ButtonConfig.class";
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import { ButtonConfig } from './ButtonConfig.class';
 
 @Component
 export default class NavFooter extends Vue {

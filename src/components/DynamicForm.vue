@@ -24,25 +24,24 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from "vue-property-decorator";
-import GridSelect from "./DynamicForm/GridSelect.vue";
-import Input from "./DynamicForm/Input.vue";
-import EmployeesInput from "./DynamicForm/EmployeesInput.vue";
-import DropDown from "./DynamicForm/DropDown.vue";
+import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
+import GridSelect from './DynamicForm/GridSelect.vue';
+import Input from './DynamicForm/Input.vue';
+import EmployeesInput from './DynamicForm/EmployeesInput.vue';
+import DropDown from './DynamicForm/DropDown.vue';
 
 @Component({
   components: {
     GridSelect,
     Input,
     DropDown,
-    EmployeesInput
-  }
+    EmployeesInput,
+  },
 })
 export default class DynamicForm extends Vue {
   @Prop() public config: any;
-  mounted() {
-  }
-  @Emit("status")
+  mounted() {}
+  @Emit('status')
   getStatus(status: any) {
     return status;
   }

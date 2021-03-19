@@ -5,9 +5,9 @@ Vue.use(Vuex);
 
 // import Questions from '@/store/questions';
 
-export default  new Vuex.Store({
+export default new Vuex.Store({
   modules: {
     // User
     // Questions
-  }
-})
+  },
+});

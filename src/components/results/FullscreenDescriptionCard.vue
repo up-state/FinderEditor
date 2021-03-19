@@ -8,7 +8,7 @@
     >
       <div class="content">
         <div class="result-card">
-          <h3>{{name}}</h3>
+          <h3>{{ name }}</h3>
           <div v-html="text"></div>
         </div>
       </div>
@@ -20,9 +20,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-vue";
-import { FinderService } from "../../shared/services/finder.service";
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
+import { FinderService } from '../../shared/services/finder.service';
 @Component({
   components: {
     OverlayScrollbarsComponent,
@@ -34,14 +34,14 @@ export default class FullscreenDescriptionCard extends Vue {
   // @Prop() public link!: string;
   close() {
     // FinderService.updateCurrentOffer(null);
-    FinderService.updateValue("index", null, false);
+    FinderService.updateValue('index', null, false);
     let query = FinderService.parseValueToUrl();
     this.$router.push({
       path: query,
     });
   }
   isLink(text: string): boolean {
-    return text.startsWith("www.") || text.startsWith("http");
+    return text.startsWith('www.') || text.startsWith('http');
   }
 }
 </script>

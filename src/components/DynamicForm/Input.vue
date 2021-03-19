@@ -9,13 +9,13 @@
       @focus="setActive(true)"
       @blur="setActive(false)"
     />
-    <span v-if="!!config.unit" class="unit">{{config.unit}}</span>
+    <span v-if="!!config.unit" class="unit">{{ config.unit }}</span>
   </label>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from "vue-property-decorator";
-import { FinderService } from "../../shared/services/finder.service";
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class Input extends Vue {
@@ -36,12 +36,12 @@ export default class Input extends Vue {
     this.validate(this.value);
     this.emitStatusChange(this.status);
   }
-  @Watch("value")
+  @Watch('value')
   valueChanged(newVal: any) {
     this.validate(newVal);
     this.emitStatusChange(this.status);
   }
-  @Emit("status")
+  @Emit('status')
   emitStatusChange(status: any) {
     this.status = status;
   }
@@ -85,7 +85,7 @@ export default class Input extends Vue {
       -webkit-appearance: none;
       margin: 0;
     }
-    &[type="number"] {
+    &[type='number'] {
       -moz-appearance: textfield;
     }
   }
@@ -93,7 +93,7 @@ export default class Input extends Vue {
     font-size: 24px;
     margin-bottom: 8px;
     &::after {
-      content: ":";
+      content: ':';
     }
   }
   @media (min-width: 500px) {
