@@ -1,0 +1,23 @@
+#app {
+  // var: --h1 x0: 768 y0: 32 x1: 1440 y1: 52
+  --h1: 32px;
+  // @media (min-width: 768px) {
+  //   --h1: calc(100vw * (52 - 32) / (1440 - 768) + (52px - 1440px * (52 - 32) / (1440 - 768)));
+  // }
+  // @media (min-width: 1440px) {
+  //   --h1: 52px;
+  // }
+}
+
+.container-xs {
+  // max-width: 700px;
+  // @media (max-width: $extra-small) {
+  //   background-color: blue;
+  // }
+}
+
+// $extra-small: 700px; xs
+// $small: 200px; s
+// $medium: 400px; m
+// $large: 500px; l
+// $extra-large: 1000px; xl

@@ -1,0 +1,36 @@
+button.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 16px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  font-size: 1.5rem;
+  outline: none !important;
+  cursor: pointer;
+
+  --actual-color: var(--secondary);
+  &:hover {
+    --actual-color: var(--secondary-dark);
+  }
+  &:active {
+    --actual-color: var(--secondary-darkest);
+  }
+  &:disabled {
+    cursor: default;
+    --actual-color: var(--grey);
+  }
+
+  color: var(--white);
+  background-color: var(--actual-color);
+
+  &.small {
+    padding: 8px 16px;
+  }
+  &.outline {
+    background-color: var(--white);
+    color: var(--actual-color);
+    box-shadow: var(--actual-color) inset 0 0 0 2px;
+  }
+
+  transition: background-color 0.5s, color 0.5s;
+}
