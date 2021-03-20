@@ -2,28 +2,30 @@
   <div class="home container-xs screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
     <div style="display: flex;">
-    <div>
-      <ul>
-        <li v-for="(question, index) in questions" :key="index">
-          {{question.key}} - {{question.config.type}}
-        </li>
-      </ul>
+      <div style="flex-grow: 1;">
+        <ul style="list-style: none;">
+          <li v-for="(question, index) in questions" :key="index">
+            <DynamicForm v-bind:config="question.config"/>
+            <div style="margin-bottom: 2rem;display: flex;justify-content:center;">⬇</div>
+          </li>
+        </ul>
+      </div>
+      <div style="width: 300px;">
+        <h3>Formelemente einfügen</h3>
+        <ul style="list-style: none;">
+          <li v-for="element in elements" :key="element.name">
+            <button @click="element.append">{{ element.name }}</button>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h3>Neue Formelemente einfügen</h3>
-      <ul>
-        <li v-for="element in elements" :key="element.name">
-          <button @click="element.append">{{ element.name }}</button>
-        </li>
-      </ul>
-    </div>
-  </div>
   </div>
 </template>
 
 <script lang="ts">
 // @ is an alias to /src
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
+import DynamicForm from '../components/DynamicForm.vue';
 import Progress from '../components/Progress.vue';
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
@@ -38,6 +40,7 @@ function randomId(): string {
 @Component({
   components: {
     Progress,
+    DynamicForm,
   },
 })
 export default class Start extends Vue {
