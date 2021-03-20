@@ -5,7 +5,7 @@
       <div style="flex-grow: 1;">
         <ul style="list-style: none;">
           <li v-for="(question, index) in questions" :key="index">
-            <DynamicForm v-bind:config="question.config"/>
+            <DynamicFormEditor :question="question"/>
             <div style="margin-bottom: 2rem;display: flex;justify-content:center;">⬇</div>
           </li>
         </ul>
@@ -25,7 +25,7 @@
 <script lang="ts">
 // @ is an alias to /src
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
-import DynamicForm from '../components/DynamicForm.vue';
+import DynamicFormEditor from '../components/DynamicFormEditor.vue';
 import Progress from '../components/Progress.vue';
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
@@ -40,7 +40,7 @@ function randomId(): string {
 @Component({
   components: {
     Progress,
-    DynamicForm,
+    DynamicFormEditor,
   },
 })
 export default class Start extends Vue {
@@ -62,8 +62,8 @@ export default class Start extends Vue {
     }
   ]
 
-  appendNumberInput() {
-    const key = `number-input-${randomId()}`
+  appendDropdown() {
+    const key = `dropdown-${randomId()}`
     const el = {
       title: 'Wo liegt dein Hauptfirmensitz?',
       key,
@@ -100,8 +100,8 @@ export default class Start extends Vue {
     this.$store.commit('appendQuestion', el)
   }
 
-  appendDropdown() {
-    const key = `dropdown-${randomId()}`
+  appendNumberInput() {
+    const key = `number-input-${randomId()}`
     const el = { title: 'Wie alt ist dein Unternehmen?',
         key,
         config: {
