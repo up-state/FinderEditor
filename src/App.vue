@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <NavHeader></NavHeader> -->
     <OverlayScrollbarsComponent
       class="view"
       :options="{ scrollbars: { autoHide: 'scroll' } }"
@@ -27,26 +26,6 @@
         v-bind:text="description.text"
       ></FullscreenDescriptionCard>
     </transition>
-    <!-- <transition name="cookies">
-      <div class="cookies-banner" v-if="cookieBannerVisible">
-        <div>
-          <div>
-            Diese Website verwendet Cookies – nähere Informationen dazu und zu
-            deinen Rechten als Benutzer findest du in unserer
-            <a
-              href="https://wir-bleiben-liqui.de/datenschutz/"
-            >Datenschutzerklärung</a>
-            .
-          </div>
-          <div>
-            Klicke auf "Ich stimme zu", um Cookies zu akzeptieren und direkt
-            unsere Website besuchen zu können.
-          </div>
-        </div>
-        <button class="btn small" v-on:click="disable">Ich lehne ab</button>
-        <button class="btn small" v-on:click="enable">Ich stimme zu</button>
-      </div>
-    </transition> -->
   </div>
 </template>
 
