@@ -28,10 +28,6 @@ new Vue({
 
 function defaultQuestions() {
   return [
-<<<<<<< HEAD
-
-=======
->>>>>>> febfdce3f4a02c488340d2a59a2103d915418489
     {
       title: 'Wo liegt dein Hauptfirmensitz?',
       key: 'state',
