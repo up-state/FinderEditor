@@ -1,6 +1,7 @@
 {
   "name": "liquid-client",
   "version": "0.1.0",
+  "homepage": "https://upstatemanager.github.io/FinderEditor",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port=5000",

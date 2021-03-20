@@ -1,52 +1,46 @@
 <template>
-  <section style="border: 2px solid black; padding: 2rem;">
-    <h2>Nummerneingabe</h2>
+  <section>
     <label class="input">
-      <span>Title</span>
+      <h3>Title</h3>
       <input
         type="text"
-        :value="question.title"
-        @change="e => updateQuestion({ title: e.target.value })"
+        v-model="question.title"
+        @change="(e) => updateQuestion({ title: e.target.value })"
       />
     </label>
-
-    <label class="input">
-      <span>Einheit</span>
-      <input
-        type="text"
-        :value="question.config.unit"
-        @change="e => updateQuestionConfig({ unit: e.target.value })"
-      />
+    <label>
+      <h3>Description</h3>
+      <textarea type="text" v-model="question.description" />
     </label>
-
-    <label class="input">
-      <span>Platzhalter</span>
-      <input
-        type="text"
-        :value="question.config.placeholder"
-        @change="e => updateQuestionConfig({ placeholder: e.target.value })"
-      />
+    <label>
+      <h3>Optionen (mit , trennen)</h3>
+      <textarea type="text" :value="options" @change="(e) => updateOptions(e.target.value)" />
     </label>
   </section>
 </template>
 
 <script lang="ts">
-import { Question } from '@/store/questions';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
 
 @Component
 export default class NumberInputEditor extends Vue {
   @Prop() private question!: any;
-
-  updateQuestion(update: Partial<Question>) {
-    this.$store.commit('updateQuestion', { ...this.question, ...update });
+  get options() {
+    return this.question.config.options.map((e: any) => e.key).join(',');
   }
 
-  updateQuestionConfig(update: Question['config']) {
-    this.$store.commit('updateQuestion', {
-      ...this.question,
-      config: { ...this.question.config, ...update },
-    });
+  updateQuestion(x: any) {
+    this.$store.commit('updateQuestion', { ...this.question, ...x });
+  }
+
+  getOptions() {
+    return this.question.config.options.size;
+  }
+
+  updateOptions(options: string) {
+    const updatedOptions = options.split(',').map((opt) => ({ key: opt, value: 1 }));
+    this.question.config.options = updatedOptions;
+    this.$store.commit('updateQuestion', { ...this.question });
   }
 }
 </script>
