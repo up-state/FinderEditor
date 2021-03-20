@@ -57,6 +57,10 @@ export default class Start extends Vue {
       append: this.appendNumberInput,
     },
     {
+      name: "TextArea",
+      append: this.appendTextArea,
+    },
+    {
       name: "Auswahlliste",
       append: this.appendDropdown,
     }
@@ -120,6 +124,27 @@ export default class Start extends Vue {
 
     this.$store.commit('appendQuestion', el)
   }
+
+  appendTextArea() {
+    const key = `text-area-${randomId()}`
+    const el = { title: 'Über dein Unternehmen?',
+        key,
+        config: {
+          type: 'text-area',
+          key,
+          placeholder: 'XX',
+          required: { message: 'Bitte Wert auswählen' },
+        },
+        description: `
+          Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+          Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
+          und wir suchen für dich die passenden Angebote.
+        `,
+      }
+    this.$store.commit('appendQuestion', el)
+  }
+
+
 
   @Emit('updateStatus')
   updateStatus(): ButtonConfig[] {
