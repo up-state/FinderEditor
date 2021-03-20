@@ -47,13 +47,12 @@ export default class EmployeesInput extends Vue {
   }
   public validate(val: any) {
     this.status.errors = [];
-    this.config.validators.forEach((v: any) => {
-      if (!v.isValide(val)) {
-        this.status.errors.push({
-          message: v.message,
-        });
+    if (!!this.config.required) {
+      
+      if(this.value == null || this.value == undefined){
+        this.status.errors.push(this.config.required);
       }
-    });
+    }
     this.status.isValide = this.status.errors.length == 0;
     this.status.value = val;
   }
