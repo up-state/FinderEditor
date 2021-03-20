@@ -76,6 +76,10 @@ export default class Start extends Vue {
       name: 'Texteingabe',
       append: this.appendTextInput,
     },
+        {
+      name: "Checkbox",
+      append: this.appendCheckbox,
+    },
   ];
 
   appendDropdown() {
@@ -175,6 +179,28 @@ export default class Start extends Vue {
 
     this.$store.commit('appendQuestion', el);
   }
+
+  appendCheckbox() {
+    const key = `number-input-${randomId()}`
+    const el = {
+      title: 'Habt ihr eine Checkbox?',
+      config: {
+        type: 'checkbox',
+        key,
+        label: 'Informationen',
+        description: 'Brauchen sie zusätzliche Informationen zu Ihrem angeforderten Formular?',
+        checked: true,
+      },
+      description: `
+        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
+        und wir suchen für dich die passenden Angebote.
+      `,
+    }
+
+    this.$store.commit('appendQuestion', el)
+  }
+
 
   @Emit('updateStatus')
   updateStatus(): ButtonConfig[] {
