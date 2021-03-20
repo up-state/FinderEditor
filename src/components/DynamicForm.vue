@@ -15,6 +15,11 @@
       v-bind:config="config"
       v-on:status="getStatus"
     />
+    <TextInput
+      v-if="!!config && config.type == 'text-input'"
+      v-bind:config="config"
+      v-on:status="getStatus"
+    />
   </div>
 </template>
 
@@ -22,12 +27,14 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import GridSelect from './DynamicForm/GridSelect.vue';
 import NumberInput from './DynamicForm/NumberInput.vue';
+import TextInput from './DynamicForm/TextInput.vue';
 import DropDown from './DynamicForm/DropDown.vue';
 
 @Component({
   components: {
     GridSelect,
     NumberInput,
+    TextInput,
     DropDown,
   },
 })
