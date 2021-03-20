@@ -27,17 +27,14 @@
 <script lang="ts">
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import Progress from '../components/Progress.vue';
-import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
-import { FinderService } from '../shared/services/finder.service';
-import { Route } from 'vue-router';
-import AnalyticsService from '../shared/services/analytics.service';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 
 @Component({
   components: {
     Progress,
   },
 })
-export default class Start extends Vue {
+export default class Login extends Vue {
   public buttonsConfig: ButtonConfig[] = [
     new ButtonConfig('Login', false, () => {
       this.toEditor();
@@ -51,28 +48,12 @@ export default class Start extends Vue {
 
   public toEditor(): void {
     this.$router.push({
-      path: '/editor' + FinderService.parseValueToUrl(),
+      path: '/editor',
     });
   }
 
   mounted() {
-    FinderService.loadStatusFromUrl();
-    if (FinderService.allValuesExist()) {
-      this.buttonsConfig = [
-        new ButtonConfig('Weiter', false, () => {
-          this.toEditor();
-        }),
-        new ButtonConfig('Akzeptieren & Kriterien anpassen', false, () => {
-          this.toFinder();
-        }),
-      ];
-    }
     this.updateStatus();
-  }
-
-  @Watch('$route', { immediate: true, deep: true })
-  onUrlChange(newVal: Route) {
-    AnalyticsService.sendGAEvent('Load', 'Start', 'Enter', FinderService.values);
   }
 }
 </script>
