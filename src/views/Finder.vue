@@ -2,7 +2,6 @@
   <div class="finder screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
     <Progress :steps="questions.length" :currentIndex="currentQuestion"/>
-    <!-- <transition :name="'direction'" v-for="(question, index) in questions" :key="index"> -->
     <div :name="'direction'" v-for="(question, index) in questions" :key="index">
       <div v-if="index === currentQuestion">
         <article>
@@ -13,37 +12,7 @@
             v-on:status="getStatus"
           ></DynamicForm>
         </article>
-        <article>
-          <h3>Anmerkungen:</h3>
-          <p class="factors-title" v-if="!!question.factorsTitle">
-            {{ question.factorsTitle }}
-          </p>
-          <table class="factors-table" v-if="!!question.factors">
-            <tr>
-              <th>Arbeitszeit</th>
-              <th>Faktor</th>
-            </tr>
-            <tr v-for="(factor, i) in question.factors" :key="i">
-              <td>{{ factor.time }}</td>
-              <td>{{ factor.value }}</td>
-            </tr>
-          </table>
-          <p v-html="question.description"></p>
-          <button
-            class="btn"
-            v-if="question.config.key == 'employees'"
-            v-on:click="calcIsOpen = true"
-          >
-            VZÄ-Hilfsrechner öffnen
-          </button>
-          <EmployeesCalculator
-            v-if="question.config.key == 'employees' && calcIsOpen"
-            v-bind:question="question"
-            v-on:status="setEmployees"
-          ></EmployeesCalculator>
-        </article>
       </div>
-      <!-- </transition> -->
     </div>
   </div>
 </template>
@@ -53,8 +22,7 @@
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import DynamicForm from '../components/DynamicForm.vue';
 import Progress from '../components/Progress.vue';
-import EmployeesCalculator from '../components/EmployeesCalculator.vue';
-import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
+import { Component, Vue, Emit, Watch,  } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
 import AnalyticsService from '../shared/services/analytics.service';
 import { Route } from 'vue-router';
@@ -63,7 +31,6 @@ import { Route } from 'vue-router';
   components: {
     DynamicForm,
     Progress,
-    EmployeesCalculator,
   },
 })
 export default class Finder extends Vue {
@@ -133,21 +100,6 @@ export default class Finder extends Vue {
     }
     this.calcIsOpen = false;
     AnalyticsService.sendGAEvent('Click', 'Button', 'Next', FinderService.values);
-  }
-
-  public setEmployees(bla: any) {
-    let key = this.questions[this.currentQuestion].config.key;
-    FinderService.updateValue(key, bla, false);
-    this.$router
-      .push({
-        path: '/finder' + FinderService.parseValueToUrl(),
-      })
-      .catch(() => {});
-    this.renderComponent = false;
-    this.$nextTick().then(() => {
-      this.renderComponent = true;
-    });
-    this.calcIsOpen = false;
   }
   getStatus(status: any) {
     this.status = status;
