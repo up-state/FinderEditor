@@ -6,7 +6,7 @@
       <div v-if="index === currentQuestion">
         <article>
           <h2>{{ question.title }}</h2>
-          <DynamicForm v-if="renderComponent" :question="question" v-on:status="getStatus" />
+          <component :is="inputComponent(question)" :question="question" @status="getStatus" />
         </article>
       </div>
     </div>
@@ -15,18 +15,27 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
-import DynamicForm from '../components/DynamicForm.vue';
-import Progress from '../components/Progress.vue';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
+import { Route } from 'vue-router';
+import { Question } from '@/store/questions';
+import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
+import Progress from '../components/Progress.vue';
+import NumberInput from '../components/DynamicForm/NumberInput.vue';
+import TextInput from '../components/DynamicForm/TextInput.vue';
+import TextArea from '../components/DynamicForm/TextArea.vue';
+import DropDown from '../components/DynamicForm/DropDown.vue';
+import Checkbox from '../components/DynamicForm/Checkbox.vue';
 import { FinderService } from '../shared/services/finder.service';
 import AnalyticsService from '../shared/services/analytics.service';
-import { Route } from 'vue-router';
 
 @Component({
   components: {
-    DynamicForm,
     Progress,
+    NumberInput,
+    TextInput,
+    TextArea,
+    DropDown,
+    Checkbox,
   },
 })
 export default class Finder extends Vue {
@@ -41,6 +50,18 @@ export default class Finder extends Vue {
   public questions = this.$store.state.Questions.questions;
   public currentQuestion = 0;
   public status: any;
+
+  inputComponent(question: Question): Vue {
+    const inputType = question.config.type;
+    const mapping: any = {
+      select: DropDown,
+      'number-input': NumberInput,
+      'text-input': TextInput,
+      'text-area': TextArea,
+      checkbox: Checkbox,
+    };
+    return mapping[inputType];
+  }
 
   // ForCalculator
   public renderComponent = true;
