@@ -20,6 +20,11 @@
       v-bind:config="config"
       v-on:status="getStatus"
     />
+    <TextArea
+      v-if="!!config && config.type == 'text-area'"
+      v-bind:config="config"
+      v-on:status="getStatus"
+    />
   </div>
 </template>
 
@@ -28,6 +33,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import GridSelect from './DynamicForm/GridSelect.vue';
 import NumberInput from './DynamicForm/NumberInput.vue';
 import TextInput from './DynamicForm/TextInput.vue';
+import TextArea from './DynamicForm/TextArea.vue';
 import DropDown from './DynamicForm/DropDown.vue';
 
 @Component({
@@ -35,6 +41,7 @@ import DropDown from './DynamicForm/DropDown.vue';
     GridSelect,
     NumberInput,
     TextInput,
+    TextArea,
     DropDown,
   },
 })

@@ -82,5 +82,19 @@ function defaultQuestions() {
         und wir suchen für dich die passenden Angebote.
       `,
     },
+    {
+      title: 'Wie alt ist dein Unternehmen?',
+      config: {
+        type: 'text-area',
+        key: 'text',
+        placeholder: 'XX',
+        required: {message: 'Bitte Wert auswählen'},
+      },
+      description: `
+        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
+        und wir suchen für dich die passenden Angebote.
+      `,
+    },
   ];
 }
