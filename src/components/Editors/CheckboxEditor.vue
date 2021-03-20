@@ -12,7 +12,7 @@
     <h2>Description</h2>
     <input
       type="text"
-      :value="question.title"
+      :value="question.description"
       @change="e => updateQuestion({description: e.target.value})"
     />
   </label>
@@ -22,7 +22,6 @@
       type="text"
       :value="question.config.label"
       @change="updateLabel($event.target.value)">
-    />
   </label>
   <label class="input">
     <h2>Checked</h2>
@@ -30,7 +29,6 @@
       type="checkbox"
       v-model="question.config.checked"
       @change="updateChecked($event.target.value)">
-    />
   </label>
   </section>
 </template>
