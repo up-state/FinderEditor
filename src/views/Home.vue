@@ -1,17 +1,16 @@
 <template>
   <div class="home container-xs screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
-
   </div>
 </template>
 
 <script lang="ts">
 // @ is an alias to /src
+import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
+import { Route } from 'vue-router';
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import Progress from '../components/Progress.vue';
-import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
-import { Route } from 'vue-router';
 import AnalyticsService from '../shared/services/analytics.service';
 
 @Component({
@@ -21,7 +20,10 @@ import AnalyticsService from '../shared/services/analytics.service';
 })
 export default class Start extends Vue {
   public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig('Weiter', false, () => {
+    new ButtonConfig('Login', false, () => {
+      this.toLogin();
+    }),
+    new ButtonConfig('Direkt zum Förderfinder', false, () => {
       this.toFinder();
     }),
   ];
@@ -37,10 +39,18 @@ export default class Start extends Vue {
       path: '/results' + FinderService.parseValueToUrl(),
     });
   }
+
   public toFinder(): void {
     FinderService.updateValue('index', 0, false);
     this.$router.push({
-      path: '/finder' + FinderService.parseValueToUrl(),
+      path: '/start' + FinderService.parseValueToUrl(),
+    });
+  }
+
+  public toLogin(): void {
+    FinderService.updateValue('index', 0, false);
+    this.$router.push({
+      path: '/login' + FinderService.parseValueToUrl(),
     });
   }
 
@@ -48,10 +58,10 @@ export default class Start extends Vue {
     FinderService.loadStatusFromUrl();
     if (FinderService.allValuesExist()) {
       this.buttonsConfig = [
-        new ButtonConfig('Weiter', false, () => {
-          this.toResults();
+        new ButtonConfig('Login', false, () => {
+          this.toLogin();
         }),
-        new ButtonConfig('Akzeptieren & Kriterien anpassen', false, () => {
+        new ButtonConfig('Direkt zum Förderfinder', false, () => {
           this.toFinder();
         }),
       ];
@@ -65,6 +75,7 @@ export default class Start extends Vue {
   }
 }
 </script>
+
 <style lang="scss">
 .home {
   display: flex;
@@ -77,6 +88,7 @@ article {
     width: 100%;
   }
 }
+
 // article {
 //   background-color: var(--brown);
 //   padding: 16px;
