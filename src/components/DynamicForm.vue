@@ -20,6 +20,11 @@
       v-bind:config="config"
       v-on:status="getStatus"
     />
+    <Checkbox
+      v-if="!!config && config.type == 'checkbox'"
+      v-bind:config="config"
+      v-on:status="getStatus"
+    />
   </div>
 </template>
 
@@ -29,6 +34,7 @@ import GridSelect from './DynamicForm/GridSelect.vue';
 import NumberInput from './DynamicForm/NumberInput.vue';
 import TextInput from './DynamicForm/TextInput.vue';
 import DropDown from './DynamicForm/DropDown.vue';
+import Checkbox from './DynamicForm/Checkbox.vue';
 
 @Component({
   components: {
@@ -36,6 +42,7 @@ import DropDown from './DynamicForm/DropDown.vue';
     NumberInput,
     TextInput,
     DropDown,
+    Checkbox
   },
 })
 export default class DynamicForm extends Vue {

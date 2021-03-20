@@ -21,7 +21,7 @@ new Vue({
 
 function defaultQuestions() {
   return [
-    
+
     {
       title: 'Wo liegt dein Hauptfirmensitz?',
       config: {
@@ -75,6 +75,21 @@ function defaultQuestions() {
         key: 'text',
         placeholder: 'XX',
         required: {message: 'Bitte Wert auswählen'},
+      },
+      description: `
+        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
+        und wir suchen für dich die passenden Angebote.
+      `,
+    },
+    {
+      title: 'Habt ihr eine Checkbox?',
+      config: {
+        type: 'checkbox',
+        key: 'option',
+        label: 'Informationen',
+        description: 'Brauchen sie zusätzliche Informationen zu Ihrem angeforderten Formular?',
+        checked: true,
       },
       description: `
         Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
