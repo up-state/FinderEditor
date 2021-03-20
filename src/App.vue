@@ -30,9 +30,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
-import { Route } from 'vue-router';
 import { ButtonConfig } from './components/NavFooter/ButtonConfig.class';
 import NavHeader from './components/NavHeader.vue';
 import NavFooter from './components/NavFooter/NavFooter.vue';

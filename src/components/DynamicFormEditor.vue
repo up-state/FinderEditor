@@ -1,5 +1,7 @@
 <template>
   <div>
+    <button @click="deleteQuestion(question)">delete</button>
+
     <NumberInputEditor
       v-if="!!question && question.config.type == 'number-input'"
       v-bind:question="question"
@@ -16,6 +18,10 @@
       v-else-if="!!question && question.config.type == 'select'"
       v-bind:question="question"
     />
+    <CheckboxEditor
+      v-if="!!question && question.config.type == 'checkbox'"
+      v-bind:question="question"
+    />
     <div v-else>{{ question.config.type }} - {{ question.title }}</div>
   </div>
 </template>
@@ -26,6 +32,8 @@ import NumberInputEditor from './Editors/NumberInputEditor.vue';
 import TextInputEditor from './Editors/TextInputEditor.vue';
 import TextAreaEditor from './Editors/TextAreaEditor.vue';
 import DropdownInputEditor from './Editors/DropdownInputEditor.vue';
+import CheckboxEditor from './Editors/CheckboxEditor.vue';
+
 
 @Component({
   components: {
@@ -33,10 +41,15 @@ import DropdownInputEditor from './Editors/DropdownInputEditor.vue';
     TextInputEditor,
     TextAreaEditor,
     DropdownInputEditor,
+    CheckboxEditor,
   },
 })
 export default class DynamicFormEditor extends Vue {
   @Prop() public question: any;
+
+  deleteQuestion(question) {
+    this.$store.commit('removeQuestion', question);
+  }
 }
 </script>
 
