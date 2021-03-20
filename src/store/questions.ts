@@ -2,7 +2,7 @@ import { VuexModule, Module, Mutation, Action } from 'vuex-module-decorators';
 
 type Question = any;
 
-@Module({ namespaced: true, name: 'questions' })
+@Module({ namespaced: false, name: 'questions' })
 class Questions extends VuexModule {
   public questions: Question[] = [];
 
