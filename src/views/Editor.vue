@@ -44,12 +44,15 @@ function randomId(): string {
   },
 })
 export default class Start extends Vue {
-  public questions = this.$store.state.Questions.questions
   public buttonsConfig: ButtonConfig[] = [
     new ButtonConfig('Weiter', false, () => {
       this.toFinder();
     }),
   ];
+
+  public get questions() {
+    return this.$store.state.Questions.questions
+  }
 
   public elements = [
     {

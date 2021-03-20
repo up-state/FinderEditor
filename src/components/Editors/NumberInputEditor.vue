@@ -1,10 +1,48 @@
 <template>
-  <section>
+  <section style="border: 2px solid black; padding: 2rem;">
+    <h2>Nummerneingabe</h2>
   <label class="input">
-    <h2>Title</h2>
+    <span>Title</span>
     <input
       type="text"
+      :value="question.title"
       @change="e => updateQuestion({title: e.target.value})"
+    />
+  </label>
+
+  <label class="input">
+    <span>Einheit</span>
+    <input
+      type="text"
+      :value="question.config.unit"
+      @change="e => updateQuestionConfig({unit: e.target.value})"
+    />
+  </label>
+
+  <label class="input">
+    <span>Platzhalter</span>
+    <input
+      type="text"
+      :value="question.config.placeholder"
+      @change="e => updateQuestionConfig({placeholder: e.target.value})"
+    />
+  </label>
+
+  <label class="input">
+    <span>Minimaler Wert</span>
+    <input
+      type="number"
+      :value="question.config.min"
+      @change="e => updateQuestionConfig({min: e.target.value})"
+    />
+  </label>
+
+  <label class="input">
+    <span>Maximaler Wert</span>
+    <input
+      type="number"
+      :value="question.config.max"
+      @change="e => updateQuestionConfig({max: e.target.value})"
     />
   </label>
 
@@ -12,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class NumberInputEditor extends Vue {
@@ -20,6 +58,10 @@ export default class NumberInputEditor extends Vue {
 
   updateQuestion(x: any) {
     this.$store.commit('updateQuestion', {...this.question, ...x})
+  }
+
+  updateQuestionConfig(x: any) {
+    this.$store.commit('updateQuestion', {...this.question, config: {...this.question.config, ...x}})
   }
 }
 </script>
