@@ -29,14 +29,7 @@ import { FinderService } from '../shared/services/finder.service';
 import AnalyticsService from '../shared/services/analytics.service';
 
 @Component({
-  components: {
-    Progress,
-    NumberInput,
-    TextInput,
-    TextArea,
-    DropDown,
-    Checkbox,
-  },
+  components: { Progress },
 })
 export default class Finder extends Vue {
   public buttonsConfig: ButtonConfig[] = [
