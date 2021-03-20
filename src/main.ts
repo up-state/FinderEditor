@@ -12,9 +12,13 @@ new Vue({
   router,
   store,
   created() {
-    for (const question of defaultQuestions()) {
-      this.$store.commit('addQuestion', question);
+    const questions = defaultQuestions();
+    for (const question of questions) {
+      this.$store.commit('appendQuestion', question);
     }
+    this.$store.commit('moveQuestion', { question: questions[2], toIndex: 3 });
+    this.$store.commit('removeQuestion', questions[1]);
+    this.$store.commit('updateQuestion', { ...questions[0], title: 'Hullebulle' });
   },
   render: h => h(App),
 }).$mount('#app');
@@ -23,6 +27,7 @@ function defaultQuestions() {
   return [
     {
       title: 'Wo liegt dein Hauptfirmensitz?',
+      key: 'state',
       config: {
         type: 'select',
         key: 'state',
@@ -53,6 +58,7 @@ function defaultQuestions() {
     },
     {
       title: 'Zu welcher Branche gehört dein Unternehmen?',
+      key: 'trade',
       config: {
         type: 'select',
         key: 'trade',
@@ -81,6 +87,7 @@ function defaultQuestions() {
     },
     {
       title: 'Welche Rechtsform hat dein Unternehmen?',
+      key: 'legal',
       config: {
         type: 'select',
         key: 'legal',
@@ -122,6 +129,7 @@ function defaultQuestions() {
     },
     {
       title: 'Wie alt ist dein Unternehmen?',
+      key: 'age',
       config: {
         type: 'input',
         key: 'age',
