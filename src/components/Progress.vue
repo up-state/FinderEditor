@@ -13,16 +13,11 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class Progress extends Vue {
-  @Prop() private values!: any;
-  private startZero = 0;
+  @Prop() private steps!: number;
+  @Prop() private currentIndex!: number;
 
   public get progress() {
-    return (this.startZero * 100 * (this.values.index + 1)) / (Object.keys(this.values).length - 1);
-  }
-  mounted() {
-    setTimeout(() => {
-      this.startZero = 1;
-    }, 0);
+    return this.currentIndex / this.steps * 100;
   }
 }
 </script>

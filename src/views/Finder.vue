@@ -1,7 +1,7 @@
 <template>
   <div class="finder screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <Progress v-bind:values="progressValues" />
+    <Progress :steps="questions.length" :currentIndex="currentQuestion"/>
     <!-- <transition :name="'direction'" v-for="(question, index) in questions" :key="index"> -->
     <div :name="'direction'" v-for="(question, index) in questions" :key="index">
       <div v-if="index === currentQuestion">
@@ -54,7 +54,7 @@ import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import DynamicForm from '../components/DynamicForm.vue';
 import Progress from '../components/Progress.vue';
 import EmployeesCalculator from '../components/EmployeesCalculator.vue';
-import { Component, Vue, Emit, Watch,  } from 'vue-property-decorator';
+import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
 import AnalyticsService from '../shared/services/analytics.service';
 import { Route } from 'vue-router';
@@ -78,7 +78,6 @@ export default class Finder extends Vue {
   public questions = this.$store.state.Questions.questions
   public currentQuestion = 0;
   public status: any;
-  public progressValues: any = {};
 
   // ForCalculator
   public renderComponent = true;
@@ -91,7 +90,7 @@ export default class Finder extends Vue {
 
   mounted() {
     FinderService.loadStatusFromUrl();
-    this.progressValues = FinderService.values;
+    console.log(FinderService.values)
     this.currentQuestion = FinderService.getValue('index');
     this.updateStatus();
 
@@ -111,7 +110,6 @@ export default class Finder extends Vue {
         path: '/' + FinderService.parseValueToUrl(),
       });
     }
-    this.progressValues = FinderService.values;
     this.calcIsOpen = false;
     AnalyticsService.sendGAEvent('Click', 'Button', 'Previous', FinderService.values);
   }
@@ -133,7 +131,6 @@ export default class Finder extends Vue {
         });
       }
     }
-    this.progressValues = FinderService.values;
     this.calcIsOpen = false;
     AnalyticsService.sendGAEvent('Click', 'Button', 'Next', FinderService.values);
   }
@@ -146,7 +143,6 @@ export default class Finder extends Vue {
         path: '/finder' + FinderService.parseValueToUrl(),
       })
       .catch(() => {});
-    this.progressValues = FinderService.values;
     this.renderComponent = false;
     this.$nextTick().then(() => {
       this.renderComponent = true;
