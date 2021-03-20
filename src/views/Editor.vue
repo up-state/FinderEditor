@@ -59,6 +59,10 @@ export default class Start extends Vue {
     {
       name: "Auswahlliste",
       append: this.appendDropdown,
+    },
+    {
+      name: "Texteingabe",
+      append: this.appendTextInput,
     }
   ]
 
@@ -115,6 +119,24 @@ export default class Start extends Vue {
           Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
           Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
           und wir suchen für dich die passenden Angebote.
+        `,
+      }
+
+    this.$store.commit('appendQuestion', el)
+  }
+
+  appendTextInput() {
+    const key = `text-input-${randomId()}`
+    const el = { title: 'Wie alt ist dein Unternehmen?',
+        key,
+        config: {
+          type: 'text-input',
+          key,
+          placeholder: 'XX',
+          required: { message: 'Bitte Wert auswählen' },
+        },
+        description: `
+          Beschreibungstext
         `,
       }
 
