@@ -7,7 +7,7 @@
           <draggable tag="el-collapse" :list="list">
             <li v-for="(question, index) in questions" :key="index">
               <DownArrow v-if="index !== 0" />
-              <DynamicFormEditor :question="question" class="editor-component-box" />
+              <component :is="editorComponent(question)" :question="question" />
             </li>
           </draggable>
         </ul>
@@ -27,7 +27,11 @@
 <script lang="ts">
 // @ is an alias to /src
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
-import DynamicFormEditor from '../components/DynamicFormEditor.vue';
+import NumberInputEditor from '../components/Editors/NumberInputEditor.vue';
+import TextInputEditor from '../components/Editors/TextInputEditor.vue';
+import TextAreaEditor from '../components/Editors/TextAreaEditor.vue';
+import DropdownInputEditor from '../components/Editors/DropdownInputEditor.vue';
+import CheckboxEditor from '../components/Editors/CheckboxEditor.vue';
 import DownArrow from '../components/DownArrow.vue';
 import Progress from '../components/Progress.vue';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
@@ -35,6 +39,7 @@ import { FinderService } from '../shared/services/finder.service';
 import { Route } from 'vue-router';
 import AnalyticsService from '../shared/services/analytics.service';
 import draggable from 'vuedraggable';
+import { Question } from '@/store/questions';
 
 function randomId(): string {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
@@ -44,7 +49,6 @@ function randomId(): string {
 @Component({
   components: {
     Progress,
-    DynamicFormEditor,
     DownArrow,
     draggable,
   },
@@ -58,6 +62,18 @@ export default class Start extends Vue {
 
   public get questions() {
     return this.$store.state.Questions.questions;
+  }
+
+  editorComponent(question: Question): Vue {
+    const inputType = question.config.type;
+    const mapping: any = {
+      select: DropdownInputEditor,
+      'number-input': NumberInputEditor,
+      'text-input': TextInputEditor,
+      'text-area': TextAreaEditor,
+      checkbox: CheckboxEditor,
+    };
+    return mapping[inputType];
   }
 
   public elements = [
