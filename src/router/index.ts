@@ -8,7 +8,6 @@ import Login from '../views/Login.vue';
 import Home from '../views/Home.vue';
 import Editor from '../views/Editor.vue';
 
-
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
