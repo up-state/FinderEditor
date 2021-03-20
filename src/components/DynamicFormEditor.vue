@@ -8,7 +8,6 @@
       v-if="!!question && question.config.type == 'text-area'"
       v-bind:question="question"
     />
-    <div v-else>{{ question.config.type }} - {{ question.title }}</div>
     <DropdownInputEditor
       v-if="!!question && question.config.type == 'select'"
       v-bind:question="question"
