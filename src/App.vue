@@ -30,16 +30,16 @@
 </template>
 
 <script lang="ts">
-import { ButtonConfig } from './components/NavFooter/ButtonConfig.class';
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
+import { Route } from 'vue-router';
+import { ButtonConfig } from './components/NavFooter/ButtonConfig.class';
 import NavHeader from './components/NavHeader.vue';
 import NavFooter from './components/NavFooter/NavFooter.vue';
 import FullscreenResultCard from './components/results/FullscreenResultCard.vue';
 import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
 import { FinderService } from './shared/services/finder.service';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
 import AnalyticsService from './shared/services/analytics.service';
-import { Route } from 'vue-router';
 import { NotificationService } from './shared/services/notfication.service';
 
 @Component({
@@ -53,11 +53,17 @@ import { NotificationService } from './shared/services/notfication.service';
 })
 export default class App extends Vue {
   public buttons: ButtonConfig[] = [];
-  public scrollMode: boolean = true;
+
+  public scrollMode = true;
+
   public offer: any = false;
+
   public description: any = false;
-  public cookieBannerVisible: boolean = true;
+
+  public cookieBannerVisible = true;
+
   public gtmProperty = 'UA-180130811-1';
+
   public gtmTrackerName = 'gtmDefaultTracker';
 
   $refs: any;
@@ -65,6 +71,7 @@ export default class App extends Vue {
   updateStatus(buttons: ButtonConfig[]) {
     this.buttons = buttons;
   }
+
   mounted() {
     // console.log(this.$router);
 
@@ -82,10 +89,12 @@ export default class App extends Vue {
       this.description = description;
     });
   }
+
   enable() {
     AnalyticsService.enable();
     this.cookieBannerVisible = AnalyticsService.cookieBannerVisible;
   }
+
   disable() {
     AnalyticsService.disable();
     this.cookieBannerVisible = AnalyticsService.cookieBannerVisible;
