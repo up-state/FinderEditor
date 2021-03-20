@@ -23,7 +23,7 @@ new Vue({
     this.$store.commit('removeQuestion', questions[1]);
     this.$store.commit('updateQuestion', { ...questions[0], title: 'Hullebulle' });
   },
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount('#app');
 
 function defaultQuestions() {
@@ -33,7 +33,6 @@ function defaultQuestions() {
       key: 'state',
       config: {
         type: 'select',
-        key: 'state',
         options: [
           { key: 'Baden-Württemberg', value: 1 },
           { key: 'Bayern', value: 2 },
@@ -65,11 +64,10 @@ function defaultQuestions() {
       key: 'age',
       config: {
         type: 'number-input',
-        key: 'age',
         unit: 'Jahre',
         placeholder: 'XX',
-        min: {value: 10, message: 'Der Wert muss mindestens 10 sein'},
-        required: {message: 'Bitte Wert auswählen'},
+        min: { value: 10, message: 'Der Wert muss mindestens 10 sein' },
+        required: { message: 'Bitte Wert auswählen' },
       },
       description: `
         Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
@@ -82,7 +80,6 @@ function defaultQuestions() {
       key: 'age2',
       config: {
         type: 'text-input',
-        key: 'text',
         placeholder: 'XX',
         required: { message: 'Bitte Wert auswählen' },
       },
@@ -97,7 +94,6 @@ function defaultQuestions() {
       key: 'age3',
       config: {
         type: 'text-area',
-        key: 'text',
         placeholder: 'XX',
         required: { message: 'Bitte Wert auswählen' },
       },
@@ -111,7 +107,6 @@ function defaultQuestions() {
       title: 'Habt ihr eine Checkbox?',
       config: {
         type: 'checkbox',
-        key: 'option',
         label: 'Informationen',
         description: 'Brauchen sie zusätzliche Informationen zu Ihrem angeforderten Formular?',
         checked: true,

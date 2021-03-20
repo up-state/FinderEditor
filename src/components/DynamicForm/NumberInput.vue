@@ -4,29 +4,28 @@
       type="number"
       v-model.number="value"
       ref="input"
-      :id="config.key"
-      :placeholder="config.placeholder"
+      :id="question.key"
+      :placeholder="question.config.placeholder"
       @focus="setActive(true)"
       @blur="setActive(false)"
     />
-    <span v-if="!!config.unit" class="unit">{{ config.unit }}</span>
+    <span v-if="question.config.unit" class="unit">{{ question.config.unit }}</span>
   </label>
 </template>
 
 <script lang="ts">
+import { Question } from '@/store/questions';
 import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
-import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class NumberInput extends Vue {
   private status: any;
-  @Prop() private config!: any;
+  @Prop() private question!: Question;
   private value: any = null;
   public $refs: any;
 
   mounted() {
     this.status = {};
-    this.value = FinderService.getValue(this.config.key);
     this.valueChanged(this.value);
     this.$refs.input.focus();
   }
@@ -47,14 +46,14 @@ export default class NumberInput extends Vue {
   }
   public validate(val: any) {
     this.status.errors = [];
-    if (!!this.config.required && (this.value == null || this.value == undefined)) {
-        this.status.errors.push(this.config.required);
+    if (!!this.question.config.required && (this.value == null || this.value == undefined)) {
+      this.status.errors.push(this.question.config.required);
     }
-    if (!!this.config.min && this.value < this.config.min.value) {
-        this.status.errors.push(this.config.min);
+    if (!!this.question.config.min && this.value < this.question.config.min.value) {
+      this.status.errors.push(this.question.config.min);
     }
-    if (!!this.config.max && this.value > this.config.max.value) {
-        this.status.errors.push(this.config.max);
+    if (!!this.question.config.max && this.value > this.question.config.max.value) {
+      this.status.errors.push(this.question.config.max);
     }
     this.status.isValide = this.status.errors.length == 0;
     this.status.value = val;

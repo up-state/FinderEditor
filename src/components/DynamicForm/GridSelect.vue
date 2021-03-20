@@ -1,25 +1,24 @@
 <template>
   <div class="grid-select">
-    <label v-for="(option, index) in config.options" :key="index">
-      <input type="radio" :id="config.key + '_' + index" :value="option.value" v-model="value" />
+    <label v-for="(option, index) in question.config.options" :key="index">
+      <input type="radio" :id="question.key + '_' + index" :value="option.value" v-model="value" />
       <span v-bind:class="{ active: option.value == value }" v-html="option.key"></span>
     </label>
   </div>
 </template>
 
 <script lang="ts">
+import { Question } from '@/store/questions';
 import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
-import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class GridSelect extends Vue {
   private status: any;
-  @Prop() private config!: any;
+  @Prop() private question!: Question;
   private value: any = null;
 
   mounted() {
     this.status = {};
-    this.value = FinderService.getValue(this.config.key);
     this.valueChanged(this.value);
   }
 
@@ -39,10 +38,9 @@ export default class GridSelect extends Vue {
   }
   public validate(val: any) {
     this.status.errors = [];
-    if (!!this.config.required) {
-      
-      if(this.value == null || this.value == undefined){
-        this.status.errors.push(this.config.required);
+    if (!!this.question.config.required) {
+      if (this.value == null || this.value == undefined) {
+        this.status.errors.push(this.question.config.required);
       }
     }
     this.status.isValide = this.status.errors.length == 0;

@@ -27,9 +27,6 @@
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import Progress from '../components/Progress.vue';
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
-import { FinderService } from '../shared/services/finder.service';
-import { Route } from 'vue-router';
-import AnalyticsService from '../shared/services/analytics.service';
 
 @Component({
   components: {
@@ -49,36 +46,10 @@ export default class Start extends Vue {
   }
 
   public toResults(): void {
-    FinderService.updateValue('index', null, false);
-    this.$router.push({
-      path: '/results' + FinderService.parseValueToUrl(),
-    });
+    this.$router.push({ path: '/results' });
   }
   public toFinder(): void {
-    FinderService.updateValue('index', 0, false);
-    this.$router.push({
-      path: '/finder' + FinderService.parseValueToUrl(),
-    });
-  }
-
-  mounted() {
-    FinderService.loadStatusFromUrl();
-    if (FinderService.allValuesExist()) {
-      this.buttonsConfig = [
-        new ButtonConfig('Akzeptieren', false, () => {
-          this.toResults();
-        }),
-        new ButtonConfig('Akzeptieren & Kriterien anpassen', false, () => {
-          this.toFinder();
-        }),
-      ];
-    }
-    this.updateStatus();
-  }
-
-  @Watch('$route', { immediate: true, deep: true })
-  onUrlChange(newVal: Route) {
-    AnalyticsService.sendGAEvent('Load', 'Start', 'Enter', FinderService.values);
+    this.$router.push({ path: '/finder' });
   }
 }
 </script>

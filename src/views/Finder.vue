@@ -1,16 +1,12 @@
 <template>
   <div class="finder screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <Progress :steps="questions.length" :currentIndex="currentQuestion"/>
+    <Progress :steps="questions.length" :currentIndex="currentQuestion" />
     <div :name="'direction'" v-for="(question, index) in questions" :key="index">
       <div v-if="index === currentQuestion">
         <article>
           <h2>{{ question.title }}</h2>
-          <DynamicForm
-            v-if="renderComponent"
-            v-bind:config="question.config"
-            v-on:status="getStatus"
-          ></DynamicForm>
+          <DynamicForm v-if="renderComponent" :question="question" v-on:status="getStatus" />
         </article>
       </div>
     </div>
@@ -22,7 +18,7 @@
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import DynamicForm from '../components/DynamicForm.vue';
 import Progress from '../components/Progress.vue';
-import { Component, Vue, Emit, Watch,  } from 'vue-property-decorator';
+import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
 import AnalyticsService from '../shared/services/analytics.service';
 import { Route } from 'vue-router';
@@ -42,7 +38,7 @@ export default class Finder extends Vue {
       this.next();
     }),
   ];
-  public questions = this.$store.state.Questions.questions
+  public questions = this.$store.state.Questions.questions;
   public currentQuestion = 0;
   public status: any;
 
@@ -57,7 +53,7 @@ export default class Finder extends Vue {
 
   mounted() {
     FinderService.loadStatusFromUrl();
-    console.log(FinderService.values)
+    console.log(FinderService.values);
     this.currentQuestion = FinderService.getValue('index');
     this.updateStatus();
 
@@ -81,7 +77,7 @@ export default class Finder extends Vue {
     AnalyticsService.sendGAEvent('Click', 'Button', 'Previous', FinderService.values);
   }
   public next() {
-    let key = this.questions[this.currentQuestion].config.key;
+    let key = this.questions[this.currentQuestion].key;
     if (this.currentQuestion < this.questions.length) {
       FinderService.updateValue(key, this.status.value, false);
       if (this.currentQuestion < this.questions.length - 1) {

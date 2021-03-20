@@ -38,9 +38,7 @@ import NavHeader from './components/NavHeader.vue';
 import NavFooter from './components/NavFooter/NavFooter.vue';
 import FullscreenResultCard from './components/results/FullscreenResultCard.vue';
 import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
-import { FinderService } from './shared/services/finder.service';
 import AnalyticsService from './shared/services/analytics.service';
-import { NotificationService } from './shared/services/notfication.service';
 
 @Component({
   components: {
@@ -78,16 +76,6 @@ export default class App extends Vue {
     // this.$cookies.remove('allow');
     AnalyticsService.init(this.$cookies);
     this.cookieBannerVisible = AnalyticsService.cookieBannerVisible;
-
-    // NotificationService.main();
-
-    FinderService.loadStatusFromUrl();
-    FinderService.addCurrentOfferListener((offer: any) => {
-      this.offer = offer;
-    });
-    FinderService.addCurrentDescriptionListener((description: any) => {
-      this.description = description;
-    });
   }
 
   enable() {

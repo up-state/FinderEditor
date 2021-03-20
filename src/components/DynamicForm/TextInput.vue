@@ -4,8 +4,8 @@
       type="text"
       v-model="value"
       ref="input"
-      :id="config.key"
-      :placeholder="config.placeholder"
+      :id="question.key"
+      :placeholder="question.config.placeholder"
       @focus="setActive(true)"
       @blur="setActive(false)"
     />
@@ -13,19 +13,18 @@
 </template>
 
 <script lang="ts">
+import { Question } from '@/store/questions';
 import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
-import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class TextInput extends Vue {
   private status: any;
-  @Prop() private config!: any;
+  @Prop() private question!: Question;
   private value: any = null;
   public $refs: any;
 
   mounted() {
     this.status = {};
-    this.value = FinderService.getValue(this.config.key);
     this.valueChanged(this.value);
     this.$refs.input.focus();
   }
@@ -35,6 +34,7 @@ export default class TextInput extends Vue {
     this.validate(this.value);
     this.emitStatusChange(this.status);
   }
+
   @Watch('value')
   valueChanged(newVal: any) {
     this.validate(newVal);
@@ -46,10 +46,9 @@ export default class TextInput extends Vue {
   }
   public validate(val: any) {
     this.status.errors = [];
-    if (!!this.config.required) {
-      
-      if(this.value == null || this.value == undefined || this.value == ''){
-        this.status.errors.push(this.config.required);
+    if (!!this.question.config.required) {
+      if (this.value == null || this.value == undefined || this.value == '') {
+        this.status.errors.push(this.question.config.required);
       }
     }
     this.status.isValide = this.status.errors.length == 0;

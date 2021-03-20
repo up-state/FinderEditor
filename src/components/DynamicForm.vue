@@ -1,35 +1,11 @@
 <template>
   <div class="dynamic-form">
-    <GridSelect
-      v-if="!!config && config.type == 'grid-select'"
-      v-bind:config="config"
-      v-on:status="getStatus"
-    ></GridSelect>
-    <DropDown
-      v-if="!!config && config.type == 'select'"
-      v-bind:config="config"
-      v-on:status="getStatus"
-    ></DropDown>
-    <NumberInput
-      v-if="!!config && config.type == 'number-input'"
-      v-bind:config="config"
-      v-on:status="getStatus"
-    />
-    <TextInput
-      v-if="!!config && config.type == 'text-input'"
-      v-bind:config="config"
-      v-on:status="getStatus"
-    />
-    <TextArea
-      v-if="!!config && config.type == 'text-area'"
-      v-bind:config="config"
-      v-on:status="getStatus"
-    />
-    <Checkbox
-      v-if="!!config && config.type == 'checkbox'"
-      v-bind:config="config"
-      v-on:status="getStatus"
-    />
+    <!-- <GridSelect v-if="inputType === 'grid-select'" :question="question" @status="getStatus" /> -->
+    <DropDown v-if="inputType === 'select'" :question="question" @status="getStatus" />
+    <NumberInput v-if="inputType === 'number-input'" :question="question" @status="getStatus" />
+    <TextInput v-if="inputType === 'text-input'" :question="question" @status="getStatus" />
+    <TextArea v-if="inputType === 'text-area'" :question="question" @status="getStatus" />
+    <Checkbox v-if="inputType === 'checkbox'" :question="question" @status="getStatus" />
   </div>
 </template>
 
@@ -41,6 +17,7 @@ import TextInput from './DynamicForm/TextInput.vue';
 import TextArea from './DynamicForm/TextArea.vue';
 import DropDown from './DynamicForm/DropDown.vue';
 import Checkbox from './DynamicForm/Checkbox.vue';
+import { Question } from '@/store/questions';
 
 @Component({
   components: {
@@ -49,12 +26,16 @@ import Checkbox from './DynamicForm/Checkbox.vue';
     TextInput,
     TextArea,
     DropDown,
-    Checkbox
+    Checkbox,
   },
 })
 export default class DynamicForm extends Vue {
-  @Prop() public config: any;
-  mounted() {}
+  @Prop() public question!: Question;
+
+  get inputType() {
+    return this.question?.config?.type;
+  }
+
   @Emit('status')
   getStatus(status: any) {
     return status;

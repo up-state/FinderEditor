@@ -1,32 +1,32 @@
 <template>
   <div class="checkbox__container">
-      <input
-        type="checkbox"
-        v-bind:id="config.key"
-        v-bind:name="config.key"
-        v-model="config.checked"
-      />
+    <input
+      type="checkbox"
+      :id="question.key"
+      :name="question.key"
+      v-model="question.config.checked"
+      ref="input"
+    />
     <div>
-      <label v-bind:for="config.key" class="">{{ config.label }}</label>
-      <p v-if="config.description" class="">{{config.description}}</p>
+      <label v-bind:for="question.key" class="">{{ question.config.label }}</label>
+      <p v-if="question.description" class="">{{ question.description }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import { Question } from '@/store/questions';
 import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
-import { FinderService } from '../../shared/services/finder.service';
 
 @Component
 export default class NumberInput extends Vue {
   private status: any;
-  @Prop() private config!: any;
+  @Prop() private question!: Question;
   private value: any = null;
   public $refs: any;
 
   mounted() {
     this.status = {};
-    this.value = FinderService.getValue(this.config.key);
     this.valueChanged(this.value);
     this.$refs.input.focus();
   }
@@ -47,9 +47,9 @@ export default class NumberInput extends Vue {
   }
   public validate(val: any) {
     this.status.errors = [];
-    if (!!this.config.required) {
+    if (!!this.question.config.required) {
       if (this.value == null || this.value == undefined) {
-        this.status.errors.push(this.config.required);
+        this.status.errors.push(this.question.config.required);
       }
     }
     this.status.isValide = this.status.errors.length == 0;
@@ -59,7 +59,7 @@ export default class NumberInput extends Vue {
 </script>
 
 <style scoped lang="scss">
-.checkbox__container{
+.checkbox__container {
   display: flex;
   input {
     margin-right: 1rem;
@@ -68,7 +68,7 @@ export default class NumberInput extends Vue {
   }
   p {
     font-size: 1rem;
-    color: gray
+    color: gray;
   }
 }
 </style>

@@ -85,7 +85,6 @@ export default class Start extends Vue {
       key,
       config: {
         type: 'select',
-        key,
         options: [
           { key: 'Baden-Württemberg', value: 1 },
           { key: 'Bayern', value: 2 },
@@ -123,7 +122,6 @@ export default class Start extends Vue {
       key,
       config: {
         type: 'number-input',
-        key,
         unit: 'Jahre',
         placeholder: 'XX',
         required: { message: 'Bitte Wert auswählen' },
@@ -144,7 +142,6 @@ export default class Start extends Vue {
       key,
       config: {
         type: 'text-area',
-        key,
         placeholder: 'XX',
         required: { message: 'Bitte Wert auswählen' },
       },
@@ -164,7 +161,6 @@ export default class Start extends Vue {
       key,
       config: {
         type: 'text-input',
-        key,
         placeholder: 'XX',
         required: { message: 'Bitte Wert auswählen' },
       },

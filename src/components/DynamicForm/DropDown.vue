@@ -1,6 +1,5 @@
 <template>
   <div class="dropdown">
-    <!-- <div class="content"> -->
     <button
       class="toggle btn"
       v-bind:class="{ active: value != null }"
@@ -13,15 +12,13 @@
         </div>
       </div>
     </button>
-    <!-- <OverlayScrollbarsComponent class="options"> -->
-    <!-- <button v-on:click="toggle()" class="select">{{value? config.options[value-1].key: 'bitte wählen'}}</button> -->
     <div
       class="options"
       v-bind:style="{ height: height }"
       v-bind:class="{ open: open }"
       ref="options"
     >
-      <div v-for="(option, index) in config.options" :key="index">
+      <div v-for="(option, index) in question.config.options" :key="index">
         <div class="category-title" v-if="option.value == null">
           <span v-html="option.key"></span>
         </div>
@@ -30,21 +27,18 @@
           v-bind:class="{ active: index == value }"
           v-on:click="setInnerHeight(false)"
         >
-          <!-- v-bind:class="{closed: true}" -->
-          <input type="radio" :id="config.key + '_' + index" :value="index" v-model="value" />
-          <span v-html="option.key"></span>
+          <input type="radio" :id="option.key + '_' + index" :value="index" v-model="value" />
+          <span v-html="option.key" />
         </label>
       </div>
     </div>
-    <!-- </OverlayScrollbarsComponent> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
-import { FinderService } from '../../shared/services/finder.service';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
+import { Question } from '@/store/questions';
 
 @Component({
   components: {
@@ -53,8 +47,8 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
 })
 export default class DropDown extends Vue {
   private status: any;
-  @Prop() private config!: any;
-  private value: any = null;
+  @Prop() private question!: Question;
+  private value = this.question.config.options[0].key;
   private height = '0';
   public $refs: any;
 
@@ -67,23 +61,10 @@ export default class DropDown extends Vue {
 
   mounted() {
     this.status = {};
-    let index: any = FinderService.getValue(this.config.key);
-    this.value = index == null ? null : this.findOptionIndex(index);
     this.open = false;
-
-    this.valueChanged(this.value);
     window.addEventListener('resize', () => {
       this.setInnerHeight(this.open);
     });
-  }
-
-  public findOptionIndex(value: any): any {
-    for (let i = 0; i < this.config.options.length; i++) {
-      if (this.config.options[i].value == value) {
-        return i;
-      }
-    }
-    return null;
   }
 
   public open: boolean = false;
@@ -94,24 +75,26 @@ export default class DropDown extends Vue {
     this.validate(this.value);
     this.emitStatusChange(this.status);
   }
+
   @Watch('value')
   valueChanged(id: number) {
-    let option = this.config.options[id];
+    let option = this.question.config.options[id];
     this.buttonText = id != null ? option.key : 'bitte wählen';
 
     this.validate(id != null ? option.value : null);
     this.emitStatusChange(this.status);
   }
+
   @Emit('status')
   emitStatusChange(status: any) {
     this.status = status;
   }
+
   public validate(val: any) {
     this.status.errors = [];
-    if (!!this.config.required) {
-      
-      if(this.value == null || this.value == undefined){
-        this.status.errors.push(this.config.required);
+    if (!!this.question.config.required) {
+      if (this.value == null || this.value == undefined) {
+        this.status.errors.push(this.question.config.required);
       }
     }
     this.status.isValide = this.status.errors.length == 0;
