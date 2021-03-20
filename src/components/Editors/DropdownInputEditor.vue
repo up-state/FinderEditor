@@ -1,20 +1,27 @@
 <template>
   <section>
+    <h2>Auswahlliste</h2>
     <label class="input">
       <h3>Title</h3>
       <input
         type="text"
         v-model="question.title"
-        @change="(e) => updateQuestion({ title: e.target.value })"
+        @change="e => updateQuestion({ title: e.target.value })"
       />
     </label>
     <label>
       <h3>Description</h3>
-      <textarea type="text" v-model="question.description" />
+      <textarea type="text" v-model="question.description" style="width:100%;" rows="5" />
     </label>
     <label>
       <h3>Optionen (mit , trennen)</h3>
-      <textarea type="text" :value="options" @change="(e) => updateOptions(e.target.value)" />
+      <textarea
+        type="text"
+        :value="options"
+        @change="e => updateOptions(e.target.value)"
+        style="width:100%;"
+        rows="5"
+      />
     </label>
   </section>
 </template>
@@ -38,7 +45,7 @@ export default class NumberInputEditor extends Vue {
   }
 
   updateOptions(options: string) {
-    const updatedOptions = options.split(',').map((opt) => ({ key: opt, value: 1 }));
+    const updatedOptions = options.split(',').map(opt => ({ key: opt, value: 1 }));
     this.question.config.options = updatedOptions;
     this.$store.commit('updateQuestion', { ...this.question });
   }

@@ -1,12 +1,12 @@
 <template>
-  <section style="border: 2px solid black; padding: 2rem">
-    <h2>TextArea</h2>
+  <section>
+    <h2>Freitext</h2>
     <label class="input">
       <span>Title</span>
       <input
         type="text"
         :value="question.title"
-        @change="(e) => updateQuestion({ title: e.target.value })"
+        @change="e => updateQuestion({ title: e.target.value })"
       />
     </label>
     <label class="input">
@@ -16,7 +16,7 @@
 
     <label class="input">
       <span>description</span>
-      <textarea type="text" v-model="question.description" />
+      <textarea type="text" v-model="question.description" style="width: 100%;" rows="5" />
     </label>
   </section>
 </template>

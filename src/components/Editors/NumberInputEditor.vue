@@ -1,5 +1,5 @@
 <template>
-  <section style="border: 2px solid black; padding: 2rem;">
+  <section>
     <h2>Nummerneingabe</h2>
     <label class="input">
       <span>Title</span>

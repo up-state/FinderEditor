@@ -1,19 +1,19 @@
 <template>
-  <div class="dynamic-form">
+  <div>
     <NumberInputEditor
       v-if="!!question && question.config.type == 'number-input'"
       v-bind:question="question"
     />
     <TextInputEditor
-      v-if="!!question && question.config.type == 'text-input'"
+      v-else-if="!!question && question.config.type == 'text-input'"
       v-bind:question="question"
     />
     <TextAreaEditor
-      v-if="!!question && question.config.type == 'text-area'"
+      v-else-if="!!question && question.config.type == 'text-area'"
       v-bind:question="question"
     />
     <DropdownInputEditor
-      v-if="!!question && question.config.type == 'select'"
+      v-else-if="!!question && question.config.type == 'select'"
       v-bind:question="question"
     />
     <div v-else>{{ question.config.type }} - {{ question.title }}</div>
@@ -40,9 +40,4 @@ export default class DynamicFormEditor extends Vue {
 }
 </script>
 
-<style scoped lang="scss">
-.dynamic-form {
-  padding: 0 32px;
-  margin-bottom: 8px;
-}
-</style>
+<style scoped lang="scss"></style>

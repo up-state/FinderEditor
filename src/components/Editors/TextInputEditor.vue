@@ -1,26 +1,26 @@
 <template>
   <section>
-  <form class="text-input-editor">
-    <h3>Title</h3>
-    <input
-      type="text"
-      :value="question.title"
-      @change="e => updateQuestion({title: e.target.value})"
-    />
-    <h3>Platzhalter</h3>
-    <input
-      type="text"
-      :value="question.config.placeholder"
-      @change="updatePlaceholder($event.target.value)"
-    />
-    <h3>Beschreibungstext</h3>
-    <textarea
-      type="text"
-      :value="question.description"
-      @change="updateDescription($event.target.value)"
-    />
-  </form>
-
+    <h2>Textfeld</h2>
+    <form class="text-input-editor">
+      <h3>Title</h3>
+      <input
+        type="text"
+        :value="question.title"
+        @change="e => updateQuestion({ title: e.target.value })"
+      />
+      <h3>Platzhalter</h3>
+      <input
+        type="text"
+        :value="question.config.placeholder"
+        @change="updatePlaceholder($event.target.value)"
+      />
+      <h3>Beschreibungstext</h3>
+      <textarea
+        type="text"
+        :value="question.description"
+        @change="updateDescription($event.target.value)"
+      />
+    </form>
   </section>
 </template>
 
@@ -40,7 +40,7 @@ export default class TextInputEditor extends Vue {
     this.$store.commit('updateQuestion', this.question);
   }
   updateQuestion(x: any) {
-    this.$store.commit('updateQuestion', {...this.question, ...x})
+    this.$store.commit('updateQuestion', { ...this.question, ...x });
   }
 }
 </script>
