@@ -60,6 +60,7 @@ function defaultQuestions() {
         key: 'age',
         unit: 'Jahre',
         placeholder: 'XX',
+        min: {value: 10, message: 'Der Wert muss mindestens 10 sein'},
         required: {message: 'Bitte Wert auswählen'},
       },
       description: `

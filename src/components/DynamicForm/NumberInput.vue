@@ -47,11 +47,14 @@ export default class NumberInput extends Vue {
   }
   public validate(val: any) {
     this.status.errors = [];
-    if (!!this.config.required) {
-      
-      if(this.value == null || this.value == undefined){
+    if (!!this.config.required && (this.value == null || this.value == undefined)) {
         this.status.errors.push(this.config.required);
-      }
+    }
+    if (!!this.config.min && this.value < this.config.min.value) {
+        this.status.errors.push(this.config.min);
+    }
+    if (!!this.config.max && this.value > this.config.max.value) {
+        this.status.errors.push(this.config.max);
     }
     this.status.isValide = this.status.errors.length == 0;
     this.status.value = val;
