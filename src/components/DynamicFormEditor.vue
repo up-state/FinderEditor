@@ -1,5 +1,7 @@
 <template>
   <div>
+    <button @click="deleteQuestion(question)">delete</button>
+
     <NumberInputEditor
       v-if="!!question && question.config.type == 'number-input'"
       v-bind:question="question"
@@ -37,6 +39,10 @@ import DropdownInputEditor from './Editors/DropdownInputEditor.vue';
 })
 export default class DynamicFormEditor extends Vue {
   @Prop() public question: any;
+
+  deleteQuestion(question) {
+    this.$store.commit('removeQuestion', question);
+  }
 }
 </script>
 
