@@ -10,8 +10,18 @@
       v-bind:config="config"
       v-on:status="getStatus"
     ></DropDown>
-    <Input
-      v-if="!!config && config.type == 'input'"
+    <NumberInput
+      v-if="!!config && config.type == 'number-input'"
+      v-bind:config="config"
+      v-on:status="getStatus"
+    />
+    <TextInput
+      v-if="!!config && config.type == 'text-input'"
+      v-bind:config="config"
+      v-on:status="getStatus"
+    />
+    <TextArea
+      v-if="!!config && config.type == 'text-area'"
       v-bind:config="config"
       v-on:status="getStatus"
     />
@@ -21,13 +31,17 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import GridSelect from './DynamicForm/GridSelect.vue';
-import Input from './DynamicForm/Input.vue';
+import NumberInput from './DynamicForm/NumberInput.vue';
+import TextInput from './DynamicForm/TextInput.vue';
+import TextArea from './DynamicForm/TextArea.vue';
 import DropDown from './DynamicForm/DropDown.vue';
 
 @Component({
   components: {
     GridSelect,
-    Input,
+    NumberInput,
+    TextInput,
+    TextArea,
     DropDown,
   },
 })

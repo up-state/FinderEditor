@@ -1,15 +1,14 @@
 <template>
   <label class="input">
     <input
-      type="number"
-      v-model.number="value"
+      type="text"
+      v-model="value"
       ref="input"
       :id="config.key"
       :placeholder="config.placeholder"
       @focus="setActive(true)"
       @blur="setActive(false)"
     />
-    <span v-if="!!config.unit" class="unit">{{ config.unit }}</span>
   </label>
 </template>
 
@@ -18,7 +17,7 @@ import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
 import { FinderService } from '../../shared/services/finder.service';
 
 @Component
-export default class Input extends Vue {
+export default class TextInput extends Vue {
   private status: any;
   @Prop() private config!: any;
   private value: any = null;
@@ -49,7 +48,7 @@ export default class Input extends Vue {
     this.status.errors = [];
     if (!!this.config.required) {
       
-      if(this.value == null || this.value == undefined){
+      if(this.value == null || this.value == undefined || this.value == ''){
         this.status.errors.push(this.config.required);
       }
     }
