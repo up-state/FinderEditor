@@ -54,10 +54,8 @@ import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import DynamicForm from '../components/DynamicForm.vue';
 import Progress from '../components/Progress.vue';
 import EmployeesCalculator from '../components/EmployeesCalculator.vue';
-import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
-import QuestionRequestService from '../shared/services/question-request.service';
+import { Component, Vue, Emit, Watch,  } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
-import URLService from '../shared/services/url.service';
 import AnalyticsService from '../shared/services/analytics.service';
 import { Route } from 'vue-router';
 
@@ -77,8 +75,8 @@ export default class Finder extends Vue {
       this.next();
     }),
   ];
+  public questions = this.$store.state.Questions.questions
   public currentQuestion = 0;
-  public questions = QuestionRequestService.getQuestions();
   public status: any;
   public progressValues: any = {};
 
