@@ -7,10 +7,7 @@
           <draggable tag="el-collapse" :list="list">
             <li v-for="(question, index) in questions" :key="index">
               <DownArrow v-if="index !== 0" />
-              <DynamicFormEditor
-                :question="question"
-                style="border: 2px solid black; padding: 2rem"
-              />
+              <DynamicFormEditor :question="question" class="editor-component-box" />
             </li>
           </draggable>
         </ul>
@@ -80,8 +77,8 @@ export default class Start extends Vue {
       name: 'Texteingabe',
       append: this.appendTextInput,
     },
-        {
-      name: "Checkbox",
+    {
+      name: 'Checkbox',
       append: this.appendCheckbox,
     },
   ];
@@ -181,7 +178,7 @@ export default class Start extends Vue {
   }
 
   appendCheckbox() {
-    const key = `number-input-${randomId()}`
+    const key = `number-input-${randomId()}`;
     const el = {
       title: 'Habt ihr eine Checkbox?',
       config: {
@@ -196,11 +193,10 @@ export default class Start extends Vue {
         Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
         und wir suchen für dich die passenden Angebote.
       `,
-    }
+    };
 
-    this.$store.commit('appendQuestion', el)
+    this.$store.commit('appendQuestion', el);
   }
-
 
   @Emit('updateStatus')
   updateStatus(): ButtonConfig[] {
@@ -244,6 +240,10 @@ export default class Start extends Vue {
 <style lang="scss">
 .add-element-button {
   margin: 10px 0;
+}
+.editor-component-box {
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 40px, rgba(0, 0, 0, 0.2) 5px 5px 5px;
 }
 .home {
   display: flex;
