@@ -1,7 +1,11 @@
 <template>
   <div>
-    <button @click="deleteQuestion(question)">delete</button>
-
+    <el-button
+      type="danger"
+      icon="el-icon-delete"
+      circle
+      @click="deleteQuestion(question)"
+    ></el-button>
     <NumberInputEditor
       v-if="!!question && question.config.type == 'number-input'"
       v-bind:question="question"
@@ -22,7 +26,6 @@
       v-if="!!question && question.config.type == 'checkbox'"
       v-bind:question="question"
     />
-    <div v-else>{{ question.config.type }} - {{ question.title }}</div>
   </div>
 </template>
 

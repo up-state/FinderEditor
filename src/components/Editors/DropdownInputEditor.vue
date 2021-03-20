@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section style="border-radius: 4px">
     <el-collapse @change="handleChange">
-      <el-collapse-item title="Auswahlliste" name="1">
+      <el-collapse-item :title="title" name="1">
         <label class="input">
           <h3>Title</h3>
           <input
@@ -31,13 +31,18 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class NumberInputEditor extends Vue {
   @Prop() private question!: any;
+
   get options() {
     return this.question.config.options.map((e: any) => e.key).join(',');
+  }
+
+  get title() {
+    return 'Auswahlliste: ' + this.question.title;
   }
 
   updateQuestion(x: any) {
