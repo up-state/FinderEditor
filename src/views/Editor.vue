@@ -1,23 +1,25 @@
 <template>
   <div class="home container-xs screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <div style="display: flex;">
-      <div style="flex-grow: 1; margin-right: 2rem;">
-        <ul style="list-style: none; margin: 0;">
-          <li v-for="(question, index) in questions" :key="index">
-            <DownArrow v-if="index !== 0" />
-            <DynamicFormEditor
-              :question="question"
-              style="border: 2px solid black; padding: 2rem;"
-            />
-          </li>
+    <div style="display: flex">
+      <div style="flex-grow: 1; margin-right: 2rem">
+        <ul style="list-style: none; margin: 0">
+          <draggable tag="el-collapse" :list="list">
+            <li v-for="(question, index) in questions" :key="index">
+              <DownArrow v-if="index !== 0" />
+              <DynamicFormEditor
+                :question="question"
+                style="border: 2px solid black; padding: 2rem"
+              />
+            </li>
+          </draggable>
         </ul>
       </div>
       <div style="width: 300px">
         <h3>Formelemente einfügen</h3>
         <ul style="list-style: none">
-          <li v-for="element in elements" :key="element.name">
-            <button @click="element.append">{{ element.name }}</button>
+          <li class="add-element-button" v-for="element in elements" :key="element.name">
+            <el-button type="primary" @click="element.append">{{ element.name }}</el-button>
           </li>
         </ul>
       </div>
@@ -31,10 +33,11 @@ import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import DynamicFormEditor from '../components/DynamicFormEditor.vue';
 import DownArrow from '../components/DownArrow.vue';
 import Progress from '../components/Progress.vue';
-import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
+import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
 import { Route } from 'vue-router';
 import AnalyticsService from '../shared/services/analytics.service';
+import draggable from 'vuedraggable';
 
 function randomId(): string {
   const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
@@ -46,6 +49,7 @@ function randomId(): string {
     Progress,
     DynamicFormEditor,
     DownArrow,
+    draggable,
   },
 })
 export default class Start extends Vue {
@@ -242,6 +246,9 @@ export default class Start extends Vue {
 }
 </script>
 <style lang="scss">
+.add-element-button {
+  margin: 10px 0;
+}
 .home {
   display: flex;
   flex-direction: column;

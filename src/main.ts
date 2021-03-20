@@ -3,11 +3,14 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 // eslint-disable-next-line import/order
 import VueCookies from 'vue-cookies-ts';
 
 Vue.config.productionTip = false;
 Vue.use(VueCookies);
+Vue.use(ElementUI);
 
 new Vue({
   router,
@@ -68,8 +71,8 @@ function defaultQuestions() {
         key: 'age',
         unit: 'Jahre',
         placeholder: 'XX',
-        min: {value: 10, message: 'Der Wert muss mindestens 10 sein'},
-        required: {message: 'Bitte Wert auswählen'},
+        min: { value: 10, message: 'Der Wert muss mindestens 10 sein' },
+        required: { message: 'Bitte Wert auswählen' },
       },
       description: `
         Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.

@@ -30,9 +30,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
-import { Route } from 'vue-router';
 import { ButtonConfig } from './components/NavFooter/ButtonConfig.class';
 import NavHeader from './components/NavHeader.vue';
 import NavFooter from './components/NavFooter/NavFooter.vue';
@@ -40,7 +39,6 @@ import FullscreenResultCard from './components/results/FullscreenResultCard.vue'
 import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
 import { FinderService } from './shared/services/finder.service';
 import AnalyticsService from './shared/services/analytics.service';
-import { NotificationService } from './shared/services/notfication.service';
 
 @Component({
   components: {
