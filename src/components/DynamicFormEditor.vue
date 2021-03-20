@@ -33,7 +33,7 @@ import TextInputEditor from './Editors/TextInputEditor.vue';
 import TextAreaEditor from './Editors/TextAreaEditor.vue';
 import DropdownInputEditor from './Editors/DropdownInputEditor.vue';
 import CheckboxEditor from './Editors/CheckboxEditor.vue';
-
+import { Question } from '@/store/questions';
 
 @Component({
   components: {
@@ -45,9 +45,9 @@ import CheckboxEditor from './Editors/CheckboxEditor.vue';
   },
 })
 export default class DynamicFormEditor extends Vue {
-  @Prop() public question: any;
+  @Prop() public question!: Question;
 
-  deleteQuestion(question) {
+  deleteQuestion(question: Question) {
     this.$store.commit('removeQuestion', question);
   }
 }
