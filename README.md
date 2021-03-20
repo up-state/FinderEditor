@@ -43,4 +43,4 @@ Staged code is prettied in a git hook on-commit. Additionally it's recommended t
 
 This site is currently developed as a static site which makes it very easy to deploy.
 
-We use the PaaS product [Render](https://render.com).
+We use Github Pages for hosting. Check out the `gh-pages` branch.
