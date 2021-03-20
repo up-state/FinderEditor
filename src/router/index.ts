@@ -13,37 +13,37 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
+    name: 'Home',
+    component: Home,
+    meta: {
+      title: 'Home',
+    },
+  },
+
+  {
+    path: '/start',
     name: 'Start',
     component: Start,
     meta: {
       title: 'Förderfinder',
     },
   },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-      meta: {
-        title: 'Login Seite',
-      },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: 'Login Seite',
     },
-    {
-      path: '/editor',
-      name: 'Editor',
-      component: Editor,
-      meta: {
-        title: 'Editor',
-      },
-        },
-
-        {
-      path: '/home',
-      name: 'Home',
-      component: Home,
-      meta: {
-        title: 'Home',
-      },
+  },
+  {
+    path: '/editor',
+    name: 'Editor',
+    component: Editor,
+    meta: {
+      title: 'Editor',
     },
+  },
 
   {
     path: '/finder',

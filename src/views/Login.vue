@@ -1,12 +1,30 @@
 <template>
   <div class="home container-xs screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
-
+    <div class="login__container">
+      <label for="mail" class="login__label"
+        >E-Mail-Adresse/Benutzername</label
+      >
+      <input
+        id="mail"
+        type="text"
+        class="login__input"
+        value="test@meinantrag.de"
+      />
+    </div>
+    <div class="login__container">
+      <label for="password" class="login__label">Passwort</label>
+      <input
+        id="password"
+        type="password"
+        class="login__input"
+        value="FakePSW"
+      />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-// @ is an alias to /src
 import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import Progress from '../components/Progress.vue';
 import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
@@ -21,8 +39,8 @@ import AnalyticsService from '../shared/services/analytics.service';
 })
 export default class Start extends Vue {
   public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig('Weiter', false, () => {
-      this.toFinder();
+    new ButtonConfig('Login', false, () => {
+      this.toEditor();
     }),
   ];
 
@@ -31,16 +49,9 @@ export default class Start extends Vue {
     return this.buttonsConfig;
   }
 
-  public toResults(): void {
-    FinderService.updateValue('index', null, false);
+  public toEditor(): void {
     this.$router.push({
-      path: '/results' + FinderService.parseValueToUrl(),
-    });
-  }
-  public toFinder(): void {
-    FinderService.updateValue('index', 0, false);
-    this.$router.push({
-      path: '/finder' + FinderService.parseValueToUrl(),
+      path: '/editor' + FinderService.parseValueToUrl(),
     });
   }
 
@@ -49,7 +60,7 @@ export default class Start extends Vue {
     if (FinderService.allValuesExist()) {
       this.buttonsConfig = [
         new ButtonConfig('Weiter', false, () => {
-          this.toResults();
+          this.toEditor();
         }),
         new ButtonConfig('Akzeptieren & Kriterien anpassen', false, () => {
           this.toFinder();
@@ -66,32 +77,18 @@ export default class Start extends Vue {
 }
 </script>
 <style lang="scss">
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+
+.login__container {
+    margin: 0rem auto 1rem auto;
+
 }
-article {
-  text-align: left;
-  p {
-    width: 100%;
-  }
+.login__label {
+  display: block;
 }
-// article {
-//   background-color: var(--brown);
-//   padding: 16px;
-//   box-sizing: border-box;
-//   margin-bottom: 32px;
-// }
-@media (min-width: 768px + 20px) {
-  // .home {
-  //   align-items: center;
-  // }
-  // article {
-  //   p {
-  //     margin: 0;
-  //     font-size: 24px;
-  //   }
-  // }
+
+.login__input {
+  display: block;
+  margin-top: 0.25rem;
+  width: 250px;
 }
 </style>
