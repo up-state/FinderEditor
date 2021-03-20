@@ -1,0 +1,25 @@
+name: CI/CD
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
+      - run: npm ci
+      - run: npm run build
+  deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
+      - run: npm ci
+      - run: |
+            git config user.name "techuser" && git config user.email "test@user.org"
+            npm run gh-pages-deploy
