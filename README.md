@@ -38,3 +38,10 @@ Staged code is prettied in a git hook on-commit. Additionally it's recommended t
 - JetBrains:
   - [JetBrains Plugin Prettier](https://plugins.jetbrains.com/plugin/10456-prettier)
   - [Configuring Prettier for JetBrains IDEs](https://www.jetbrains.com/help/idea/prettier.html#ws_prettier_reformat_code)
+
+
+## Deployment
+
+This site is currently developed as a static site which makes it very easy to deploy.
+
+We use the PaaS product [Render](https://render.com).
