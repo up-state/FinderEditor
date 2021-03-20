@@ -18,7 +18,7 @@ import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
 import { FinderService } from '../../shared/services/finder.service';
 
 @Component
-export default class Input extends Vue {
+export default class NumberInput extends Vue {
   private status: any;
   @Prop() private config!: any;
   private value: any = null;

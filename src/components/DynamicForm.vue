@@ -10,8 +10,8 @@
       v-bind:config="config"
       v-on:status="getStatus"
     ></DropDown>
-    <Input
-      v-if="!!config && config.type == 'input'"
+    <NumberInput
+      v-if="!!config && config.type == 'number-input'"
       v-bind:config="config"
       v-on:status="getStatus"
     />
@@ -21,13 +21,13 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import GridSelect from './DynamicForm/GridSelect.vue';
-import Input from './DynamicForm/Input.vue';
+import NumberInput from './DynamicForm/NumberInput.vue';
 import DropDown from './DynamicForm/DropDown.vue';
 
 @Component({
   components: {
     GridSelect,
-    Input,
+    NumberInput,
     DropDown,
   },
 })

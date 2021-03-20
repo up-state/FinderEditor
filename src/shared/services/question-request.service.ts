@@ -35,7 +35,7 @@ export default abstract class QuestionRequestService {
       {
         title: 'Wie alt ist dein Unternehmen?',
         config: {
-          type: 'input',
+          type: 'number-input',
           key: 'age',
           unit: 'Jahre',
           placeholder: 'XX',
