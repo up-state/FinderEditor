@@ -4,6 +4,10 @@ import Finder from '../views/Finder.vue';
 import Results from '../views/Results.vue';
 import Test from '../views/Test.vue';
 import Start from '../views/Start.vue';
+import Login from '../views/Login.vue';
+import Home from '../views/Home.vue';
+import Editor from '../views/Editor.vue';
+
 
 Vue.use(VueRouter);
 
@@ -16,6 +20,32 @@ const routes: Array<RouteConfig> = [
       title: 'Förderfinder',
     },
   },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      meta: {
+        title: 'Login Seite',
+      },
+    },
+    {
+      path: '/editor',
+      name: 'Editor',
+      component: Editor,
+      meta: {
+        title: 'Editor',
+      },
+        },
+
+        {
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      meta: {
+        title: 'Home',
+      },
+    },
+
   {
     path: '/finder',
     name: 'Finder',
