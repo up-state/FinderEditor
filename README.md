@@ -5,22 +5,21 @@
 ### Requirements
 
 - [Node.js](https://nodejs.org) >= 12 with npm
-- [Yarn](https://yarnpkg.com/) package manager
 
 ### Getting Started
 
 ```sh
 # Project setup: Install dependencies
-yarn install
+npm ci
 
 # Development: Compiles and hot-reloads
-yarn serve
+npm run serve
 
 # Lint and fix files
-yarn lint
+npm run lint
 
 # Production: Build and minify
-yarn build
+npm run build
 ```
 
 ### Build Tool Reference
