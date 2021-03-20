@@ -1,18 +1,18 @@
 <template>
   <div class="home container-xs screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <div style="display: flex;">
-      <div style="flex-grow: 1;">
-        <ul style="list-style: none;">
+    <div style="display: flex">
+      <div style="flex-grow: 1">
+        <ul style="list-style: none">
           <li v-for="(question, index) in questions" :key="index">
-            <DynamicFormEditor :question="question"/>
-            <div style="margin-bottom: 2rem;display: flex;justify-content:center;">⬇</div>
+            <DynamicFormEditor :question="question" />
+            <div style="margin-bottom: 2rem; display: flex; justify-content: center">⬇</div>
           </li>
         </ul>
       </div>
-      <div style="width: 300px;">
+      <div style="width: 300px">
         <h3>Formelemente einfügen</h3>
-        <ul style="list-style: none;">
+        <ul style="list-style: none">
           <li v-for="element in elements" :key="element.name">
             <button @click="element.append">{{ element.name }}</button>
           </li>
@@ -44,30 +44,37 @@ function randomId(): string {
   },
 })
 export default class Start extends Vue {
-  public questions = this.$store.state.Questions.questions
   public buttonsConfig: ButtonConfig[] = [
     new ButtonConfig('Weiter', false, () => {
       this.toFinder();
     }),
   ];
 
+  public get questions() {
+    return this.$store.state.Questions.questions;
+  }
+
   public elements = [
     {
-      name: "Nummerneingabe",
+      name: 'Nummerneingabe',
       append: this.appendNumberInput,
     },
     {
-      name: "Auswahlliste",
+      name: 'TextArea',
+      append: this.appendTextArea,
+    },
+    {
+      name: 'Auswahlliste',
       append: this.appendDropdown,
     },
     {
-      name: "Texteingabe",
+      name: 'Texteingabe',
       append: this.appendTextInput,
-    }
-  ]
+    },
+  ];
 
   appendDropdown() {
-    const key = `dropdown-${randomId()}`
+    const key = `dropdown-${randomId()}`;
     const el = {
       title: 'Wo liegt dein Hauptfirmensitz?',
       key,
@@ -99,48 +106,69 @@ export default class Start extends Vue {
         Bitte wähle das Bundesland aus,
         in dem der Sitz deines Unternehmens ist.
       `,
-      }
+    };
 
-    this.$store.commit('appendQuestion', el)
+    this.$store.commit('appendQuestion', el);
   }
 
   appendNumberInput() {
-    const key = `number-input-${randomId()}`
-    const el = { title: 'Wie alt ist dein Unternehmen?',
+    const key = `number-input-${randomId()}`;
+    const el = {
+      title: 'Wie alt ist dein Unternehmen?',
+      key,
+      config: {
+        type: 'number-input',
         key,
-        config: {
-          type: 'number-input',
-          key,
-          unit: 'Jahre',
-          placeholder: 'XX',
-          required: { message: 'Bitte Wert auswählen' },
-        },
-        description: `
+        unit: 'Jahre',
+        placeholder: 'XX',
+        required: { message: 'Bitte Wert auswählen' },
+      },
+      description: `
           Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
           Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
           und wir suchen für dich die passenden Angebote.
         `,
-      }
+    };
 
-    this.$store.commit('appendQuestion', el)
+    this.$store.commit('appendQuestion', el);
+  }
+  appendTextArea() {
+    const key = `text-area-${randomId()}`;
+    const el = {
+      title: 'Über dein Unternehmen?',
+      key,
+      config: {
+        type: 'text-area',
+        key,
+        placeholder: 'XX',
+        required: { message: 'Bitte Wert auswählen' },
+      },
+      description: `
+          Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+          Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
+          und wir suchen für dich die passenden Angebote.
+        `,
+    };
+    this.$store.commit('appendQuestion', el);
   }
 
   appendTextInput() {
-    const key = `text-input-${randomId()}`
-    const el = { title: 'Wie alt ist dein Unternehmen?',
+    const key = `text-input-${randomId()}`;
+    const el = {
+      title: 'Wie alt ist dein Unternehmen?',
+      key,
+      config: {
+        type: 'text-input',
         key,
-        config: {
-          type: 'text-input',
-          key,
-          placeholder: 'XX',
-          required: { message: 'Bitte Wert auswählen' },
-        },
-        description: `
+        placeholder: 'XX',
+        required: { message: 'Bitte Wert auswählen' },
+      },
+      description: `
           Beschreibungstext
         `,
-      }
+    };
 
-    this.$store.commit('appendQuestion', el)
+    this.$store.commit('appendQuestion', el);
   }
 
   @Emit('updateStatus')

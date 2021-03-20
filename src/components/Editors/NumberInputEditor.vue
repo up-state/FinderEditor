@@ -1,25 +1,71 @@
 <template>
-  <section>
-  <label class="input">
-    <h2>Title</h2>
-    <input
-      type="text"
-      @change="e => updateQuestion({title: e.target.value})"
-    />
-  </label>
+  <section style="border: 2px solid black; padding: 2rem;">
+    <h2>Nummerneingabe</h2>
+    <label class="input">
+      <span>Title</span>
+      <input
+        type="text"
+        :value="question.title"
+        @change="e => updateQuestion({ title: e.target.value })"
+      />
+    </label>
 
+    <label class="input">
+      <span>Einheit</span>
+      <input
+        type="text"
+        :value="question.config.unit"
+        @change="e => updateQuestionConfig({ unit: e.target.value })"
+      />
+    </label>
+
+    <label class="input">
+      <span>Zwingend erforderlich</span>
+      <input
+        type="checkbox"
+        :value="question.config.required.value"
+        @change="e => updateQuestionRequired(e.target.checked)"
+      />
+    </label>
+
+    <label class="input">
+      <span>Platzhalter</span>
+      <input
+        type="text"
+        :value="question.config.placeholder"
+        @change="e => updateQuestionConfig({ placeholder: e.target.value })"
+      />
+    </label>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch, Emit } from 'vue-property-decorator';
+import { Question } from '@/store/questions';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class NumberInputEditor extends Vue {
   @Prop() private question!: any;
 
-  updateQuestion(x: any) {
-    this.$store.commit('updateQuestion', {...this.question, ...x})
+  updateQuestion(update: Partial<Question>) {
+    this.$store.commit('updateQuestion', { ...this.question, ...update });
+  }
+
+  updateQuestionConfig(update: Question['config']) {
+    this.$store.commit('updateQuestion', {
+      ...this.question,
+      config: { ...this.question.config, ...update },
+    });
+  }
+
+  updateQuestionRequired(required: boolean) {
+    this.$store.commit('updateQuestion', {
+      ...this.question,
+      config: {
+        ...this.question.config,
+        required: required ? { message: 'Bitte Wert auswählen' } : undefined,
+      },
+    });
   }
 }
 </script>

@@ -8,7 +8,15 @@
       v-if="!!question && question.config.type == 'text-input'"
       v-bind:question="question"
     />
-    <div v-else>{{question.config.type}} - {{question.title}}</div>
+    <TextAreaEditor
+      v-if="!!question && question.config.type == 'text-area'"
+      v-bind:question="question"
+    />
+    <DropdownInputEditor
+      v-if="!!question && question.config.type == 'select'"
+      v-bind:question="question"
+    />
+    <div v-else>{{ question.config.type }} - {{ question.title }}</div>
   </div>
 </template>
 
@@ -16,11 +24,15 @@
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 import NumberInputEditor from './Editors/NumberInputEditor.vue';
 import TextInputEditor from './Editors/TextInputEditor.vue';
+import TextAreaEditor from './Editors/TextAreaEditor.vue';
+import DropdownInputEditor from './Editors/DropdownInputEditor.vue';
 
 @Component({
   components: {
     NumberInputEditor,
     TextInputEditor,
+    TextAreaEditor,
+    DropdownInputEditor,
   },
 })
 export default class DynamicFormEditor extends Vue {
