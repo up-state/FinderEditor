@@ -20,6 +20,15 @@
     </label>
 
     <label class="input">
+      <span>Zwingend erforderlich</span>
+      <input
+        type="checkbox"
+        :value="question.config.required.value"
+        @change="e => updateQuestionRequired(e.target.checked)"
+      />
+    </label>
+
+    <label class="input">
       <span>Platzhalter</span>
       <input
         type="text"
@@ -46,6 +55,16 @@ export default class NumberInputEditor extends Vue {
     this.$store.commit('updateQuestion', {
       ...this.question,
       config: { ...this.question.config, ...update },
+    });
+  }
+
+  updateQuestionRequired(required: boolean) {
+    this.$store.commit('updateQuestion', {
+      ...this.question,
+      config: {
+        ...this.question.config,
+        required: required ? { message: 'Bitte Wert auswählen' } : undefined,
+      },
     });
   }
 }
