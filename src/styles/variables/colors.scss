@@ -27,3 +27,10 @@
   --secondary-dark: #5100c5;
   --secondary-darkest: #41009e;
 }
+
+/* Element UI */
+$--color-primary: #007d8c;
+
+/* change icon font path variable, required */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+@import '~element-ui/packages/theme-chalk/src/index';

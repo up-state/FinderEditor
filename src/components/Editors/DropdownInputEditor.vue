@@ -1,30 +1,31 @@
 <template>
-  <section style="border-radius: 4px">
+  <section style="padding: 10px, max-width: 400px">
     <el-collapse @change="handleChange">
       <el-collapse-item :title="title" name="1">
-        <label class="input">
-          <h3>Title</h3>
-          <input
-            type="text"
-            v-model="question.title"
-            @change="(e) => updateQuestion({ title: e.target.value })"
-          />
-        </label>
+        <h4>Titel</h4>
+        <el-input
+          v-model="question.title"
+          @change="(e) => updateQuestion({ title: e.target.value })"
+          clearable
+        />
 
-        <label>
-          <h3>Description</h3>
-          <textarea type="text" v-model="question.description" style="width: 100%" rows="5" />
-        </label>
-        <label>
-          <h3>Optionen (mit , trennen)</h3>
-          <textarea
-            type="text"
-            :value="options"
-            @change="(e) => updateOptions(e.target.value)"
-            style="width: 100%"
-            rows="5"
-          />
-        </label>
+        <h4>Beschreibung</h4>
+        <el-input
+          type="text"
+          v-model="question.description"
+          style="width: 100%"
+          rows="5"
+          clearable
+        />
+
+        <h4>Optionen (Komma-getrennt)</h4>
+        <el-input
+          type="textarea"
+          :value="options"
+          @change="(e) => updateOptions(e.target.value)"
+          style="width: 100%"
+          rows="5"
+        />
       </el-collapse-item>
     </el-collapse>
   </section>

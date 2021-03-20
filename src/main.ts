@@ -4,7 +4,8 @@ import router from './router';
 import store from './store';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import './styles/variables/colors.scss';
+//import 'element-ui/lib/theme-chalk/index.css';
 // eslint-disable-next-line import/order
 import VueCookies from 'vue-cookies-ts';
 
@@ -26,7 +27,7 @@ new Vue({
     this.$store.commit('removeQuestion', questions[1]);
     this.$store.commit('updateQuestion', { ...questions[0], title: 'Hullebulle' });
   },
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 
 function defaultQuestions() {
