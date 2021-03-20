@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
+// eslint-disable-next-line import/order
 import VueCookies from 'vue-cookies-ts';
 
 Vue.config.productionTip = false;
@@ -12,7 +13,9 @@ new Vue({
   router,
   store,
   created() {
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     const questions = defaultQuestions();
+    // eslint-disable-next-line no-restricted-syntax
     for (const question of questions) {
       this.$store.commit('appendQuestion', question);
     }
@@ -20,7 +23,7 @@ new Vue({
     this.$store.commit('removeQuestion', questions[1]);
     this.$store.commit('updateQuestion', { ...questions[0], title: 'Hullebulle' });
   },
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 
 function defaultQuestions() {

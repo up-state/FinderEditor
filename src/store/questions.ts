@@ -25,17 +25,17 @@ class Questions extends VuexModule {
 
   @Mutation
   public removeQuestion(question: Question): void {
-    this.questions = this.questions.filter(q => q.key !== question.key);
+    this.questions = this.questions.filter((q) => q.key !== question.key);
   }
 
   @Mutation
   public updateQuestion(question: Question): void {
-    this.questions = this.questions.map(q => (question.key === q.key ? question : q));
+    this.questions = this.questions.map((q) => (question.key === q.key ? question : q));
   }
 
   @Mutation
   public moveQuestion({ question, toIndex }: { question: Question; toIndex: number }): void {
-    const from = this.questions.findIndex(q => q.key === question.key);
+    const from = this.questions.findIndex((q) => q.key === question.key);
     this.questions.splice(toIndex, 0, this.questions.splice(from, 1)[0]);
   }
 }
