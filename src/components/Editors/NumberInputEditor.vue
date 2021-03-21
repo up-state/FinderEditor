@@ -28,7 +28,7 @@
           style="width: 100%"
       rows="5"
       @change="(e) => updateQuestionRequired(e.target.checked)"
-    />
+    ></el-checkbox>
 
     <h4>Platzhalter</h4>
     <el-input

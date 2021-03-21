@@ -9,7 +9,7 @@
       style="width: 100%"
       rows="5"
       clearable
-      @change="(e) => updateQuestion({ title: e.target.value })"
+      @change="e => updateQuestion({ title: e.target.value })"
     />
 
     <h4>Platzhalter</h4>
