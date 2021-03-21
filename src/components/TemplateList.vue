@@ -1,15 +1,22 @@
 <template>
   <nav class="template-list">
-    <h2 class="box-headline">Leere Formelemente</h2>
-    <ul>
-      <li v-for="patternKey in Object.keys(emptyPatterns)" :key="patternKey">
-        <el-button type="primary" @click="append(emptyPatterns[patternKey])">{{ patternKey }}</el-button>
-      </li>
-    </ul>
     <h2 class="box-headline">Wählen Sie Ihre Module aus</h2>
     <ul>
       <li v-for="mockupPatternKey in Object.keys(mockupPatterns)" :key="mockupPatternKey">
-        <el-button type="primary" @click="append(mockupPatterns[mockupPatternKey])">{{ mockupPatternKey }}</el-button>
+        <el-button
+          class="template-btn"
+          type="primary"
+          @click="append(mockupPatterns[mockupPatternKey])"
+          >{{ mockupPatternKey }}</el-button
+        >
+      </li>
+    </ul>
+    <h2 class="box-headline">Leere Formelemente</h2>
+    <ul>
+      <li v-for="patternKey in Object.keys(emptyPatterns)" :key="patternKey">
+        <el-button class="template-btn" type="primary" @click="append(emptyPatterns[patternKey])">{{
+          patternKey
+        }}</el-button>
       </li>
     </ul>
   </nav>
@@ -42,7 +49,7 @@ export default class TemplateList extends Vue {
   };
 
   public mockupPatterns = {
-    'Postleitzahl': [
+    Postleitzahl: [
       this.NumberInputPattern(
         'Wie lautet Ihre Postleitzahl',
         '000000',
@@ -50,7 +57,7 @@ export default class TemplateList extends Vue {
         'Eine Postleitzahl besteht aus 6 Ziffern von 6 Ziffern von 0 bis 9.',
       ),
     ],
-    'Wohnort': [
+    Wohnort: [
       this.textInputPattern(
         'Wie lautet Ihr Wohnort',
         'Name des Ortes',
@@ -155,11 +162,17 @@ export default class TemplateList extends Vue {
     gap: 8px;
     margin-bottom: 32px;
   }
-  
-.box-headline {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: left;
-}
+
+  .box-headline {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    margin: 0px 10px;
+  }
+
+  .template-btn {
+    max-width: 320px;
+    width: 100%;
+  }
 }
 </style>
