@@ -4,13 +4,27 @@
     <div style="display: flex">
       <div style="flex-grow: 1; margin-right: 2rem">
         <ul style="list-style: none; margin: 0">
-          <draggable tag="el-collapse" :list="list" accordion>
+          <draggable tag="el-collapse">
             <li v-for="(question, index) in questions" :key="index">
-              <component
-                :is="editorComponent(question)"
-                :question="question"
-                class="editor-component-box"
-              />
+              <el-collapse v-model="activeTab" accordion>
+                <el-collapse-item :name="question.key">
+                  <template slot="title">
+                    <h4>{{ question.title }}</h4>
+                    <el-button
+                      id="delete-btn"
+                      type="danger"
+                      v-on:click="deleteQuestion(question)"
+                      icon="el-icon-delete"
+                      circle
+                    />
+                  </template>
+                  <component
+                    :is="editorComponent(question)"
+                    :question="question"
+                    class="editor-component-box"
+                  />
+                </el-collapse-item>
+              </el-collapse>
             </li>
           </draggable>
         </ul>
@@ -55,6 +69,7 @@ function randomId(): string {
   },
 })
 export default class Start extends Vue {
+  public activeTab = this.questions[0]?.key;
   public buttonsConfig: ButtonConfig[] = [
     new ButtonConfig('Weiter', false, () => {
       this.toFinder();
