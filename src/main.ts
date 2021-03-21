@@ -23,11 +23,8 @@ new Vue({
     for (const question of questions) {
       this.$store.commit('appendQuestion', question);
     }
-    this.$store.commit('moveQuestion', { question: questions[2], toIndex: 3 });
-    this.$store.commit('removeQuestion', questions[1]);
-    this.$store.commit('updateQuestion', { ...questions[0], title: 'Hullebulle' });
   },
-  render: (h) => h(App),
+  render: h => h(App),
 }).$mount('#app');
 
 function defaultQuestions() {
@@ -86,34 +83,6 @@ function defaultQuestions() {
         type: 'text-input',
         placeholder: 'XX',
         required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-        und wir suchen für dich die passenden Angebote.
-      `,
-    },
-    {
-      title: 'Wie alt ist dein Unternehmen?',
-      key: 'age3',
-      config: {
-        type: 'text-area',
-        placeholder: 'XX',
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-        und wir suchen für dich die passenden Angebote.
-      `,
-    },
-    {
-      title: 'Habt ihr eine Checkbox?',
-      config: {
-        type: 'checkbox',
-        label: 'Informationen',
-        description: 'Brauchen sie zusätzliche Informationen zu Ihrem angeforderten Formular?',
-        checked: true,
       },
       description: `
         Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
