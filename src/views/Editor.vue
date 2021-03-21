@@ -24,7 +24,7 @@
               <el-collapse v-model="activeTab" accordion>
                 <el-collapse-item :name="question.key">
                   <template slot="title">
-                    <h4>{{ question.title }}</h4>
+                    <h4 class="editor__header">{{ question.title }}</h4>
                     <el-button
                       id="delete-btn"
                       type="danger"
