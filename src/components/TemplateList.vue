@@ -17,7 +17,7 @@
         <el-button
           class="template-btn"
           type="secondary"
-          @click="append(emptyPatterns[patternKey])"
+          @click="append([emptyPatterns[patternKey]()])"
           >{{ patternKey }}</el-button
         >
       </li>
@@ -27,6 +27,7 @@
 
 <script lang="ts">
 // @ is an alias to /src
+import { Question } from '@/store/questions';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 
 function randomId(): string {
@@ -38,17 +39,22 @@ function randomId(): string {
   components: {},
 })
 export default class TemplateList extends Vue {
+  get questionKeys(): string[] {
+    return this.$store.state.Questions.questions.map((q: Question) => q.key);
+  }
+
   @Emit('append')
-  public append(element: any): void {
-    return element.elements;
+  public append(questions: Question[]): Question[] {
+    // Only append questions that have not been added yet
+    return questions.filter(question => !this.questionKeys.includes(question.key));
   }
 
   public emptyPatterns = {
-    ZahlenFeld: [this.NumberInputPattern()],
-    Absatz: [this.TextAreaPattern()],
-    Dropdown: [this.dropdownPattern()],
-    TextFeld: [this.textInputPattern()],
-    Checkbox: [this.checkboxPattern()],
+    Zahlenfeld: this.NumberInputPattern,
+    Absatz: this.TextAreaPattern,
+    Dropdown: this.dropdownPattern,
+    Textfeld: this.textInputPattern,
+    Checkbox: this.checkboxPattern,
   };
 
   public mockupPatterns = {
@@ -162,6 +168,7 @@ export default class TemplateList extends Vue {
   }
 }
 </script>
+
 <style lang="scss">
 .template-list {
   ul {
