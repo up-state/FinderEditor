@@ -5,7 +5,7 @@
       <li v-for="mockupPatternKey in Object.keys(mockupPatterns)" :key="mockupPatternKey">
         <el-button
           class="template-btn"
-          type="primary"
+          type="secondary"
           @click="append(mockupPatterns[mockupPatternKey])"
           >{{ mockupPatternKey }}</el-button
         >
@@ -14,9 +14,12 @@
     <h2 class="box-headline">Leere Formelemente</h2>
     <ul>
       <li v-for="patternKey in Object.keys(emptyPatterns)" :key="patternKey">
-        <el-button class="template-btn" type="primary" @click="append(emptyPatterns[patternKey])">{{
-          patternKey
-        }}</el-button>
+        <el-button
+          class="template-btn"
+          type="secondary"
+          @click="append(emptyPatterns[patternKey])"
+          >{{ patternKey }}</el-button
+        >
       </li>
     </ul>
   </nav>
