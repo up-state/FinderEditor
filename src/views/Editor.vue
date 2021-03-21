@@ -4,7 +4,7 @@
     <div style="display: flex">
       <div style="flex-grow: 1; margin-right: 2rem">
         <ul style="list-style: none; margin: 0">
-          <draggable tag="el-collapse" :list="list">
+          <draggable tag="el-collapse">
             <li v-for="(question, index) in questions" :key="index">
               <el-collapse v-model="activeTab" accordion>
                 <el-collapse-item :name="question.key">
