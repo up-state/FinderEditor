@@ -1,15 +1,14 @@
 <template>
-  <div class="home container-xs screen">
-    <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <div class="login__container">
+  <div class="login-container">
+    <div style="margin: 10px">
       <label for="mail" class="login__label">E-Mail-Adresse/Benutzername</label>
-      <input id="mail" type="text" class="login__input" value="test@meinantrag.de" />
+      <el-input id="mail" type="text" class="login__input" value="test@meinantrag.de" />
     </div>
-    <div class="login__container">
+    <div style="margin: 10px">
       <label for="password" class="login__label">Passwort</label>
-      <input id="password" type="password" class="login__input" value="FakePSW" />
+      <el-input id="password" type="password" class="login__input" value="FakePSW" />
     </div>
-    <el-button type="primary" v-on:click="toEditor()">Login</el-button>
+    <el-button id="login-btn" type="primary" v-on:click="toEditor()">Login</el-button>
   </div>
 </template>
 
@@ -31,9 +30,6 @@ export default class Login extends Vue {
 }
 </script>
 <style lang="scss">
-.login__container {
-  margin: 0rem auto 1rem auto;
-}
 .login__label {
   display: block;
 }
@@ -42,5 +38,27 @@ export default class Login extends Vue {
   display: block;
   margin-top: 0.25rem;
   width: 250px;
+}
+#login-btn {
+  width: 93%;
+  margin: 10px;
+  margin-top: 80px;
+  button {
+    margin-bottom: 16px;
+    max-width: 320px;
+    width: 100%;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+.login-container {
+  margin: auto;
+  width: 20em !important;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 10px;
+  padding: 2rem;
 }
 </style>
