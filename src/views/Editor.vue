@@ -2,6 +2,9 @@
   <div class="editor max-screen">
     <nav class="nav">
       <el-button type="primary"><i class="el-icon-back"></i>Familie</el-button>
+      <el-button type="primary" v-on:click="toFinder()"
+        ><i class="el-icon-right" />Zum Finder</el-button
+      >
     </nav>
 
     <div class="editor-main">
@@ -41,7 +44,6 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import NumberInputEditor from '../components/Editors/NumberInputEditor.vue';
 import TextInputEditor from '../components/Editors/TextInputEditor.vue';
 import TextAreaEditor from '../components/Editors/TextAreaEditor.vue';
@@ -67,14 +69,9 @@ import { Question } from '@/store/questions';
 })
 export default class Start extends Vue {
   public activeTab = this.questions[0]?.key;
-  public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig('Weiter', false, () => {
-      this.toFinder();
-    }),
-  ];
 
   public append(elements: []) {
-    elements.forEach(element => {
+    elements.forEach((element) => {
       this.$store.commit('appendQuestion', element);
     });
   }
@@ -95,11 +92,6 @@ export default class Start extends Vue {
     return mapping[inputType];
   }
 
-  @Emit('updateStatus')
-  updateStatus(): ButtonConfig[] {
-    return this.buttonsConfig;
-  }
-
   public toResults(): void {
     FinderService.updateValue('index', null, false);
     this.$router.push({
@@ -111,21 +103,6 @@ export default class Start extends Vue {
     this.$router.push({
       path: '/finder' + FinderService.parseValueToUrl(),
     });
-  }
-
-  mounted() {
-    FinderService.loadStatusFromUrl();
-    if (FinderService.allValuesExist()) {
-      this.buttonsConfig = [
-        new ButtonConfig('Weiter', false, () => {
-          this.toResults();
-        }),
-        new ButtonConfig('Akzeptieren & Kriterien anpassen', false, () => {
-          this.toFinder();
-        }),
-      ];
-    }
-    this.updateStatus();
   }
 
   @Watch('$route', { immediate: true, deep: true })
