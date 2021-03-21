@@ -1,10 +1,14 @@
 <template>
   <div class="editor max-screen">
     <nav class="nav">
-      <el-button type="primary"><i class="el-icon-back"></i>Familie</el-button>
-      <el-button type="primary" v-on:click="toFinder()"
+      <el-button disabled><i class="el-icon-back"></i>Familie</el-button>
+      <el-badge :value="questions.length"  class="item">
+
+      <el-button style="margin-left: 10px" type="primary" v-on:click="toFinder()"
         ><i class="el-icon-right" />Zum Finder</el-button
       >
+
+        </el-badge>
     </nav>
 
     <div class="editor-main">
@@ -15,16 +19,17 @@
 
       <!-- Edit Module -->
       <div class="box" style="flex-grow: 1; margin-right: 2rem">
-        <h2 class="box-headline">Module bearbeiten</h2>
+          <h2 class="box-headline">Module bearbeiten</h2>
         <ul style="list-style: none; margin: 0; padding-left: 0">
           <draggable tag="el-collapse">
             <li v-for="(question, index) in questions" :key="index">
               <el-collapse v-model="activeTab" accordion>
                 <el-collapse-item :name="question.key">
-                  <template slot="title">
+                  <template slot="title" style="margin-left: 5px">
                     <h4 class="editor__header">{{ question.title }}</h4>
                   </template>
                   <div class="collapse-content">
+                    <div style="background: #fff400; width: 5px"></div>
                     <component
                       :is="editorComponent(question)"
                       :question="question"
@@ -146,8 +151,7 @@ export default class Start extends Vue {
 
 .box {
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   border-radius: 10px;
   padding: 2rem;
   min-height: 60vh;

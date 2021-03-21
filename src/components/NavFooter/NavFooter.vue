@@ -1,14 +1,14 @@
 <template>
   <nav id="action-footer">
-    <button
-      class="btn"
+    <el-button
       v-for="(button, index) in buttons"
+      type="primary"
       :key="index"
       :disabled="button.disabled"
       v-on:click="button.listener"
     >
       {{ button.name }}
-    </button>
+    </el-button>
   </nav>
 </template>
 

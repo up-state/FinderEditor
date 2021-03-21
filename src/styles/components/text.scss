@@ -1,4 +1,6 @@
-#app {
+#app,
+// Tooltips are rendered outside the app
+.el-tooltip__popper {
   font-family: 'Fira Sans', sans-serif;
 }
 

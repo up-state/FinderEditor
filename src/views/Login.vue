@@ -1,8 +1,10 @@
 <template>
   <div class="login-container">
+    <img src="@/assets/title.png" id="logo-login" />
+
     <div style="margin: 10px">
       <label for="mail" class="login__label">E-Mail-Adresse/Benutzername</label>
-      <el-input id="mail" type="text" class="login__input" value="test@meinantrag.de" />
+      <el-input id="mail" type="text" class="login__input" value="mein@antrag.de" />
     </div>
     <div style="margin: 10px">
       <label for="password" class="login__label">Passwort</label>
@@ -42,7 +44,7 @@ export default class Login extends Vue {
 #login-btn {
   width: 93%;
   margin: 10px;
-  margin-top: 80px;
+  margin-top: 25px;
   button {
     margin-bottom: 16px;
     max-width: 320px;
@@ -56,9 +58,12 @@ export default class Login extends Vue {
   margin: auto;
   width: 20em !important;
   background-color: white;
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   border-radius: 10px;
   padding: 2rem;
+}
+#logo-login {
+  width:300px;
+  margin-bottom: 25px;
 }
 </style>
