@@ -7,6 +7,8 @@
         <article>
           <h2>{{ question.title }}</h2>
           <component :is="inputComponent(question)" :question="question" @status="getStatus" />
+          <br />
+          <div class="description">{{ question.description }}</div>
         </article>
       </div>
     </div>
