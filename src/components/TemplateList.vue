@@ -100,7 +100,10 @@ export default class TemplateList extends Vue {
 
   dropdownPattern(
     title: string = 'Neues Dropdown',
-    options: { key: string; value: number }[] = [],
+    options: { key: string; value: number }[] = [
+      { key: 'Option 1', value: 1 },
+      { key: 'Option 2', value: 2 },
+    ],
     description: string = '',
   ) {
     return {
