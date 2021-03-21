@@ -1,7 +1,11 @@
 <template>
   <section style="padding: 10px, max-width: 400px">
     <el-collapse @change="handleChange">
-      <el-collapse-item :title="title" name="1">
+      <el-collapse-item>
+        <template slot="title">
+          Auswahlliste: {{ question.title }}
+          <el-button id="delete-btn" v-on:click="deleteQuestion()" icon="el-icon-delete" />
+        </template>
         <h4>Titel</h4>
         <el-input
           v-model="question.title"
@@ -35,7 +39,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class NumberInputEditor extends Vue {
+export default class DropdownInputEditor extends Vue {
   @Prop() private question!: any;
 
   get options() {
@@ -43,7 +47,11 @@ export default class NumberInputEditor extends Vue {
   }
 
   get title() {
-    return 'Auswahlliste: ' + this.question.title;
+    return (
+      'Auswahlliste: ' +
+      this.question.title +
+      "<el-button type='info' icon='el-icon-delete' circle></el-button>"
+    );
   }
 
   updateQuestion(x: any) {
@@ -52,6 +60,10 @@ export default class NumberInputEditor extends Vue {
 
   getOptions() {
     return this.question.config.options.size;
+  }
+
+  deleteQuestion() {
+    this.$store.commit('removeQuestion', this.question);
   }
 
   handleChange(val: any) {
@@ -68,6 +80,10 @@ export default class NumberInputEditor extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+#delete-btn {
+  margin-left: auto;
+  color: #021343;
+}
 .input {
   position: relative;
   display: flex;

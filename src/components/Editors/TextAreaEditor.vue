@@ -1,23 +1,34 @@
 <template>
   <section>
     <h2>Freitext</h2>
-    <label class="input">
-      <span>Title</span>
-      <input
-        type="text"
-        :value="question.title"
-        @change="e => updateQuestion({ title: e.target.value })"
-      />
-    </label>
-    <label class="input">
-      <span>Platzhalter</span>
-      <input type="text" v-model="question.config.placeholder" />
-    </label>
 
-    <label class="input">
-      <span>description</span>
-      <textarea type="text" v-model="question.description" style="width: 100%;" rows="5" />
-    </label>
+    <h4>Title</h4>
+    <el-input
+      type="text"
+      v-model="question.title"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="(e) => updateQuestion({ title: e.target.value })"
+    />
+
+    <h4>Platzhalter</h4>
+    <el-input
+      type="text"
+      v-model="question.config.placeholder"
+      style="width: 100%"
+      rows="5"
+      clearable
+    />
+
+    <h4>Beschreibungstext</h4>
+    <el-input
+      type="textarea"
+      v-model="question.description"
+      style="width: 100%"
+      rows="5"
+      clearable
+    />
   </section>
 </template>
 
