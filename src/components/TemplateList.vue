@@ -167,7 +167,6 @@ export default class TemplateList extends Vue {
     font-size: 18px;
     font-weight: bold;
     text-align: left;
-    margin: 0px 10px;
   }
 
   .template-btn {

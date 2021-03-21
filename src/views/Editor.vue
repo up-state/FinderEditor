@@ -2,9 +2,13 @@
   <div class="editor max-screen">
     <nav class="nav">
       <el-button disabled><i class="el-icon-back"></i>Familie</el-button>
-      <el-button type="primary" v-on:click="toFinder()"
+      <el-badge :value="questions.length"  class="item">
+
+      <el-button style="margin-left: 10px" type="primary" v-on:click="toFinder()"
         ><i class="el-icon-right" />Zum Finder</el-button
       >
+
+        </el-badge>
     </nav>
 
     <div class="editor-main">
@@ -15,7 +19,7 @@
 
       <!-- Edit Module -->
       <div class="box" style="flex-grow: 1; margin-right: 2rem">
-        <h2 class="box-headline">Module bearbeiten</h2>
+          <h2 class="box-headline">Module bearbeiten</h2>
         <ul style="list-style: none; margin: 0; padding-left: 0">
           <draggable tag="el-collapse">
             <li v-for="(question, index) in questions" :key="index">
