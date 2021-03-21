@@ -53,8 +53,6 @@ export default class App extends Vue {
   $refs: any;
 
   updateStatus(buttons: ButtonConfig[]) {
-    console.log(buttons);
-
     this.buttons = buttons;
   }
 
