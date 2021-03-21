@@ -2,6 +2,9 @@
   <div class="editor max-screen">
     <nav class="nav">
       <el-button type="primary"><i class="el-icon-back"></i>Familie</el-button>
+      <el-button type="primary" v-on:click="toFinder()"
+        ><i class="el-icon-right" />Zum Finder</el-button
+      >
     </nav>
 
     <div class="editor-main">
@@ -20,19 +23,15 @@
                 <el-collapse-item :name="question.key">
                   <template slot="title">
                     <h4 class="editor__header">{{ question.title }}</h4>
-                    <el-button
-                      id="delete-btn"
-                      type="danger"
-                      v-on:click="deleteQuestion(question)"
-                      icon="el-icon-delete"
-                      circle
-                    />
                   </template>
-                  <component
-                    :is="editorComponent(question)"
-                    :question="question"
-                    class="editor-component-box"
-                  />
+                  <div class="collapse-content">
+                    <component
+                      :is="editorComponent(question)"
+                      :question="question"
+                      class="editor-component-box"
+                    />
+                    <toolbar :question="question" class="collapse-toolbar" />
+                  </div>
                 </el-collapse-item>
               </el-collapse>
             </li>
@@ -45,7 +44,6 @@
 
 <script lang="ts">
 // @ is an alias to /src
-import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import NumberInputEditor from '../components/Editors/NumberInputEditor.vue';
 import TextInputEditor from '../components/Editors/TextInputEditor.vue';
 import TextAreaEditor from '../components/Editors/TextAreaEditor.vue';
@@ -53,21 +51,19 @@ import DropdownInputEditor from '../components/Editors/DropdownInputEditor.vue';
 import CheckboxEditor from '../components/Editors/CheckboxEditor.vue';
 import TemplateList from '../components/TemplateList.vue';
 import Progress from '../components/Progress.vue';
+import Toolbar from '../components/Toolbar.vue';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
 import { Route } from 'vue-router';
 import AnalyticsService from '../shared/services/analytics.service';
 import draggable from 'vuedraggable';
 import { Question } from '@/store/questions';
-
-function randomId(): string {
-  const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
-  return uint32.toString(16);
-}
+import { ButtonConfig } from '@/components/NavFooter/ButtonConfig.class';
 
 @Component({
   components: {
     Progress,
+    Toolbar,
     draggable,
     TemplateList,
   },
@@ -102,11 +98,6 @@ export default class Start extends Vue {
     return mapping[inputType];
   }
 
-  @Emit('updateStatus')
-  updateStatus(): ButtonConfig[] {
-    return this.buttonsConfig;
-  }
-
   public toResults(): void {
     FinderService.updateValue('index', null, false);
     this.$router.push({
@@ -123,6 +114,11 @@ export default class Start extends Vue {
   mounted() {
     FinderService.loadStatusFromUrl();
     this.updateStatus();
+  }
+
+  @Emit('updateStatus')
+  updateStatus(): ButtonConfig[] {
+    return [];
   }
 
   @Watch('$route', { immediate: true, deep: true })
@@ -163,6 +159,13 @@ export default class Start extends Vue {
   text-align: left;
 }
 
+.collapse-content {
+  display: flex;
+}
+.collapse-toolbar {
+  align-self: flex-start;
+}
+
 #delete-btn {
   margin-left: auto;
 }
@@ -172,6 +175,7 @@ export default class Start extends Vue {
 .editor-component-box {
   margin-bottom: 20px;
   border-radius: 4px;
+  flex-grow: 1;
 }
 .home {
   display: flex;
