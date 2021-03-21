@@ -24,7 +24,7 @@
       <ul ref="navlist">
         <li class="logo">
           <a href="https://www.wir-bleiben-liquide.de/">
-            <img src="@/assets/logo.svg" alt />
+            <img src="@/assets/logo.png" alt />
           </a>
         </li>
         <li>
