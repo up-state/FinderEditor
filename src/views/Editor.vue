@@ -276,7 +276,6 @@ export default class Start extends Vue {
 .editor-component-box {
   margin-bottom: 20px;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 40px, rgba(0, 0, 0, 0.2) 5px 5px 5px;
 }
 .home {
   display: flex;
