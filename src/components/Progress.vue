@@ -1,8 +1,11 @@
 <template>
   <div class="progress">
     <div class="progressbar">
-      <div class="value" v-bind:style="{ width: progress + '%' }"></div>
+      <div class="value" v-bind:style="{ width: progress + '%' }">
+        <div class="progressposition" v-bind:class="{ progressstart: currentIndex == 0, progressposition:currentIndex > 0 }" >{{ currentIndex }} / {{ steps }}</div>
+      </div>
     </div>
+
     <!-- {{values}} -->
     <!-- TODO: Add answers -->
   </div>
@@ -17,7 +20,7 @@ export default class Progress extends Vue {
   @Prop() private currentIndex!: number;
 
   public get progress() {
-    return this.currentIndex / this.steps * 100;
+    return (this.currentIndex / this.steps) * 100;
   }
 }
 </script>
@@ -32,9 +35,29 @@ export default class Progress extends Vue {
     position: relative;
     width: 100%;
     height: 24px;
+    color: #ffffff;
     background-color: var(--light-grey);
     @media (min-width: 700px) {
       border-radius: 12px;
+    }
+
+    .progressposition {
+      line-height: 24px;
+      color: #ffffff;
+      font-weight: bold;
+      height: 24px;
+      width:50px;
+      text-align: center;
+      float: right;
+    }
+
+    .progressstart{
+      line-height: 24px;
+      color: #ffffff;
+      font-weight: bold;
+      height: 24px;
+      width:50px;
+      float: none;
     }
   }
   .value {
