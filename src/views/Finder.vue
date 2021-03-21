@@ -137,8 +137,10 @@ export default class Finder extends Vue {
   align-items: stretch;
 }
 article {
-  background-color: var(--brown);
+  background-color: white;
   padding: 32px 32px 24px 32px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+          border-radius: 12px;
   box-sizing: border-box;
   margin-bottom: 32px;
   display: flex;

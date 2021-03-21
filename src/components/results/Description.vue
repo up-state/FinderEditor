@@ -47,7 +47,7 @@ export default class Description extends Vue {
   margin-bottom: 32px;
   box-sizing: border-box;
   padding: 16px;
-  background-color: #f9f6f2;
+  background-color: #f8fbfd;
   border-radius: 8px;
   border: 2px white solid;
   &.minimizable .content {
