@@ -1,33 +1,23 @@
 <template>
-  <section style="padding: 10px, max-width: 400px">
-    <el-collapse @change="handleChange">
-      <el-collapse-item :title="title" name="1">
-        <h4>Titel</h4>
-        <el-input
-          v-model="question.title"
-          @change="(e) => updateQuestion({ title: e.target.value })"
-          clearable
-        />
+  <section style="padding: 10px; max-width: 400px">
+    <h4>Titel</h4>
+    <el-input
+      v-model="question.title"
+      @change="e => updateQuestion({ title: e.target.value })"
+      clearable
+    />
 
-        <h4>Beschreibung</h4>
-        <el-input
-          type="text"
-          v-model="question.description"
-          style="width: 100%"
-          rows="5"
-          clearable
-        />
+    <h4>Beschreibung</h4>
+    <el-input type="text" v-model="question.description" style="width: 100%" rows="5" clearable />
 
-        <h4>Optionen (Komma-getrennt)</h4>
-        <el-input
-          type="textarea"
-          :value="options"
-          @change="(e) => updateOptions(e.target.value)"
-          style="width: 100%"
-          rows="5"
-        />
-      </el-collapse-item>
-    </el-collapse>
+    <h4>Optionen (Komma-getrennt)</h4>
+    <el-input
+      type="textarea"
+      :value="options"
+      @change="e => updateOptions(e.target.value)"
+      style="width: 100%"
+      rows="5"
+    />
   </section>
 </template>
 
@@ -54,12 +44,8 @@ export default class NumberInputEditor extends Vue {
     return this.question.config.options.size;
   }
 
-  handleChange(val: any) {
-    console.log(val);
-  }
-
   updateOptions(options: string) {
-    const updatedOptions = options.split(',').map((opt) => ({ key: opt, value: 1 }));
+    const updatedOptions = options.split(',').map(opt => ({ key: opt, value: 1 }));
     this.question.config.options = updatedOptions;
     this.$store.commit('updateQuestion', { ...this.question });
   }

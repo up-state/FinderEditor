@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h2>Freitext</h2>
     <label class="input">
       <span>Title</span>
       <input

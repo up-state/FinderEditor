@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h2>Textfeld</h2>
     <form class="text-input-editor">
       <h3>Title</h3>
       <input

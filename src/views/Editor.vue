@@ -6,8 +6,14 @@
         <ul style="list-style: none; margin: 0">
           <draggable tag="el-collapse" :list="list">
             <li v-for="(question, index) in questions" :key="index">
-              <DownArrow v-if="index !== 0" />
-              <component :is="editorComponent(question)" :question="question" />
+              <el-collapse accordion>
+                <el-collapse-item name="1">
+                  <template slot="title">
+                    <h4>{{ question.title }}</h4>
+                  </template>
+                  <component :is="editorComponent(question)" :question="question" />
+                </el-collapse-item>
+              </el-collapse>
             </li>
           </draggable>
         </ul>

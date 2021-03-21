@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h2>Nummerneingabe</h2>
     <label class="input">
       <span>Title</span>
       <input
