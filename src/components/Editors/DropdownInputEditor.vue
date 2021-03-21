@@ -4,13 +4,7 @@
       <el-collapse-item>
         <template slot="title">
           Auswahlliste: {{ question.title }}
-          <el-button
-            id="delete-btn"
-            type="danger"
-            v-on:click="deleteQuestion()"
-            icon="el-icon-delete"
-            circle
-          />
+          <el-button id="delete-btn" v-on:click="deleteQuestion()" icon="el-icon-delete" />
         </template>
         <h4>Titel</h4>
         <el-input
@@ -88,6 +82,7 @@ export default class DropdownInputEditor extends Vue {
 <style scoped lang="scss">
 #delete-btn {
   margin-left: auto;
+  color: #021343;
 }
 .input {
   position: relative;
