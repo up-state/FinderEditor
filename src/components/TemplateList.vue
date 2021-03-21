@@ -146,14 +146,9 @@ export default class TemplateList extends Vue {
 </script>
 <style lang="scss">
 .template-list {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
   width: 200px;
   background-color: white;
   padding: 16px;
-  box-shadow: #00000030 0px 0 12px;
   ul {
     list-style: none;
     padding: 0;
