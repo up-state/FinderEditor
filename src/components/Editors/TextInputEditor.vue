@@ -2,22 +2,33 @@
   <section>
     <h2>Textfeld</h2>
     <form class="text-input-editor">
-      <h3>Title</h3>
-      <input
+      <h4>Title</h4>
+      <el-input
         type="text"
-        :value="question.title"
-        @change="e => updateQuestion({ title: e.target.value })"
+        v-model="question.title"
+        style="width: 100%"
+        rows="5"
+        clearable
+        @change="(e) => updateQuestion({ title: e.target.value })"
       />
-      <h3>Platzhalter</h3>
-      <input
+
+      <h4>Platzhalter</h4>
+      <el-input
         type="text"
-        :value="question.config.placeholder"
+        v-model="question.config.placeholder"
+        style="width: 100%"
+        rows="5"
+        clearable
         @change="updatePlaceholder($event.target.value)"
       />
-      <h3>Beschreibungstext</h3>
-      <textarea
-        type="text"
-        :value="question.description"
+
+      <h4>Beschreibungstext</h4>
+      <el-input
+        type="textarea"
+        v-model="question.description"
+        style="width: 100%"
+        rows="5"
+        clearable
         @change="updateDescription($event.target.value)"
       />
     </form>
