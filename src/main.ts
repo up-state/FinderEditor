@@ -55,10 +55,9 @@ function defaultQuestions() {
         required: { message: 'Bitte Wert auswählen' },
       },
       description: `
-        Hiermit können wir dir helfen die Programme aus deinem Bundesland für dich zu finden.
-        Bitte wähle das Bundesland aus,
-        in dem der Sitz deines Unternehmens ist.
-      `,
+Hiermit können wir dir helfen die Programme aus deinem Bundesland für dich zu finden.
+Bitte wähle das Bundesland aus, in dem der Sitz deines Unternehmens ist.
+      `.trim(),
     },
     {
       title: 'Wie alt ist dein Unternehmen?',
@@ -71,10 +70,8 @@ function defaultQuestions() {
         required: { message: 'Bitte Wert auswählen' },
       },
       description: `
-        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-        und wir suchen für dich die passenden Angebote.
-      `,
+Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt und wir suchen für dich die passenden Angebote.`.trim(),
     },
     {
       title: 'Wie alt ist dein Unternehmen?',
@@ -85,10 +82,8 @@ function defaultQuestions() {
         required: { message: 'Bitte Wert auswählen' },
       },
       description: `
-        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-        und wir suchen für dich die passenden Angebote.
-      `,
+Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
+Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt und wir suchen für dich die passenden Angebote.`.trim(),
     },
   ];
 }
