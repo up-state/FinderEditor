@@ -31,7 +31,7 @@ import NavHeader from './components/NavHeader.vue';
 import FullscreenResultCard from './components/results/FullscreenResultCard.vue';
 import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
 import AnalyticsService from './shared/services/analytics.service';
-import NavFooter from "./components/NavFooter/NavFooter.vue";
+import NavFooter from './components/NavFooter/NavFooter.vue';
 
 @Component({
   components: {
@@ -39,24 +39,17 @@ import NavFooter from "./components/NavFooter/NavFooter.vue";
     OverlayScrollbarsComponent,
     FullscreenResultCard,
     FullscreenDescriptionCard,
-    NavFooter
+    NavFooter,
   },
 })
 export default class App extends Vue {
   public buttons: ButtonConfig[] = [];
-
   public scrollMode = true;
-
   public offer: any = false;
-
   public description: any = false;
-
   public cookieBannerVisible = true;
-
   public gtmProperty = 'UA-180130811-1';
-
   public gtmTrackerName = 'gtmDefaultTracker';
-
   $refs: any;
 
   updateStatus(buttons: ButtonConfig[]) {
@@ -86,28 +79,21 @@ export default class App extends Vue {
 @import './styles/index.scss';
 
 body {
- background: #f8f9fa;
+  background: #f8f9fa;
 }
 
 #app {
   display: flex;
   flex-direction: column;
   .view {
-    // TODO: custom styling https://kingsora.github.io/OverlayScrollbars/#!documentation/styling
-    // margin-top: 86px;
-    // height: calc(100vh - 86px);
     height: 100vh;
     padding: 0;
     &.onscroll {
       margin-right: calc(100vw - 100%);
     }
     @media (min-width: 700px) {
-      // margin-top: 120px;
-      // height: calc(100vh - 120px);
-      // height: 100vh;
     }
     @media (min-width: 1024px) {
-      // padding: 0 64px;
     }
     .content {
       min-height: 100%;
@@ -164,13 +150,7 @@ body {
   }
 }
 
-.editor__section{
+.editor__section {
   padding: 1rem 2rem;
 }
-
-// $extra-small: 700px; xs
-// $small: 200px; s
-// $medium: 400px; m
-// $large: 500px; l
-// $extra-large: 1000px; xl
 </style>

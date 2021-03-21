@@ -24,7 +24,7 @@ new Vue({
       this.$store.commit('appendQuestion', question);
     }
   },
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');
 
 function defaultQuestions() {
@@ -58,32 +58,6 @@ function defaultQuestions() {
 Hiermit können wir dir helfen die Programme aus deinem Bundesland für dich zu finden.
 Bitte wähle das Bundesland aus, in dem der Sitz deines Unternehmens ist.
       `.trim(),
-    },
-    {
-      title: 'Wie alt ist dein Unternehmen?',
-      key: 'age',
-      config: {
-        type: 'number-input',
-        unit: 'Jahre',
-        placeholder: 'XX',
-        min: { value: 10, message: 'Der Wert muss mindestens 10 sein' },
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt und wir suchen für dich die passenden Angebote.`.trim(),
-    },
-    {
-      title: 'Wie alt ist dein Unternehmen?',
-      key: 'age2',
-      config: {
-        type: 'text-input',
-        placeholder: 'XX',
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt und wir suchen für dich die passenden Angebote.`.trim(),
     },
   ];
 }
