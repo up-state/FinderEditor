@@ -5,7 +5,9 @@
     color="white"
     active-text-color="#fff400"
   >
-    <img src="@/assets/logo.png" id="logo" />
+    <router-link to="/">
+      <img src="@/assets/logo.png" id="logo" />
+    </router-link>
     <el-menu-item class="nav-btn" index="1">
       <i class="el-icon-shopping-bag-2"></i>
     </el-menu-item>
