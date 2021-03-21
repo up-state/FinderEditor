@@ -148,6 +148,7 @@ export default class Start extends Vue {
 .editor {
   height: 100%;
   max-width: none;
+  margin-left:160px;
 }
 .nav {
   margin-top: 40px;
