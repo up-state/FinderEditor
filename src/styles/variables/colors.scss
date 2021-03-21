@@ -36,9 +36,17 @@
 }
 
 /* Element UI */
+// https://element.eleme.io/#/en-US/theme/preview
 $--color-primary: #021343;
 $--color-secondary: #dfefff;
 $--color-info: #fff400;
+
+// Button
+// TODO: default button background color is grey on hover...
+$--button-default-background-color: $--color-secondary;
+$--button-default-font-color: $--color-primary;
+$--button-default-border-color: $--color-secondary;
+$--button-font-weight: bolder;
 
 /* change icon font path variable, required */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';

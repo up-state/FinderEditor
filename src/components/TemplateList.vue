@@ -5,7 +5,7 @@
       <li v-for="mockupPatternKey in Object.keys(mockupPatterns)" :key="mockupPatternKey">
         <el-button
           class="template-btn"
-          type="primary"
+          type="secondary"
           @click="append(mockupPatterns[mockupPatternKey])"
           >{{ mockupPatternKey }}</el-button
         >
@@ -14,9 +14,12 @@
     <h2 class="box-headline">Leere Formelemente</h2>
     <ul>
       <li v-for="patternKey in Object.keys(emptyPatterns)" :key="patternKey">
-        <el-button class="template-btn" type="primary" @click="append(emptyPatterns[patternKey])">{{
-          patternKey
-        }}</el-button>
+        <el-button
+          class="template-btn"
+          type="secondary"
+          @click="append(emptyPatterns[patternKey])"
+          >{{ patternKey }}</el-button
+        >
       </li>
     </ul>
   </nav>
@@ -41,10 +44,10 @@ export default class TemplateList extends Vue {
   }
 
   public emptyPatterns = {
-    Nummerneingabe: [this.NumberInputPattern()],
-    TextArea: [this.TextAreaPattern()],
-    Auswahlliste: [this.dropdownPattern()],
-    Texteingabe: [this.textInputPattern()],
+    ZahlenFeld: [this.NumberInputPattern()],
+    Absatz: [this.TextAreaPattern()],
+    Dropdown: [this.dropdownPattern()],
+    TextFeld: [this.textInputPattern()],
     Checkbox: [this.checkboxPattern()],
   };
 
@@ -71,7 +74,7 @@ export default class TemplateList extends Vue {
   };
 
   checkboxPattern(
-    title: string = 'Neue Kontrollbox',
+    title: string = 'Neue Checkbox',
     label: string = '',
     checked: boolean = false,
     description: string = '',
@@ -90,7 +93,7 @@ export default class TemplateList extends Vue {
   }
 
   dropdownPattern(
-    title: string = 'Neue Listenauswahl',
+    title: string = 'Neues Dropdown',
     options: { key: string; value: number }[] = [],
     description: string = '',
   ) {
@@ -107,7 +110,7 @@ export default class TemplateList extends Vue {
   }
 
   NumberInputPattern(
-    title: string = 'Neues Zahleneingabefeld',
+    title: string = 'Neues Zahlenfeld',
     placeholder: string = '',
     unit: string | null = null,
     description: string = '',
@@ -125,7 +128,7 @@ export default class TemplateList extends Vue {
     };
   }
   TextAreaPattern(
-    title: string = 'Neues Freitextfeld',
+    title: string = 'Neuer Absatz',
     placeholder: string = '',
     description: string = '',
   ) {

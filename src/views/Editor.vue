@@ -26,7 +26,7 @@
               <el-collapse v-model="activeTab" accordion>
                 <el-collapse-item :name="question.key">
                   <template slot="title" style="margin-left: 5px">
-                    <h4 class="editor__header">{{ question.title }}</h4>
+                    <h4 class="editor__header">{{parseEditorHeader(question.config.type, question.title) }}</h4>
                   </template>
                   <div class="collapse-content">
                     <div style="background: #fff400; width: 5px"></div>
@@ -87,6 +87,16 @@ export default class Start extends Vue {
     elements.forEach((element) => {
       this.$store.commit('appendQuestion', element);
     });
+  }
+
+  public parseEditorHeader(type: string, title: string) {
+    switch (type) {
+      case 'number-input': return 'Zahlenfeld: '+title;
+      case 'text-input': return 'Textfelt: '+title;
+      case 'text-area': return 'Absatz: '+title;
+      case 'select': return 'Dropdown: '+title;
+      case 'checkbox': return 'Checkbox: '+title;
+    }
   }
 
   public get questions() {

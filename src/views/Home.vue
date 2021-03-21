@@ -51,6 +51,7 @@ export default class Start extends Vue {
   margin-right: 5em;
 }
 #buttons {
+  margin-top: 13px;
   width: 20em;
   float: right;
   button {
