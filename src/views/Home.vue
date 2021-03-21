@@ -1,17 +1,15 @@
 <template>
-  <div class="home container-xs screen">
-    <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <nav id="action-footer">
-      <button v-on:click="toLogin()" class="btn">Login</button>
-      <button v-on:click="toFinder()" class="btn">Direkt zum Förderfinder</button>
+  <div id="home">
+    <img src="@/assets/title.png" id="title" />
+    <nav id="buttons">
+      <el-button type="primary" v-on:click="toLogin()">Login</el-button>
+      <el-button type="primary" v-on:click="toFinder()">Direkt zum Förderfinder</el-button>
     </nav>
   </div>
 </template>
 
 <script lang="ts">
-import { ButtonConfig } from '@/components/NavFooter/ButtonConfig.class';
-import { FinderService } from '@/shared/services/finder.service';
-import { Component, Emit, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import Progress from '../components/Progress.vue';
 
 @Component({
@@ -20,13 +18,6 @@ import Progress from '../components/Progress.vue';
   },
 })
 export default class Start extends Vue {
-  public buttonsConfig: ButtonConfig[] = [];
-
-  @Emit('updateStatus')
-  updateStatus(): ButtonConfig[] {
-    return this.buttonsConfig;
-  }
-
   public toFinder(): void {
     this.$router.push({
       path: '/start',
@@ -38,13 +29,28 @@ export default class Start extends Vue {
       path: '/login',
     });
   }
-
-  mounted() {
-    FinderService.loadStatusFromUrl();
-    if (FinderService.allValuesExist()) {
-      this.buttonsConfig = [];
-    }
-    this.updateStatus();
-  }
 }
 </script>
+<style scoped lang="scss">
+#home {
+  margin: auto;
+  width: 55em !important;
+}
+#title {
+  width: 30em;
+  float: left;
+  margin-right: 5em;
+}
+#buttons {
+  width: 20em;
+  float: right;
+  button {
+    margin-bottom: 16px;
+    max-width: 320px;
+    width: 100%;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+</style>
