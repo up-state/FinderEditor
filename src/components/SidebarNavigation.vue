@@ -30,8 +30,9 @@ export default class SidebarNavigation extends Vue {}
 
 <style scoped type="scss">
 #logo {
-  width: 100%;
+  width: 80%;
   margin-bottom: 3em;
+  margin-top: 2em;
 }
 #sidebar-navigation-left {
   height: 100%;

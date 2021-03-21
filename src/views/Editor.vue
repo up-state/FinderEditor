@@ -96,7 +96,7 @@ export default class Start extends Vue {
       case 'number-input':
         return 'Zahlenfeld: ' + title;
       case 'text-input':
-        return 'Textfelt: ' + title;
+        return 'Textfeld: ' + title;
       case 'text-area':
         return 'Absatz: ' + title;
       case 'select':
