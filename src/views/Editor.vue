@@ -1,7 +1,7 @@
 <template>
   <div class="editor max-screen">
     <nav class="nav">
-      <el-button type="primary"><i class="el-icon-back"></i>Familie</el-button>
+      <el-button disabled><i class="el-icon-back"></i>Familie</el-button>
       <el-button type="primary" v-on:click="toFinder()"
         ><i class="el-icon-right" />Zum Finder</el-button
       >
