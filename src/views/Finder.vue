@@ -2,14 +2,18 @@
   <div class="finder screen">
     <h1>{{ $router.currentRoute.meta.title }}</h1>
     <Progress :steps="questions.length" :currentIndex="currentQuestion" />
+
     <div :name="'direction'" v-for="(question, index) in questions" :key="index">
       <div v-if="index === currentQuestion">
         <article>
           <h2>{{ question.title }}</h2>
           <component :is="inputComponent(question)" :question="question" @status="getStatus" />
+          <br />
+          <div class="description">{{ question.description }}</div>
         </article>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -40,8 +44,11 @@ export default class Finder extends Vue {
       this.next();
     }),
   ];
+
   public questions = this.$store.state.Questions.questions;
+
   public currentQuestion = 0;
+
   public status: any;
 
   inputComponent(question: Question): Vue {
@@ -58,6 +65,7 @@ export default class Finder extends Vue {
 
   // ForCalculator
   public renderComponent = true;
+
   public calcIsOpen = false;
 
   @Emit('updateStatus')
