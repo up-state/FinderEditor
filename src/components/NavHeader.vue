@@ -40,7 +40,7 @@
           <a href="https://www.wir-bleiben-liquide.de/team">Team</a>
         </li>
         <li>
-          <a class="active" href="">Förderfinder</a>
+          <a class="active" href="">Fragestrecke</a>
         </li>
         <li class="sozial-links">
           <a
