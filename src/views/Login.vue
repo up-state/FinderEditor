@@ -11,6 +11,9 @@
       <el-input id="password" type="password" class="login__input" value="FakePSW" />
     </div>
     <el-button id="login-btn" type="primary" v-on:click="toEditor()">Login</el-button>
+    <div style="margin: 10px">
+      Jeder Login funktioniert in diesem Prototyp
+    </div>
   </div>
 </template>
 
