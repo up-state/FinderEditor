@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="editor__section">
     <h4>Titel</h4>
     <el-input
       v-model="question.title"

@@ -7,9 +7,8 @@
     >
       <div class="content">
         <router-view @updateStatus="updateStatus" />
-        <NavFooter v-bind:buttons="buttons"></NavFooter>
         <footer>
-          ©2020 taxy.io GmbH |
+          ©2021 taxy.io GmbH |
           <a href="https://www.taxy.io/impressum">Impressum</a> |
           <a href="https://www.wir-bleiben-liquide.de/datenschutz">Datenschutz</a> |
           <a href="mailto:hallo@wir-bleiben-liqui.de">hallo@wir-bleiben-liqui.de</a>
@@ -34,7 +33,6 @@ import { Component, Vue } from 'vue-property-decorator';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue';
 import { ButtonConfig } from './components/NavFooter/ButtonConfig.class';
 import NavHeader from './components/NavHeader.vue';
-import NavFooter from './components/NavFooter/NavFooter.vue';
 import FullscreenResultCard from './components/results/FullscreenResultCard.vue';
 import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
 import AnalyticsService from './shared/services/analytics.service';
@@ -42,7 +40,6 @@ import AnalyticsService from './shared/services/analytics.service';
 @Component({
   components: {
     NavHeader,
-    NavFooter,
     OverlayScrollbarsComponent,
     FullscreenResultCard,
     FullscreenDescriptionCard,
@@ -70,9 +67,6 @@ export default class App extends Vue {
   }
 
   mounted() {
-    // console.log(this.$router);
-
-    // this.$cookies.remove('allow');
     AnalyticsService.init(this.$cookies);
     this.cookieBannerVisible = AnalyticsService.cookieBannerVisible;
   }
@@ -86,34 +80,6 @@ export default class App extends Vue {
     AnalyticsService.disable();
     this.cookieBannerVisible = AnalyticsService.cookieBannerVisible;
   }
-
-  // disableCookies() {
-  //   this.cookieBannerVisible = false;
-  //   // AnalyticsService.disableCookies();
-  //   this.$cookies.set("allow", true, { expires: "365d" });
-  //   AnalyticsService.allowed = true;
-  // }
-  // enableCookies() {
-  //   this.cookieBannerVisible = false;
-  //   // AnalyticsService.enableCookies();
-  //   this.$cookies.set("allow", false, { expires: "365d" });
-  //   AnalyticsService.allowed = false;
-  //   let g = (function (w: any, d: any, s: any, l: any, i: any) {
-  //     w[l] = w[l] || [];
-  //     w[l].push({
-  //       "gtm.start": new Date().getTime(),
-  //       event: "gtm.js",
-  //     });
-  //     var f = d.getElementsByTagName(s)[0],
-  //       j = d.createElement(s),
-  //       dl = l != "dataLayer" ? "&l=" + l : "";
-  //     j.async = true;
-  //     j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-  //     f.parentNode.insertBefore(j, f);
-  //   })(window, document, "script", "dataLayer", this.gtmProperty);
-  //   console.log(g);
-
-  // }
 }
 </script>
 
@@ -140,6 +106,7 @@ export default class App extends Vue {
       // padding: 0 64px;
     }
     .content {
+      background: white;
       min-height: 100%;
       padding: 0;
       display: flex;
@@ -153,7 +120,11 @@ export default class App extends Vue {
         text-align: center;
         padding: 1rem;
         a {
+          color: #021343;
           padding: 1rem;
+        }
+        a:hover {
+          color: #02134381;
         }
       }
       @media (min-width: 700px) {
@@ -189,6 +160,15 @@ export default class App extends Vue {
     opacity: 0;
   }
 }
+
+.content {
+  background-color: #f8f9fa;
+}
+
+.editor__section{
+  padding: 1rem 2rem;
+}
+
 // $extra-small: 700px; xs
 // $small: 200px; s
 // $medium: 400px; m

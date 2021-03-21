@@ -1,15 +1,30 @@
 <template>
-  <div class="home container-xs screen">
-    <h1>{{ $router.currentRoute.meta.title }}</h1>
-    <div style="display: flex">
-      <div style="flex-grow: 1; margin-right: 2rem">
-        <ul style="list-style: none; margin: 0">
+  <div class="editor max-screen">
+    <nav class="nav">
+      <el-button type="primary"><i class="el-icon-back"></i>Familie</el-button>
+    </nav>
+
+    <div class="editor-main">
+      <!-- Templates -->
+      <div class="box" style="width: 300px; margin-right: 2rem;">
+        <h2 class="box-headline">Wählen Sie Ihre Module aus</h2>
+        <ul style="list-style: none; padding-left: 0;">
+          <li class="add-element-button" v-for="element in elements" :key="element.name">
+            <el-button type="primary" @click="element.append">{{ element.name }}</el-button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Edit Module -->
+      <div class="box" style="flex-grow: 1; margin-right: 2rem">
+        <h2 class="box-headline">Module bearbeiten</h2>
+        <ul style="list-style: none; margin: 0; padding-left: 0;">
           <draggable tag="el-collapse">
             <li v-for="(question, index) in questions" :key="index">
               <el-collapse v-model="activeTab" accordion>
                 <el-collapse-item :name="question.key">
                   <template slot="title">
-                    <h4>{{ question.title }}</h4>
+                    <h4 class="editor__header">{{ question.title }}</h4>
                     <el-button
                       id="delete-btn"
                       type="danger"
@@ -29,7 +44,7 @@
           </draggable>
         </ul>
       </div>
-      <template-list @append="append"/>
+      <template-list @append="append" />
     </div>
   </div>
 </template>
@@ -132,7 +147,41 @@ export default class Start extends Vue {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
+.editor {
+  height: 100%;
+  max-width: none;
+}
+.nav {
+  margin-top: 40px;
+  i {
+    margin-right: 1rem;
+  }
+}
+.editor-main {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 3rem;
+}
+
+.box {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  border-radius: 10px;
+  padding: 2rem;
+  min-height: 60vh;
+}
+
+.box-headline {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
+
+#delete-btn {
+  margin-left: auto;
+}
 .add-element-button {
   margin: 10px 0;
 }
@@ -150,22 +199,5 @@ article {
   p {
     width: 100%;
   }
-}
-// article {
-//   background-color: var(--brown);
-//   padding: 16px;
-//   box-sizing: border-box;
-//   margin-bottom: 32px;
-// }
-@media (min-width: 768px + 20px) {
-  // .home {
-  //   align-items: center;
-  // }
-  // article {
-  //   p {
-  //     margin: 0;
-  //     font-size: 24px;
-  //   }
-  // }
 }
 </style>
