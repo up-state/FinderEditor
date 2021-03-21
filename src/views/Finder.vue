@@ -8,7 +8,7 @@
           <h2>{{ question.title }}</h2>
           <component :is="inputComponent(question)" :question="question" @status="getStatus" />
           <br />
-          <div class="description">{{ question.description }}</div>
+          <div v-if="question.description" class="description">{{ question.description }}</div>
         </article>
       </div>
     </div>
@@ -136,11 +136,14 @@ export default class Finder extends Vue {
   flex-direction: column;
   align-items: stretch;
 }
+.description {
+  margin-top: 3rem;
+}
 article {
   background-color: white;
   padding: 32px 32px 24px 32px;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-          border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
   box-sizing: border-box;
   margin-bottom: 32px;
   display: flex;
