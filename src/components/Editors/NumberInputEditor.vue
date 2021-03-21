@@ -1,7 +1,5 @@
 <template>
   <section>
-    <h2>Nummerneingabe</h2>
-
     <h4>Title</h4>
     <el-input
       type="text"
