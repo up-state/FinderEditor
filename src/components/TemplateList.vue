@@ -41,10 +41,10 @@ export default class TemplateList extends Vue {
   }
 
   public emptyPatterns = {
-    Nummerneingabe: [this.NumberInputPattern()],
-    TextArea: [this.TextAreaPattern()],
-    Auswahlliste: [this.dropdownPattern()],
-    Texteingabe: [this.textInputPattern()],
+    ZahlenFeld: [this.NumberInputPattern()],
+    Absatz: [this.TextAreaPattern()],
+    Dropdown: [this.dropdownPattern()],
+    TextFeld: [this.textInputPattern()],
     Checkbox: [this.checkboxPattern()],
   };
 
@@ -71,7 +71,7 @@ export default class TemplateList extends Vue {
   };
 
   checkboxPattern(
-    title: string = 'Neue Kontrollbox',
+    title: string = 'Neue Checkbox',
     label: string = '',
     checked: boolean = false,
     description: string = '',
@@ -90,7 +90,7 @@ export default class TemplateList extends Vue {
   }
 
   dropdownPattern(
-    title: string = 'Neue Listenauswahl',
+    title: string = 'Neues Dropdown',
     options: { key: string; value: number }[] = [],
     description: string = '',
   ) {
@@ -107,7 +107,7 @@ export default class TemplateList extends Vue {
   }
 
   NumberInputPattern(
-    title: string = 'Neues Zahleneingabefeld',
+    title: string = 'Neues Zahlenfeld',
     placeholder: string = '',
     unit: string | null = null,
     description: string = '',
@@ -125,7 +125,7 @@ export default class TemplateList extends Vue {
     };
   }
   TextAreaPattern(
-    title: string = 'Neues Freitextfeld',
+    title: string = 'Neuer Absatz',
     placeholder: string = '',
     description: string = '',
   ) {
