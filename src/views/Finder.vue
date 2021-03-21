@@ -1,6 +1,6 @@
 <template>
   <div class="finder screen">
-    <h1>{{ $router.currentRoute.meta.title }}</h1>
+    <h1>Fragestrecke</h1>
     <Progress :steps="questions.length" :currentIndex="currentQuestion" />
     <div :name="'direction'" v-for="(question, index) in questions" :key="index">
       <div v-if="index === currentQuestion">

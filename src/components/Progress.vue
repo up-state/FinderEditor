@@ -56,7 +56,7 @@ export default class Progress extends Vue {
     position: absolute;
     width: 0%;
     height: 100%;
-    background-color: var(--prim-600);
+    background-color: var(--purple);
     transition: 0.5s width;
     @media (min-width: 700px) {
       border-radius: 12px;
