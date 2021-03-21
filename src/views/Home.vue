@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <img src="@/assets/title.png" id="title" />
+    <img src="@/assets/title.svg" id="title" />
     <nav id="buttons">
       <el-button type="primary" v-on:click="toLogin()">Login</el-button>
       <el-button type="primary" v-on:click="toFinder()">Direkt zum Förderfinder</el-button>
