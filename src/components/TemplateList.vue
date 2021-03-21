@@ -1,12 +1,12 @@
 <template>
   <nav class="template-list">
-    <h4>Leere Formelemente einfügen</h4>
+    <h2 class="box-headline">Leere Formelemente</h2>
     <ul>
       <li v-for="patternKey in Object.keys(emptyPatterns)" :key="patternKey">
         <el-button type="primary" @click="append(emptyPatterns[patternKey])">{{ patternKey }}</el-button>
       </li>
     </ul>
-    <h4>Wählen Sie ihr Mockup aus</h4>
+    <h2 class="box-headline">Wählen Sie Ihre Module aus</h2>
     <ul>
       <li v-for="mockupPatternKey in Object.keys(mockupPatterns)" :key="mockupPatternKey">
         <el-button type="primary" @click="append(mockupPatterns[mockupPatternKey])">{{ mockupPatternKey }}</el-button>
@@ -146,9 +146,6 @@ export default class TemplateList extends Vue {
 </script>
 <style lang="scss">
 .template-list {
-  width: 200px;
-  background-color: white;
-  padding: 16px;
   ul {
     list-style: none;
     padding: 0;
@@ -156,6 +153,13 @@ export default class TemplateList extends Vue {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 32px;
   }
+  
+.box-headline {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+}
 }
 </style>

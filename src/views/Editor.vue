@@ -6,19 +6,14 @@
 
     <div class="editor-main">
       <!-- Templates -->
-      <div class="box" style="width: 300px; margin-right: 2rem;">
-        <h2 class="box-headline">Wählen Sie Ihre Module aus</h2>
-        <ul style="list-style: none; padding-left: 0;">
-          <li class="add-element-button" v-for="element in elements" :key="element.name">
-            <el-button type="primary" @click="element.append">{{ element.name }}</el-button>
-          </li>
-        </ul>
+      <div class="box" style="width: 300px; margin-right: 2rem">
+        <template-list @append="append" />
       </div>
 
       <!-- Edit Module -->
       <div class="box" style="flex-grow: 1; margin-right: 2rem">
         <h2 class="box-headline">Module bearbeiten</h2>
-        <ul style="list-style: none; margin: 0; padding-left: 0;">
+        <ul style="list-style: none; margin: 0; padding-left: 0">
           <draggable tag="el-collapse">
             <li v-for="(question, index) in questions" :key="index">
               <el-collapse v-model="activeTab" accordion>
@@ -44,7 +39,6 @@
           </draggable>
         </ul>
       </div>
-      <template-list @append="append" />
     </div>
   </div>
 </template>
@@ -87,7 +81,7 @@ export default class Start extends Vue {
   ];
 
   public append(elements: []) {
-    elements.forEach(element => {
+    elements.forEach((element) => {
       this.$store.commit('appendQuestion', element);
     });
   }
