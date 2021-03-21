@@ -5,7 +5,7 @@
       :options="{ scrollbars: { autoHide: 'scroll' } }"
       :extensions="[]"
     >
-      <div class="contend">
+      <div class="content">
         <router-view @updateStatus="updateStatus" />
         <NavFooter v-bind:buttons="buttons"></NavFooter>
         <footer>
@@ -139,7 +139,8 @@ export default class App extends Vue {
     @media (min-width: 1024px) {
       // padding: 0 64px;
     }
-    .contend {
+    .content {
+      min-height: 100%;
       padding: 0;
       display: flex;
       flex-direction: column;
@@ -148,9 +149,11 @@ export default class App extends Vue {
         width: 100%;
       }
       footer {
+        margin-top: auto;
         text-align: center;
+        padding: 1rem;
         a {
-          padding: 16px;
+          padding: 1rem;
         }
       }
       @media (min-width: 700px) {

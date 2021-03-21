@@ -28,12 +28,14 @@
   --secondary-darkest: #41009e;
 
   --purple: #021343;
-  --light-blue: #DFEFFF;
-  --yellow: #FFF400;
+  --light-blue: #dfefff;
+  --yellow: #fff400;
 }
 
 /* Element UI */
-$--color-primary: #007d8c;
+$--color-primary: #dfefff;
+//$--color-primary: #021343;
+$--color-info: #fff400;
 
 /* change icon font path variable, required */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
