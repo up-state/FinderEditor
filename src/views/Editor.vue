@@ -20,19 +20,15 @@
                 <el-collapse-item :name="question.key">
                   <template slot="title">
                     <h4 class="editor__header">{{ question.title }}</h4>
-                    <el-button
-                      id="delete-btn"
-                      type="danger"
-                      v-on:click="deleteQuestion(question)"
-                      icon="el-icon-delete"
-                      circle
-                    />
                   </template>
-                  <component
-                    :is="editorComponent(question)"
-                    :question="question"
-                    class="editor-component-box"
-                  />
+                  <div class="collapse-content">
+                    <component
+                      :is="editorComponent(question)"
+                      :question="question"
+                      class="editor-component-box"
+                    />
+                    <toolbar :question="question" class="collapse-toolbar" />
+                  </div>
                 </el-collapse-item>
               </el-collapse>
             </li>
@@ -53,6 +49,7 @@ import DropdownInputEditor from '../components/Editors/DropdownInputEditor.vue';
 import CheckboxEditor from '../components/Editors/CheckboxEditor.vue';
 import TemplateList from '../components/TemplateList.vue';
 import Progress from '../components/Progress.vue';
+import Toolbar from '../components/Toolbar.vue';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
 import { Route } from 'vue-router';
@@ -60,14 +57,10 @@ import AnalyticsService from '../shared/services/analytics.service';
 import draggable from 'vuedraggable';
 import { Question } from '@/store/questions';
 
-function randomId(): string {
-  const uint32 = window.crypto.getRandomValues(new Uint32Array(1))[0];
-  return uint32.toString(16);
-}
-
 @Component({
   components: {
     Progress,
+    Toolbar,
     draggable,
     TemplateList,
   },
@@ -81,7 +74,7 @@ export default class Start extends Vue {
   ];
 
   public append(elements: []) {
-    elements.forEach((element) => {
+    elements.forEach(element => {
       this.$store.commit('appendQuestion', element);
     });
   }
@@ -173,6 +166,13 @@ export default class Start extends Vue {
   text-align: left;
 }
 
+.collapse-content {
+  display: flex;
+}
+.collapse-toolbar {
+  align-self: flex-start;
+}
+
 #delete-btn {
   margin-left: auto;
 }
@@ -182,6 +182,7 @@ export default class Start extends Vue {
 .editor-component-box {
   margin-bottom: 20px;
   border-radius: 4px;
+  flex-grow: 1;
 }
 .home {
   display: flex;
