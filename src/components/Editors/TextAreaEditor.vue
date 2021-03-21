@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="editor__section">
     <h4>Title</h4>
     <el-input
       type="text"

@@ -193,6 +193,11 @@ export default class App extends Vue {
 .content {
   background-color: #F8F9FA;
 }
+
+.editor__section{
+  padding: 1rem 2rem;
+}
+
 // $extra-small: 700px; xs
 // $small: 200px; s
 // $medium: 400px; m
