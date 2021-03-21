@@ -25,10 +25,11 @@
             <li v-for="(question, index) in questions" :key="index">
               <el-collapse v-model="activeTab" accordion>
                 <el-collapse-item :name="question.key">
-                  <template slot="title">
+                  <template slot="title" style="margin-left: 5px">
                     <h4 class="editor__header">{{ question.title }}</h4>
                   </template>
                   <div class="collapse-content">
+                    <div style="background: #fff400; width: 5px"></div>
                     <component
                       :is="editorComponent(question)"
                       :question="question"
