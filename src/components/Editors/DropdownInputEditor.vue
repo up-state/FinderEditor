@@ -1,5 +1,5 @@
 <template>
-  <section style="padding: 10px; max-width: 400px">
+  <section>
     <h4>Titel</h4>
     <el-input
       v-model="question.title"

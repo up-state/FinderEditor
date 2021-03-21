@@ -44,6 +44,7 @@
           </draggable>
         </ul>
       </div>
+      <template-list @append="append" />
     </div>
   </div>
 </template>
@@ -56,6 +57,7 @@ import TextInputEditor from '../components/Editors/TextInputEditor.vue';
 import TextAreaEditor from '../components/Editors/TextAreaEditor.vue';
 import DropdownInputEditor from '../components/Editors/DropdownInputEditor.vue';
 import CheckboxEditor from '../components/Editors/CheckboxEditor.vue';
+import TemplateList from '../components/TemplateList.vue';
 import Progress from '../components/Progress.vue';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
@@ -73,6 +75,7 @@ function randomId(): string {
   components: {
     Progress,
     draggable,
+    TemplateList,
   },
 })
 export default class Start extends Vue {
@@ -82,6 +85,12 @@ export default class Start extends Vue {
       this.toFinder();
     }),
   ];
+
+  public append(elements: []) {
+    elements.forEach(element => {
+      this.$store.commit('appendQuestion', element);
+    });
+  }
 
   public get questions() {
     return this.$store.state.Questions.questions;
@@ -97,144 +106,6 @@ export default class Start extends Vue {
       checkbox: CheckboxEditor,
     };
     return mapping[inputType];
-  }
-
-  public elements = [
-    {
-      name: 'Nummerneingabe',
-      append: this.appendNumberInput,
-    },
-    {
-      name: 'TextArea',
-      append: this.appendTextArea,
-    },
-    {
-      name: 'Auswahlliste',
-      append: this.appendDropdown,
-    },
-    {
-      name: 'Texteingabe',
-      append: this.appendTextInput,
-    },
-    {
-      name: 'Checkbox',
-      append: this.appendCheckbox,
-    },
-  ];
-
-  appendDropdown() {
-    const key = `dropdown-${randomId()}`;
-    const el = {
-      title: 'Wo liegt dein Hauptfirmensitz?',
-      key,
-      config: {
-        type: 'select',
-        options: [
-          { key: 'Baden-Württemberg', value: 1 },
-          { key: 'Bayern', value: 2 },
-          { key: 'Berlin', value: 3 },
-          { key: 'Brandenburg', value: 4 },
-          { key: 'Bremen', value: 5 },
-          { key: 'Hamburg', value: 6 },
-          { key: 'Hessen', value: 7 },
-          { key: 'Mecklenburg-Vorpommern', value: 8 },
-          { key: 'Niedersachsen', value: 9 },
-          { key: 'Nordrhein-Westfalen', value: 10 },
-          { key: 'Rheinland-Pfalz', value: 11 },
-          { key: 'Saarland', value: 12 },
-          { key: 'Sachsen', value: 13 },
-          { key: 'Sachsen-Anhalt', value: 14 },
-          { key: 'Schleswig-Holstein', value: 15 },
-          { key: 'Thüringen', value: 16 },
-        ],
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-        Hiermit können wir dir helfen die Programme aus deinem Bundesland für dich zu finden.
-        Bitte wähle das Bundesland aus,
-        in dem der Sitz deines Unternehmens ist.
-      `,
-    };
-
-    this.$store.commit('appendQuestion', el);
-  }
-
-  appendNumberInput() {
-    const key = `number-input-${randomId()}`;
-    const el = {
-      title: 'Wie alt ist dein Unternehmen?',
-      key,
-      config: {
-        type: 'number-input',
-        unit: 'Jahre',
-        placeholder: 'XX',
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-          Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-          Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-          und wir suchen für dich die passenden Angebote.
-        `,
-    };
-
-    this.$store.commit('appendQuestion', el);
-  }
-  appendTextArea() {
-    const key = `text-area-${randomId()}`;
-    const el = {
-      title: 'Über dein Unternehmen?',
-      key,
-      config: {
-        type: 'text-area',
-        placeholder: 'XX',
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-          Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-          Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-          und wir suchen für dich die passenden Angebote.
-        `,
-    };
-    this.$store.commit('appendQuestion', el);
-  }
-
-  appendTextInput() {
-    const key = `text-input-${randomId()}`;
-    const el = {
-      title: 'Wie alt ist dein Unternehmen?',
-      key,
-      config: {
-        type: 'text-input',
-        placeholder: 'XX',
-        required: { message: 'Bitte Wert auswählen' },
-      },
-      description: `
-          Beschreibungstext
-        `,
-    };
-
-    this.$store.commit('appendQuestion', el);
-  }
-
-  appendCheckbox() {
-    const key = `number-input-${randomId()}`;
-    const el = {
-      title: 'Habt ihr eine Checkbox?',
-      config: {
-        type: 'checkbox',
-        key,
-        label: 'Informationen',
-        description: 'Brauchen sie zusätzliche Informationen zu Ihrem angeforderten Formular?',
-        checked: true,
-      },
-      description: `
-        Für junge und bereits etablierte Unternehmen gibt es oft unterschiedliche Förderprogramme.
-        Lass uns wissen seit wie vielen Jahren es dein Unternehmen bereits gibt
-        und wir suchen für dich die passenden Angebote.
-      `,
-    };
-
-    this.$store.commit('appendQuestion', el);
   }
 
   @Emit('updateStatus')
@@ -253,10 +124,6 @@ export default class Start extends Vue {
     this.$router.push({
       path: '/finder' + FinderService.parseValueToUrl(),
     });
-  }
-
-  deleteQuestion(question: Question) {
-    this.$store.commit('removeQuestion', question);
   }
 
   mounted() {
@@ -319,7 +186,6 @@ export default class Start extends Vue {
 .editor-component-box {
   margin-bottom: 20px;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 40px, rgba(0, 0, 0, 0.2) 5px 5px 5px;
 }
 .home {
   display: flex;

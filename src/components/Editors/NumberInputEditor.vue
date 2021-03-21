@@ -1,40 +1,42 @@
 <template>
   <section>
-    <label class="input">
-      <span>Title</span>
-      <input
-        type="text"
-        :value="question.title"
-        @change="e => updateQuestion({ title: e.target.value })"
-      />
-    </label>
+    <h4>Title</h4>
+    <el-input
+      type="text"
+      v-model="question.title"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="(e) => updateQuestion({ title: e.target.value })"
+    />
 
-    <label class="input">
-      <span>Einheit</span>
-      <input
-        type="text"
-        :value="question.config.unit"
-        @change="e => updateQuestionConfig({ unit: e.target.value })"
-      />
-    </label>
+    <h4>Einheit</h4>
+    <el-input
+      type="text"
+      v-model="question.config.unit"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="(e) => updateQuestionConfig({ unit: e.target.value })"
+    />
 
-    <label class="input">
-      <span>Zwingend erforderlich</span>
-      <input
-        type="checkbox"
-        :value="question.config.required.value"
-        @change="e => updateQuestionRequired(e.target.checked)"
-      />
-    </label>
+    <h4>Zwingend erforderlich</h4>
+    <el-checkbox
+    v-model="question.config.required.value"
+          style="width: 100%"
+      rows="5"
+      @change="(e) => updateQuestionRequired(e.target.checked)"
+    ></el-checkbox>
 
-    <label class="input">
-      <span>Platzhalter</span>
-      <input
-        type="text"
-        :value="question.config.placeholder"
-        @change="e => updateQuestionConfig({ placeholder: e.target.value })"
-      />
-    </label>
+    <h4>Platzhalter</h4>
+    <el-input
+      type="text"
+      v-model="question.config.placeholder"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="(e) => updateQuestionConfig({ placeholder: e.target.value })"
+    />
   </section>
 </template>
 

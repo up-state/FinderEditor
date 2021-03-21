@@ -1,35 +1,51 @@
 <template>
   <section>
-  <label class="input">
-    <h2>Title</h2>
-    <input
+    <h4>Title</h4>
+    <el-input
       type="text"
-      :value="question.title"
-      @change="e => updateQuestion({title: e.target.value})"
+      v-model="question.title"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="(e) => updateQuestion({ title: e.target.value })"
     />
-  </label>
-  <label class="input">
-    <h2>Description</h2>
-    <input
+
+    <h4>Description</h4>
+    <el-input
       type="text"
-      :value="question.description"
-      @change="e => updateQuestion({description: e.target.value})"
+      v-model="question.description"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="(e) => updateQuestion({ title: e.target.value })"
     />
-  </label>
-  <label class="input">
-    <h2>Label</h2>
-    <input
+
+    <h4>Label</h4>
+    <el-input
       type="text"
-      :value="question.config.label"
-      @change="updateLabel($event.target.value)">
-  </label>
-  <label class="input">
-    <h2>Checked</h2>
-    <input
-      type="checkbox"
+      v-model="question.config.label"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="updateLabel($event.target.value)"
+    />
+    <h4>Label</h4>
+    <el-input
+      type="text"
+      v-model="question.config.label"
+      style="width: 100%"
+      rows="5"
+      clearable
+      @change="updateLabel($event.target.value)"
+    />
+
+    <h4>Checked</h4>
+    <el-checkbox
       v-model="question.config.checked"
-      @change="updateChecked($event.target.value)">
-  </label>
+      style="width: 100%"
+      rows="5"
+      @change="updateChecked($event.target.value)"
+    ></el-checkbox>
   </section>
 </template>
 
@@ -41,17 +57,17 @@ export default class CheckboxEditor extends Vue {
   @Prop() private question!: any;
 
   updateQuestion(x: any) {
-    this.$store.commit('updateQuestion', {...this.question, ...x})
+    this.$store.commit('updateQuestion', { ...this.question, ...x });
   }
 
   updateLabel(label: string) {
     this.question.config.label = label;
-    this.$store.commit('updateQuestion', this.question)
+    this.$store.commit('updateQuestion', this.question);
   }
 
   updateChecked(checked: boolean) {
     this.question.config.checked = checked;
-    this.$store.commit('updateQuestion', this.question)
+    this.$store.commit('updateQuestion', this.question);
   }
 }
 </script>
