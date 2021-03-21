@@ -189,6 +189,10 @@ export default class App extends Vue {
     opacity: 0;
   }
 }
+
+.content {
+  background-color: #F8F9FA;
+}
 // $extra-small: 700px; xs
 // $small: 200px; s
 // $medium: 400px; m
