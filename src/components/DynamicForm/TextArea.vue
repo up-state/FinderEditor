@@ -71,7 +71,7 @@ export default class TextArea extends Vue {
     letter-spacing: 1px;
     color: black;
 
-    border: 2px solid #007d8c;
+    border: 2px solid var(--purple-dropdown);
     border-radius: 6px;
 
     text-align: center;
@@ -93,14 +93,14 @@ export default class TextArea extends Vue {
     }
   }
   @media (min-width: 500px) {
-    border: 2px solid #007d8c;
+    border: 2px solid var(--purple-dropdown);
     border-radius: 6px;
     flex-direction: row;
     .unit {
       font-size: 24px;
       display: block;
       padding: 16px 24px;
-      background: #007d8c;
+      background: var(--purple-dropdown);
       color: white;
       margin-bottom: 0;
       &::after {
