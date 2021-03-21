@@ -273,6 +273,9 @@ export default class Start extends Vue {
 }
 </script>
 <style lang="scss">
+#delete-btn {
+  margin-left: auto;
+}
 .add-element-button {
   margin: 10px 0;
 }

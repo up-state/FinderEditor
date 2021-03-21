@@ -60,6 +60,7 @@ export default class DropdownInputEditor extends Vue {
 <style scoped lang="scss">
 #delete-btn {
   margin-left: auto;
+  color: #021343;
 }
 .input {
   position: relative;
