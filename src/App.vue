@@ -61,7 +61,7 @@ export default class App extends Vue {
 
   updateStatus(buttons: ButtonConfig[]) {
     console.log(buttons);
-    
+
     this.buttons = buttons;
   }
 
@@ -84,6 +84,11 @@ export default class App extends Vue {
 
 <style lang="scss">
 @import './styles/index.scss';
+
+body {
+ background: #f8f9fa;
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -105,7 +110,6 @@ export default class App extends Vue {
       // padding: 0 64px;
     }
     .content {
-      background: white;
       min-height: 100%;
       padding: 0;
       display: flex;
@@ -158,10 +162,6 @@ export default class App extends Vue {
   &.fscard-enter, &.fscard-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
-}
-
-.content {
-  background-color: #f8f9fa;
 }
 
 .editor__section{
