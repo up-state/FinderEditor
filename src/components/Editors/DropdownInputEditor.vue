@@ -14,7 +14,7 @@
     <el-input
       type="textarea"
       :value="options"
-      @change="e => updateOptions(e.target.value)"
+      @input="updateOptions"
       style="width: 100%"
       rows="5"
     />
@@ -44,14 +44,12 @@ export default class DropdownInputEditor extends Vue {
     this.$store.commit('updateQuestion', { ...this.question, ...x });
   }
 
-  getOptions() {
-    return this.question.config.options.size;
-  }
-
   updateOptions(options: string) {
     const updatedOptions = options.split(',').map(opt => ({ key: opt, value: 1 }));
-    this.question.config.options = updatedOptions;
-    this.$store.commit('updateQuestion', { ...this.question });
+    this.$store.commit('updateQuestion', {
+      ...this.question,
+      config: { ...this.question.config, options: updatedOptions },
+    });
   }
 }
 </script>
