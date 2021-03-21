@@ -25,7 +25,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
-export default class NumberInputEditor extends Vue {
+export default class DropdownInputEditor extends Vue {
   @Prop() private question!: any;
 
   get options() {
@@ -33,7 +33,11 @@ export default class NumberInputEditor extends Vue {
   }
 
   get title() {
-    return 'Auswahlliste: ' + this.question.title;
+    return (
+      'Auswahlliste: ' +
+      this.question.title +
+      "<el-button type='info' icon='el-icon-delete' circle></el-button>"
+    );
   }
 
   updateQuestion(x: any) {
@@ -54,6 +58,9 @@ export default class NumberInputEditor extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+#delete-btn {
+  margin-left: auto;
+}
 .input {
   position: relative;
   display: flex;

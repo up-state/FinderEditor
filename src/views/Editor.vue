@@ -4,14 +4,25 @@
     <div style="display: flex">
       <div style="flex-grow: 1; margin-right: 2rem">
         <ul style="list-style: none; margin: 0">
-          <draggable tag="el-collapse" :list="list">
+          <draggable tag="el-collapse" :list="list" accordion>
             <li v-for="(question, index) in questions" :key="index">
               <el-collapse accordion>
                 <el-collapse-item name="1">
                   <template slot="title">
                     <h4>{{ question.title }}</h4>
+                    <el-button
+                      id="delete-btn"
+                      type="danger"
+                      v-on:click="deleteQuestion(question)"
+                      icon="el-icon-delete"
+                      circle
+                    />
                   </template>
-                  <component :is="editorComponent(question)" :question="question" />
+                  <component
+                    :is="editorComponent(question)"
+                    :question="question"
+                    class="editor-component-box"
+                  />
                 </el-collapse-item>
               </el-collapse>
             </li>
@@ -38,7 +49,6 @@ import TextInputEditor from '../components/Editors/TextInputEditor.vue';
 import TextAreaEditor from '../components/Editors/TextAreaEditor.vue';
 import DropdownInputEditor from '../components/Editors/DropdownInputEditor.vue';
 import CheckboxEditor from '../components/Editors/CheckboxEditor.vue';
-import DownArrow from '../components/DownArrow.vue';
 import Progress from '../components/Progress.vue';
 import { Component, Vue, Emit, Watch } from 'vue-property-decorator';
 import { FinderService } from '../shared/services/finder.service';
@@ -55,7 +65,6 @@ function randomId(): string {
 @Component({
   components: {
     Progress,
-    DownArrow,
     draggable,
   },
 })
@@ -238,6 +247,10 @@ export default class Start extends Vue {
     });
   }
 
+  deleteQuestion(question: Question) {
+    this.$store.commit('removeQuestion', question);
+  }
+
   mounted() {
     FinderService.loadStatusFromUrl();
     if (FinderService.allValuesExist()) {
@@ -264,6 +277,7 @@ export default class Start extends Vue {
   margin: 10px 0;
 }
 .editor-component-box {
+  margin-bottom: 20px;
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 40px, rgba(0, 0, 0, 0.2) 5px 5px 5px;
 }
