@@ -19,14 +19,13 @@
         jeweiligen Themenfelder oder die Finanzinstitute selbst konsultiert werden.
       </p>
     </article>
+    <el-button id="accept-btn" type="primary" v-on:click="toFinder()">Akzeptieren</el-button>
   </div>
 </template>
 
 <script lang="ts">
-// @ is an alias to /src
-import { ButtonConfig } from '../components/NavFooter/ButtonConfig.class';
 import Progress from '../components/Progress.vue';
-import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
+import { Component, Vue, Emit } from 'vue-property-decorator';
 
 @Component({
   components: {
@@ -34,20 +33,6 @@ import { Component, Prop, Vue, Emit, Watch } from 'vue-property-decorator';
   },
 })
 export default class Start extends Vue {
-  public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig('Akzeptieren', false, () => {
-      this.toFinder();
-    }),
-  ];
-
-  @Emit('updateStatus')
-  updateStatus(): ButtonConfig[] {
-    return this.buttonsConfig;
-  }
-
-  public toResults(): void {
-    this.$router.push({ path: '/results' });
-  }
   public toFinder(): void {
     this.$router.push({ path: '/finder' });
   }
@@ -64,22 +49,5 @@ article {
   p {
     width: 100%;
   }
-}
-// article {
-//   background-color: var(--brown);
-//   padding: 16px;
-//   box-sizing: border-box;
-//   margin-bottom: 32px;
-// }
-@media (min-width: 768px + 20px) {
-  // .home {
-  //   align-items: center;
-  // }
-  // article {
-  //   p {
-  //     margin: 0;
-  //     font-size: 24px;
-  //   }
-  // }
 }
 </style>
