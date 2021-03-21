@@ -7,7 +7,7 @@
     >
       <div class="content">
         <router-view @updateStatus="updateStatus" />
-        <NavFooter v-bind:buttons="buttons"></NavFooter>
+        <NavFooter v-if="!isResultsPage" :buttons="buttons" />
       </div>
     </OverlayScrollbarsComponent>
     <transition name="fscard">
@@ -51,6 +51,11 @@ export default class App extends Vue {
   public gtmProperty = 'UA-180130811-1';
   public gtmTrackerName = 'gtmDefaultTracker';
   $refs: any;
+
+  get isResultsPage(): boolean {
+    // yolo
+    return this.$route.path.startsWith('/results');
+  }
 
   updateStatus(buttons: ButtonConfig[]) {
     this.buttons = buttons;
