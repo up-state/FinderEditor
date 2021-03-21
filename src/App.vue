@@ -7,12 +7,7 @@
     >
       <div class="content">
         <router-view @updateStatus="updateStatus" />
-        <footer>
-          ©2021 taxy.io GmbH |
-          <a href="https://www.taxy.io/impressum">Impressum</a> |
-          <a href="https://www.wir-bleiben-liquide.de/datenschutz">Datenschutz</a> |
-          <a href="mailto:hallo@wir-bleiben-liqui.de">hallo@wir-bleiben-liqui.de</a>
-        </footer>
+        <NavFooter v-bind:buttons="buttons"></NavFooter>
       </div>
     </OverlayScrollbarsComponent>
     <transition name="fscard">
@@ -36,6 +31,7 @@ import NavHeader from './components/NavHeader.vue';
 import FullscreenResultCard from './components/results/FullscreenResultCard.vue';
 import FullscreenDescriptionCard from './components/results/FullscreenDescriptionCard.vue';
 import AnalyticsService from './shared/services/analytics.service';
+import NavFooter from "./components/NavFooter/NavFooter.vue";
 
 @Component({
   components: {
@@ -43,6 +39,7 @@ import AnalyticsService from './shared/services/analytics.service';
     OverlayScrollbarsComponent,
     FullscreenResultCard,
     FullscreenDescriptionCard,
+    NavFooter
   },
 })
 export default class App extends Vue {
@@ -63,6 +60,8 @@ export default class App extends Vue {
   $refs: any;
 
   updateStatus(buttons: ButtonConfig[]) {
+    console.log(buttons);
+    
     this.buttons = buttons;
   }
 

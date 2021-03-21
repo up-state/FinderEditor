@@ -75,7 +75,7 @@ function randomId(): string {
 export default class Start extends Vue {
   public activeTab = this.questions[0]?.key;
   public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig('Weiter', false, () => {
+    new ButtonConfig('Vorschau', false, () => {
       this.toFinder();
     }),
   ];
@@ -122,16 +122,6 @@ export default class Start extends Vue {
 
   mounted() {
     FinderService.loadStatusFromUrl();
-    if (FinderService.allValuesExist()) {
-      this.buttonsConfig = [
-        new ButtonConfig('Weiter', false, () => {
-          this.toResults();
-        }),
-        new ButtonConfig('Akzeptieren & Kriterien anpassen', false, () => {
-          this.toFinder();
-        }),
-      ];
-    }
     this.updateStatus();
   }
 

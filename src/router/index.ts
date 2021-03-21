@@ -19,15 +19,6 @@ const routes: Array<RouteConfig> = [
       title: 'Home',
     },
   },
-
-  {
-    path: '/start',
-    name: 'Start',
-    component: Start,
-    meta: {
-      title: 'Förderfinder',
-    },
-  },
   {
     path: '/login',
     name: 'Login',

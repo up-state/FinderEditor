@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Emit, Vue } from 'vue-property-decorator';
 import Progress from '../components/Progress.vue';
 
 @Component({
@@ -20,8 +20,17 @@ import Progress from '../components/Progress.vue';
 export default class Start extends Vue {
   public toFinder(): void {
     this.$router.push({
-      path: '/start',
+      path: '/finder',
     });
+  }
+
+  @Emit('updateStatus')
+  updateStatus(): [] {
+    return [];
+  }
+
+  mounted(){
+    this.updateStatus();
   }
 
   public toLogin(): void {

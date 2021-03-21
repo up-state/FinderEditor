@@ -32,14 +32,7 @@ import AnalyticsService from '../shared/services/analytics.service';
   components: { Progress },
 })
 export default class Finder extends Vue {
-  public buttonsConfig: ButtonConfig[] = [
-    new ButtonConfig('Zurück', false, () => {
-      this.previous();
-    }),
-    new ButtonConfig('Weiter', true, () => {
-      this.next();
-    }),
-  ];
+  public buttonsConfig: ButtonConfig[] = [];
   public questions = this.$store.state.Questions.questions;
   public currentQuestion = 0;
   public status: any;
@@ -66,8 +59,15 @@ export default class Finder extends Vue {
   }
 
   mounted() {
+    this.buttonsConfig = [
+      new ButtonConfig('Zurück', false, () => {
+        this.previous();
+      }),
+      new ButtonConfig('Weiter', true, () => {
+        this.next();
+      }),
+    ];
     FinderService.loadStatusFromUrl();
-    console.log(FinderService.values);
     this.currentQuestion = FinderService.getValue('index');
     this.updateStatus();
 
@@ -83,6 +83,7 @@ export default class Finder extends Vue {
       FinderService.updateValue('index', --this.currentQuestion);
     } else {
       FinderService.updateValue('index', null, false);
+      this.buttonsConfig = [];
       this.$router.push({
         path: '/' + FinderService.parseValueToUrl(),
       });
