@@ -71,7 +71,7 @@ export default class TemplateList extends Vue {
   };
 
   checkboxPattern(
-    title: string = '',
+    title: string = 'Neue Kontrollbox',
     label: string = '',
     checked: boolean = false,
     description: string = '',
@@ -90,7 +90,7 @@ export default class TemplateList extends Vue {
   }
 
   dropdownPattern(
-    title: string = '',
+    title: string = 'Neue Listenauswahl',
     options: { key: string; value: number }[] = [],
     description: string = '',
   ) {
@@ -107,7 +107,7 @@ export default class TemplateList extends Vue {
   }
 
   NumberInputPattern(
-    title: string = '',
+    title: string = 'Neues Zahleneingabefeld',
     placeholder: string = '',
     unit: string | null = null,
     description: string = '',
@@ -124,7 +124,11 @@ export default class TemplateList extends Vue {
       description,
     };
   }
-  TextAreaPattern(title: string = '', placeholder: string = '', description: string = '') {
+  TextAreaPattern(
+    title: string = 'Neues Freitextfeld',
+    placeholder: string = '',
+    description: string = '',
+  ) {
     return {
       title,
       key: `text-area-${randomId()}`,
@@ -137,7 +141,11 @@ export default class TemplateList extends Vue {
     };
   }
 
-  textInputPattern(title: string = '', placeholder: string = '', description: string = '') {
+  textInputPattern(
+    title: string = 'Neues Textfeld',
+    placeholder: string = '',
+    description: string = '',
+  ) {
     return {
       title,
       key: `text-input-${randomId()}`,
