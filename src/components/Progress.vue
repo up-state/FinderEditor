@@ -20,7 +20,7 @@ export default class Progress extends Vue {
   @Prop() private currentIndex!: number;
 
   public get progress() {
-    return (this.currentIndex + 1 / this.steps) * 100;
+    return ((this.currentIndex + 1)  / this.steps) * 100;
   }
 }
 </script>
