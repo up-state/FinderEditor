@@ -32,7 +32,6 @@ export default class NavFooter extends Vue {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: white;
   padding: 16px;
   // max-width: 1024px;
   box-sizing: border-box;
