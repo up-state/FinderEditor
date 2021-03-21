@@ -20,8 +20,8 @@
       rows="5"
       clearable
     />
-    <h4>Beschreibung</h4>
 
+    <h4>Beschreibungstext</h4>
     <el-input
       type="textarea"
       v-model="question.description"
