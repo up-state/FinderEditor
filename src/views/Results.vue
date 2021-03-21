@@ -1,29 +1,31 @@
 <template>
   <div class="results max-screen">
-    <h1 style="text-align: left">Resultateseite</h1>
-    <h4>Auf Basis Ihrer Eingaben haben wir folgende Angebote für Sie.</h4>
-    <el-collapse id="results-list" v-for="(result, index) in resultItems" :key="index">
-      <el-collapse-item>
-        <template slot="title" id="result-header" style="background: #dfefff">
-          <div style="">
-            <i class="el-icon-notebook-2"></i>
-            <h4 style="display: inline; margin-left: 10px">{{ result.title }}</h4>
+    <section class="wrapper">
+      <h1 style="text-align: left">Resultate</h1>
+      <h4>Auf Basis Ihrer Eingaben haben wir folgende Angebote für Sie.</h4>
+      <el-collapse id="results-list" v-for="(result, index) in resultItems" :key="index">
+        <el-collapse-item>
+          <template slot="title" id="result-header" style="background: #dfefff">
+            <div style="margin-left: 1rem;">
+              <i class="el-icon-notebook-2"></i>
+              <h4 style="display: inline; margin-left: 10px">{{ result.title }}</h4>
+            </div>
+          </template>
+          <div class="collapse-content">
+            <div style="background: #fff400; width: 5px" />
+            <div>
+              <h4 class="result-title-sub">{{ result.titleA }}</h4>
+              <div>{{ result.descriptionA }}</div>
+            </div>
+            <div>
+              <h4 class="result-title-sub">{{ result.titleB }}</h4>
+              <div>{{ result.descriptionB }}</div>
+            </div>
           </div>
-        </template>
-        <div class="collapse-content">
-          <div style="background: #fff400; width: 5px" />
-          <div>
-            <h4 class="result-title-sub">{{ result.titleA }}</h4>
-            <div>{{ result.descriptionA }}</div>
-          </div>
-          <div>
-            <h4 class="result-title-sub">{{ result.titleB }}</h4>
-            <div>{{ result.descriptionB }}</div>
-          </div>
-        </div>
-      </el-collapse-item>
-    </el-collapse>
-    <el-button style="margin: 20px" type="primary" v-on:click="toHome()">Startseite</el-button>
+        </el-collapse-item>
+      </el-collapse>
+      <el-button class="to-home-button" type="primary" v-on:click="toHome()">Startseite</el-button>
+    </section>
   </div>
 </template>
 
@@ -78,6 +80,10 @@ export default class Results extends Vue {
 </script>
 
 <style scoped lang="scss">
+.wrapper {
+  max-width: 50rem;
+  margin: 0 auto;
+}
 #results-list {
   width: 60em;
 }
@@ -90,5 +96,8 @@ export default class Results extends Vue {
 }
 .result-title-sub {
   margin-bottom: 0;
+}
+.to-home-button {
+  margin-top: 2rem;
 }
 </style>
