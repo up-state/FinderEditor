@@ -54,7 +54,7 @@ export default class App extends Vue {
 
   get isResultsPage(): boolean {
     // yolo
-    return this.$route.path.startsWith('/results');
+    return this.$route.path.includes('/results');
   }
 
   updateStatus(buttons: ButtonConfig[]) {
