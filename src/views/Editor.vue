@@ -92,7 +92,7 @@ export default class Start extends Vue {
   public parseEditorHeader(type: string, title: string) {
     switch (type) {
       case 'number-input': return 'Zahlenfeld: '+title;
-      case 'text-input': return 'Textfelt: '+title;
+      case 'text-input': return 'Textfeld: '+title;
       case 'text-area': return 'Absatz: '+title;
       case 'select': return 'Dropdown: '+title;
       case 'checkbox': return 'Checkbox: '+title;
