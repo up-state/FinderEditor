@@ -1,43 +1,23 @@
 <template>
-  <section style="padding: 10px, max-width: 400px">
-    <el-collapse @change="handleChange">
-      <el-collapse-item>
-        <template slot="title">
-          Auswahlliste: {{ question.title }}
-          <el-button
-            id="delete-btn"
-            type="danger"
-            v-on:click="deleteQuestion()"
-            icon="el-icon-delete"
-            circle
-          />
-        </template>
-        <h4>Titel</h4>
-        <el-input
-          v-model="question.title"
-          @change="(e) => updateQuestion({ title: e.target.value })"
-          clearable
-        />
+  <section style="padding: 10px; max-width: 400px">
+    <h4>Titel</h4>
+    <el-input
+      v-model="question.title"
+      @change="e => updateQuestion({ title: e.target.value })"
+      clearable
+    />
 
-        <h4>Beschreibung</h4>
-        <el-input
-          type="text"
-          v-model="question.description"
-          style="width: 100%"
-          rows="5"
-          clearable
-        />
+    <h4>Beschreibung</h4>
+    <el-input type="text" v-model="question.description" style="width: 100%" rows="5" clearable />
 
-        <h4>Optionen (Komma-getrennt)</h4>
-        <el-input
-          type="textarea"
-          :value="options"
-          @change="(e) => updateOptions(e.target.value)"
-          style="width: 100%"
-          rows="5"
-        />
-      </el-collapse-item>
-    </el-collapse>
+    <h4>Optionen (Komma-getrennt)</h4>
+    <el-input
+      type="textarea"
+      :value="options"
+      @change="e => updateOptions(e.target.value)"
+      style="width: 100%"
+      rows="5"
+    />
   </section>
 </template>
 
@@ -68,16 +48,8 @@ export default class DropdownInputEditor extends Vue {
     return this.question.config.options.size;
   }
 
-  deleteQuestion() {
-    this.$store.commit('removeQuestion', this.question);
-  }
-
-  handleChange(val: any) {
-    console.log(val);
-  }
-
   updateOptions(options: string) {
-    const updatedOptions = options.split(',').map((opt) => ({ key: opt, value: 1 }));
+    const updatedOptions = options.split(',').map(opt => ({ key: opt, value: 1 }));
     this.question.config.options = updatedOptions;
     this.$store.commit('updateQuestion', { ...this.question });
   }
@@ -88,6 +60,7 @@ export default class DropdownInputEditor extends Vue {
 <style scoped lang="scss">
 #delete-btn {
   margin-left: auto;
+  color: #021343;
 }
 .input {
   position: relative;
